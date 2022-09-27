@@ -2,12 +2,13 @@
 Projeto Final - EFA Cesae
 
 #Requisitos: 
+```
 •	Identidade (Logotipo, Nome aplicação)
 •	Backoffice (página inicial com login)
 •	Gestão equipamentos (designação, marca, modelo, descrição, foto, quantidade, outros). -> Usar quantidades ou usar números serie?
 
 •	Gestão de utilizadores:
-o	Registo utilizador
+o	Registo utilizadorCancel changes
 o	Pedidos/Requisições   (UserId, equipamento, quantidade)  
 o	Visualizar Requisições
 o	Editar/Cancelar requisições ->Apenas as requisições que ainda não estão aprovadas?
