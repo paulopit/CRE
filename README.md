@@ -1,7 +1,7 @@
 # Projeto-Final---EFA-Cesae
 Projeto Final - EFA Cesae
 
-Requisitos: 
+#Requisitos: 
 •	Identidade (Logotipo, Nome aplicação)
 •	Backoffice (página inicial com login)
 •	Gestão equipamentos (designação, marca, modelo, descrição, foto, quantidade, outros). -> Usar quantidades ou usar números serie?
