@@ -8,6 +8,7 @@
  */
 
 :root {
+    --color-main: #343A4E;
   --blue: #3490dc;
   --indigo: #6574cd;
   --purple: #9561e2;
@@ -5041,6 +5042,7 @@ input[type=button].btn-block {
   flex: 1 1 auto;
   min-height: 1px;
   padding: 1.25rem;
+    background-color: #F7FAFC;
 }
 
 .card-title {
@@ -5067,7 +5069,8 @@ input[type=button].btn-block {
 .card-header {
   padding: 0.75rem 1.25rem;
   margin-bottom: 0;
-  background-color: rgba(0, 0, 0, 0.03);
+    background-color: #fff;
+  /*background-color: rgba(0, 0, 0, 0.03);*/
   border-bottom: 1px solid rgba(0, 0, 0, 0.125);
 }
 
@@ -10930,5 +10933,13 @@ a.text-dark:focus {
     color: inherit;
     border-color: #dee2e6;
   }
+
 }
 
+.navbar-custom{
+    background-color: var(--color-main);
+    color: #fff!important;
+}
+.btn-color{
+    background-color: var(--color-main);
+}
