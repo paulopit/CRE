@@ -81,11 +81,8 @@
 
             <div class="content">
                 <div class="title m-b-md">
-
-                    Laravel teste sergio
-
+                    Laravel
                 </div>
-
                 <div class="links">
                     <a href="https://laravel.com/docs">Docs</a>
                     <a href="https://laracasts.com">Laracasts</a>
