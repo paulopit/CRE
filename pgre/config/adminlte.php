@@ -337,7 +337,10 @@ return [
             'url'  => 'user/settings',
             'icon' => 'fas fa-fw fa-user',
         ],
-        ['header' => 'GESTÃO'],
+        [
+            'header' => 'GESTÃO',
+            'can'  => ['tech-permission', 'admin-permission'],
+        ],
         [
             'text'    => 'Gestão de Equipamentos',
             'icon'    => 'fas fa-desktop',
