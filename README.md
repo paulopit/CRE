@@ -36,7 +36,7 @@
 - [x] Criar projeto. :frowning_person:@Sergio
 - [x] Integrar AdminLTE. :frowning_person:@Sergio
 - [x] Middlewares :frowning_person:@Paulo
-- [ ] Migrations 
+- [ ] Migrations :frowning_person:@Paulo
 - [ ] Seeds
 - [ ] CRUD
 - [ ] Página Login :frowning_person:@Deivid
