@@ -75,7 +75,7 @@
                                 <label for="phone" class="col-md-4 col-form-label text-md-right">{{ __('Telephone') }}</label>
 
                                 <div class="col-md-6">
-                                    <input id="phone" type="tel" pattern="[0-9]{3}-[0-9]{3}-[0-9]{3}" placeholder="123-456-789" class="form-control @error('phone') is-invalid @enderror" name="phone" value="{{ old('phone') }}" required autocomplete="phone">
+                                    <input id="phone" type="tel" pattern="[0-9]{3}-[0-9]{3}-[0-9]{3}" placeholder="123-456-789" class="form-control @error('phone') is-invalid @enderror" name="phone" value="{{ old('phone') }}"  autocomplete="phone">
 
                                     @error('phone')
                                     <span class="invalid-feedback" role="alert">
@@ -91,7 +91,7 @@
                                 <label for="birth_date" class="col-md-4 col-form-label text-md-right">{{ __('Birth Date') }}</label>
 
                                 <div class="col-md-6">
-                                    <input id="birth_date" type="date" pattern="[0-9]{2}/[0-9]{2}/[0-9]{2}" class="form-control @error('birth_date') is-invalid @enderror" name="birth_date" value="{{ old('birth_date') }}" required autocomplete="birth_date">
+                                    <input id="birth_date" type="date" pattern="[0-9]{2}/[0-9]{2}/[0-9]{2}" class="form-control @error('birth_date') is-invalid @enderror" name="birth_date" value="{{ old('birth_date') }}"  autocomplete="birth_date">
 
                                     @error('birth_date')
                                     <span class="invalid-feedback" role="alert">
@@ -107,7 +107,7 @@
                                 <label for="function" class="col-md-4 col-form-label text-md-right">{{ __('Function') }}</label>
 
                                 <div class="col-md-6">
-                                    <select id="function" type="date" pattern="[0-9]{2}/[0-9]{2}/[0-9]{2}" class="form-control @error('birth_date') is-invalid @enderror" name="birth_date" value="{{ old('birth_date') }}" required autocomplete="birth_date"></select>
+                                    <select id="function" type="date" pattern="[0-9]{2}/[0-9]{2}/[0-9]{2}" class="form-control @error('birth_date') is-invalid @enderror" name="birth_date" value="{{ old('birth_date') }}"  autocomplete="birth_date"></select>
 
                                         @error('birth_date')
                                         <span class="invalid-feedback" role="alert">
