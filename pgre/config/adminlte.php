@@ -307,87 +307,169 @@ return [
             'text' => 'search',
         ],
         [
-            'text' => 'blog',
-            'url'  => 'admin/blog',
-            'can'  => 'manage-blog',
+            'header' => 'REQUISIÇÕES',
+            'can'  => ['tech-permission', 'admin-permission'],
         ],
         [
-            'text'        => 'pages',
-            'url'         => 'admin/pages',
-            'icon'        => 'far fa-fw fa-file',
-            'label'       => 4,
-            'label_color' => 'success',
+            'text' => 'Pendentes',
+            'url'  => 'requisitions/pending',
+            'icon' => 'fas fa-pause-circle',
+            'icon_color' => 'orange',
+            'can'  => ['tech-permission', 'admin-permission'],
         ],
-        ['header' => 'account_settings'],
         [
-            'text' => 'profile',
-            'url'  => 'admin/settings',
+            'text' => 'Ativas',
+            'url'  => 'requisitions/active',
+            'icon' => 'fas fa-play-circle',
+            'icon_color' => 'green',
+            'can'  => ['tech-permission', 'admin-permission'],
+        ],
+        [
+            'text' => 'Fechadas',
+            'url'  => 'requisitions/closed',
+            'icon' => 'fas fa-stop-circle',
+            'icon_color' => 'red',
+            'can'  => ['tech-permission', 'admin-permission'],
+        ],
+        ['header' => 'A MINHA CONTA'],
+        [
+            'text' => 'Dados Pessoais',
+            'url'  => 'user/settings',
             'icon' => 'fas fa-fw fa-user',
         ],
+        ['header' => 'GESTÃO'],
         [
-            'text' => 'O paulo é bonito',
-            'url'  => 'admin/cenas',
-            'icon' => 'fas fa-fw fa-lock',
-        ],
-        [
-            'text' => 'change_password',
-            'url'  => 'admin/settings',
-            'icon' => 'fas fa-fw fa-lock',
-        ],
-        [
-            'text'    => 'multilevel',
-            'icon'    => 'fas fa-fw fa-share',
+            'text'    => 'Gestão de Equipamentos',
+            'icon'    => 'fas fa-desktop',
+            'can'  => ['tech-permission', 'admin-permission'],
             'submenu' => [
                 [
-                    'text' => 'level_one',
-                    'url'  => '#',
+                    'text' => 'Equipamentos',
+                    'url'  => 'equip-management/equipments',
+                    'icon'    => 'fas fa-laptop-house',
                 ],
                 [
-                    'text'    => 'level_one',
-                    'url'     => '#',
-                    'submenu' => [
-                        [
-                            'text' => 'level_two',
-                            'url'  => '#',
-                        ],
-                        [
-                            'text'    => 'level_two',
-                            'url'     => '#',
-                            'submenu' => [
-                                [
-                                    'text' => 'level_three',
-                                    'url'  => '#',
-                                ],
-                                [
-                                    'text' => 'level_three',
-                                    'url'  => '#',
-                                ],
-                            ],
-                        ],
-                    ],
+                    'text' => 'Tipos Equipamento',
+                    'url'  => 'equip-management/types',
+                    'icon'    => 'fas fa-boxes',
                 ],
                 [
-                    'text' => 'level_one',
-                    'url'  => '#',
+                    'text' => 'Marcas',
+                    'url'  => 'equip-management/brands',
+                    'icon'    => 'far fa-copyright',
+                ],
+                [
+                    'text' => 'Modelos',
+                    'url'  => 'equip-management/models',
+                    'icon'    => 'fas fa-ring',
                 ],
             ],
         ],
-        ['header' => 'labels'],
         [
-            'text'       => 'important',
-            'icon_color' => 'red',
-            'url'        => '#',
+            'text'    => 'Gestão de Utilizadores',
+            'icon'    => 'fas fa-user-tag',
+            'can'  => 'admin-permission',
+            'submenu' => [
+                [
+                    'text' => 'Utilizadores',
+                    'url'  => 'user-management/users',
+                    'icon'    => 'fas fa-fw fa-user',
+                ],
+                [
+                    'text' => 'Funções',
+                    'url'  => 'user-management/functions',
+                    'icon'    => 'fas fa-user-md',
+                ],
+                [
+                    'text' => 'Tipos',
+                    'url'  => 'user-management/types',
+                    'icon'    => 'fas fa-user-secret',
+                ],
+            ],
         ],
         [
-            'text'       => 'warning',
-            'icon_color' => 'yellow',
-            'url'        => '#',
+            'text' => 'Configurações',
+            'url'  => 'admin/AppConfig',
+            'can'  => 'admin-permission',
+            'icon'    => 'fas fa-cogs',
         ],
-        [
-            'text'       => 'information',
-            'icon_color' => 'cyan',
-            'url'        => '#',
-        ],
+//        [
+//            'text'        => 'pages',
+//            'url'         => 'admin/pages',
+//            'icon'        => 'far fa-fw fa-file',
+//            'label'       => 4,
+//            'label_color' => 'success',
+//        ],
+//        ['header' => 'account_settings'],
+//        [
+//            'text' => 'profile',
+//            'url'  => 'user/settings',
+//            'icon' => 'fas fa-fw fa-user',
+//        ],
+//        [
+//            'text' => 'O paulo é bonito',
+//            'url'  => 'admin/cenas',
+//            'icon' => 'fas fa-fw fa-lock',
+//        ],
+//        [
+//            'text' => 'change_password',
+//            'url'  => 'admin/settings',
+//            'icon' => 'fas fa-fw fa-lock',
+//        ],
+//        [
+//            'text'    => 'multilevel',
+//            'icon'    => 'fas fa-fw fa-share',
+//            'submenu' => [
+//                [
+//                    'text' => 'level_one',
+//                    'url'  => '#',
+//                ],
+//                [
+//                    'text'    => 'level_one',
+//                    'url'     => '#',
+//                    'submenu' => [
+//                        [
+//                            'text' => 'level_two',
+//                            'url'  => '#',
+//                        ],
+//                        [
+//                            'text'    => 'level_two',
+//                            'url'     => '#',
+//                            'submenu' => [
+//                                [
+//                                    'text' => 'level_three',
+//                                    'url'  => '#',
+//                                ],
+//                                [
+//                                    'text' => 'level_three',
+//                                    'url'  => '#',
+//                                ],
+//                            ],
+//                        ],
+//                    ],
+//                ],
+//                [
+//                    'text' => 'level_one',
+//                    'url'  => '#',
+//                ],
+//            ],
+//        ],
+//        ['header' => 'labels'],
+//        [
+//            'text'       => 'important',
+//            'icon_color' => 'red',
+//            'url'        => '#',
+//        ],
+//        [
+//            'text'       => 'warning',
+//            'icon_color' => 'yellow',
+//            'url'        => '#',
+//        ],
+//        [
+//            'text'       => 'information',
+//            'icon_color' => 'cyan',
+//            'url'        => '#',
+//        ],
     ],
 
     /*
