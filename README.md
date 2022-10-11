@@ -41,8 +41,8 @@
 - [ ] CRUD
 - [ ] Página Login 
 - [ ] Página Registo 
-- [ ] Permissões Gate
-- [ ] Menus AdminLTE
+- [x] Permissões Gate
+- [x] Menus AdminLTE
 - [ ] Página gestão de conta para utilizadores
 - [ ] Página gestão contas para Administrador
 - [ ] Página gestão de tipos de utilizador
