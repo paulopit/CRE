@@ -33,16 +33,16 @@
 
 ## To Do:
 
-- [x] Criar projeto.
-- [x] Integrar AdminLTE.
-- [x] Middlewares
+- [x] Criar projeto. :frowning_person:@Sergio
+- [x] Integrar AdminLTE. :frowning_person:@Sergio
+- [x] Middlewares :frowning_person:@Paulo
 - [ ] Migrations 
 - [ ] Seeds
 - [ ] CRUD
-- [ ] Página Login 
-- [ ] Página Registo 
-- [x] Permissões Gate
-- [x] Menus AdminLTE
+- [ ] Página Login :frowning_person:@Deivid
+- [ ] Página Registo :frowning_person:@Deivid
+- [x] Permissões Gate :frowning_person:@Sergio
+- [x] Menus AdminLTE :frowning_person:@Sergio
 - [ ] Página gestão de conta para utilizadores
 - [ ] Página gestão contas para Administrador
 - [ ] Página gestão de tipos de utilizador
