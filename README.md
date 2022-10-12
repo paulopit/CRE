@@ -43,10 +43,13 @@
 - [ ] Página Registo :frowning_person:@Deivid
 - [x] Permissões Gate :frowning_person:@Sergio
 - [x] Menus AdminLTE :frowning_person:@Sergio
+- [x] Datatables AdminLTE :frowning_person:@Sergio
+- [x] Modo Tabs AdminLTE :frowning_person:@Sergio
 - [ ] Página gestão de conta para utilizadores
 - [ ] Página gestão contas para Administrador
 - [ ] Página gestão de tipos de utilizador
-- [ ] Página gestão de funções de utilizador
+- [x] Página gestão de funções de utilizador :frowning_person:@Sergio
+- [x] CRUD funções de utilizador :frowning_person:@Sergio
 - [ ] Página gestão de Marcas e Modelos
 - [ ] Página gestão de Equipamentos
 - [ ] Página gestão de parametros da APP
