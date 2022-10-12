@@ -50,6 +50,16 @@ class User extends Authenticatable
         return $this->hasOne(User_type::class);
     }
 
+    public function requisitions()
+    {
+        return $this->hasMany(Requisition::class);
+    }
+
+    public function requisition_lines()
+    {
+        return $this->hasMany(Requisition_line::class);
+    }
+
     public function isAdmin()
     {
         $admin = false;
