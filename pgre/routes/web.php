@@ -35,4 +35,10 @@ Route::group(['middleware' => 'admin'], function () {
     Route::delete('/user-management/functions/{user_function}', 'UserFunctionController@destroy');
     Route::put('/user-management/functions/{user_function}', 'UserFunctionController@update');
 
+    Route::post('/user-management/types/add', 'UserTypeController@store');
+    Route::get('/user-management/types', 'UserTypeController@index');
+    Route::delete('/user-management/types/{user_type}', 'UserTypeController@destroy');
+    Route::put('/user-management/types/{user_type}', 'UserTypeController@update');
+
+
 });
