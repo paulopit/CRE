@@ -43,6 +43,60 @@
                                 </div>
                             </div>
 
+                            <!-------PHONE------------->
+
+                            <div class="form-group row">
+                                <label for="phone" class="col-md-4 col-form-label text-md-right">{{ __('Telephone') }}</label>
+
+                                <div class="col-md-6">
+                                    <input id="phone" type="tel"  placeholder="123456789" class="form-control @error('phone') is-invalid @enderror" name="phone" value="{{ old('phone') }}" autocomplete="phone">
+
+                                    @error('phone')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                    @enderror
+                                </div>
+                            </div>
+
+                            <!-------BIRTH DATE------------->
+
+                            <div class="form-group row">
+                                <label for="birth_date" class="col-md-4 col-form-label text-md-right">{{ __('Birth Date') }}</label>
+
+                                <div class="col-md-6">
+                                    <input id="birth_date" type="date"  class="form-control @error('birth_date') is-invalid @enderror" name="birth_date" value="{{ old('birth_date') }}"  autocomplete="birth_date">
+
+                                    @error('birth_date')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                    @enderror
+                                </div>
+                            </div>
+
+                            <!-------FUNCTION------------->
+
+                            <div class="form-group row">
+                                <label for="function" class="col-md-4 col-form-label text-md-right">{{ __('Function') }}</label>
+
+                                <div class="col-md-6">
+
+                                    <select id="function" type="date"  class="form-control @error('user_function_id') is-invalid @enderror" name="user_function_id" value="{{ old('user_function_id') }}" required autocomplete="user_function_id">
+                                        <option value="1">Colaborador</option>
+                                        <option value="2">Formador</option>
+                                        <option value="3">Estagiario</option>
+                                        <option value="4">Aluno</option>
+                                    </select>
+
+                                        @error('user_function_id')
+                                        <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                                    @enderror
+                                </div>
+                            </div>
+
                             <!-------PASSWORD------------->
 
                             <div class="form-group row">
@@ -66,54 +120,6 @@
 
                                 <div class="col-md-6">
                                     <input id="password-confirm" type="password" placeholder="Confirm your password"  class="form-control" name="password_confirmation" required autocomplete="new-password">
-                                </div>
-                            </div>
-
-                            <!-------PHONE------------->
-
-                            <div class="form-group row">
-                                <label for="phone" class="col-md-4 col-form-label text-md-right">{{ __('Telephone') }}</label>
-
-                                <div class="col-md-6">
-                                    <input id="phone" type="tel" pattern="[0-9]{3}-[0-9]{3}-[0-9]{3}" placeholder="123-456-789" class="form-control @error('phone') is-invalid @enderror" name="phone" value="{{ old('phone') }}" required autocomplete="phone">
-
-                                    @error('phone')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                    @enderror
-                                </div>
-                            </div>
-
-                            <!-------BIRTH DATE------------->
-
-                            <div class="form-group row">
-                                <label for="birth_date" class="col-md-4 col-form-label text-md-right">{{ __('Birth Date') }}</label>
-
-                                <div class="col-md-6">
-                                    <input id="birth_date" type="date" pattern="[0-9]{2}/[0-9]{2}/[0-9]{2}" class="form-control @error('birth_date') is-invalid @enderror" name="birth_date" value="{{ old('birth_date') }}" required autocomplete="birth_date">
-
-                                    @error('birth_date')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                    @enderror
-                                </div>
-                            </div>
-
-                            <!-------FUNCTION------------->
-
-                            <div class="form-group row">
-                                <label for="function" class="col-md-4 col-form-label text-md-right">{{ __('Function') }}</label>
-
-                                <div class="col-md-6">
-                                    <select id="function" type="date" pattern="[0-9]{2}/[0-9]{2}/[0-9]{2}" class="form-control @error('birth_date') is-invalid @enderror" name="birth_date" value="{{ old('birth_date') }}" required autocomplete="birth_date"></select>
-
-                                        @error('birth_date')
-                                        <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $message }}</strong>
-                                </span>
-                                    @enderror
                                 </div>
                             </div>
 

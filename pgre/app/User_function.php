@@ -10,4 +10,8 @@ class User_function extends Model
     {
         return $this->hasMany(User::class);
     }
+
+    protected $fillable = [
+        'function_name'
+    ];
 }
