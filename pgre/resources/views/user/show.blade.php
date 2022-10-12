@@ -10,7 +10,7 @@
 @stop
 
 @section('content')
-    <div class="container">
+    <div class="">
         <div class="col-lg-12">
             <div class="card card-secondary">
                 <div class="card-header">

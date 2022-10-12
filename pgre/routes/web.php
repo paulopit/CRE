@@ -23,6 +23,15 @@ Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');
 
 Route::group(['middleware' => 'auth'], function () {
+    Route::get('/', 'HomeController@index')->name('home');
     Route::get('/user/settings', 'UserController@index');
     Route::put('/user/{user}', 'UserController@update');
+});
+
+Route::group(['middleware' => 'admin'], function () {
+    Route::post('/user-management/functions/add', 'UserFunctionController@store');
+    Route::get('/user-management/functions', 'UserFunctionController@index');
+    Route::delete('/user-management/functions/{user_function}', 'UserFunctionController@destroy');
+    Route::put('/user-management/functions/{user_function}', 'UserFunctionController@update');
+
 });
