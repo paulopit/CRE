@@ -1,17 +1,17 @@
 @extends('adminlte::page')
 
-@section('title', 'Dashboard')
+@section('title', 'GRE - Dados Pessoais')
 
 @section('content_header')
     <div class="mb-3">
-
+        @component('components.alerts')
+        @endcomponent
     </div>
 @stop
 
 @section('content')
-    <div class="container">
+    <div class="">
         <div class="col-lg-12">
-
             <div class="card card-secondary">
                 <div class="card-header">
                     <h3 class="card-title">Dados Pessoais </h3>

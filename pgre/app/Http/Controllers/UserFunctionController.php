@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\User_function;
+use Cassandra\Type\UserType;
 use Illuminate\Http\Request;
 
 class UserFunctionController extends Controller
@@ -14,7 +15,8 @@ class UserFunctionController extends Controller
      */
     public function index()
     {
-        //
+        $user_functions = User_function::all();
+        return view('user.functions.list', ['user_functions' => $user_functions]);
     }
 
     /**
@@ -35,7 +37,13 @@ class UserFunctionController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $this->validate($request, [
+            'function_name' => 'required'
+        ]);
+        $user_function = new User_function();
+        $user_function->function_name = $request->function_name;
+        $user_function->save();
+        return redirect('user-management/functions')->with('success','Função criada com sucesso!');
     }
 
     /**
@@ -69,7 +77,13 @@ class UserFunctionController extends Controller
      */
     public function update(Request $request, User_function $user_function)
     {
-        //
+        $this->validate($request, [
+            'function_name' => 'required'
+        ]);
+        $user_function = User_function::find($user_function->id);
+        $user_function->function_name = $request->function_name;
+        $user_function->save();
+        return redirect('user-management/functions')->with('success','Função editada com sucesso!');
     }
 
     /**
@@ -80,6 +94,8 @@ class UserFunctionController extends Controller
      */
     public function destroy(User_function $user_function)
     {
-        //
+        $user_function = User_function::find($user_function->id);
+        $user_function->delete();
+        return redirect('user-management/functions')->with('success','Função eliminada com sucesso!');
     }
 }

@@ -6,6 +6,7 @@ use App\User;
 use App\User_function;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
 {
@@ -36,10 +37,10 @@ class UserController extends Controller
             if($request->user_password == $request->user_password2){
                 $user_info->password = Hash::make($request->user_password);
             }else{
-
+                return redirect('user/settings')->with('error','Erro ao alterar password: As passwords não coincidem');
             }
         }
         $user_info->save();
-        return redirect('user/settings')->with('status','Dados pessoais alterados com sucesso!');
+        return redirect('user/settings')->with('success','Dados pessoais alterados com sucesso!');
     }
 }
