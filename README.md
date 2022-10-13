@@ -33,26 +33,11 @@
 
 ## To Do:
 
-- [x] Criar projeto. :frowning_person:@Sergio
-- [x] Integrar AdminLTE. :frowning_person:@Sergio
-- [x] Middlewares :frowning_person:@Paulo
 - [ ] Migrations :frowning_person:@Paulo
 - [ ] Seeds
 - [ ] CRUD
-- [ ] Página Login :frowning_person:@Deivid
-- [ ] Página Registo :frowning_person:@Deivid
-- [x] Permissões Gate :frowning_person:@Sergio
-- [x] Menus AdminLTE :frowning_person:@Sergio
-- [x] Datatables AdminLTE :frowning_person:@Sergio
-- [x] Modo Tabs AdminLTE :frowning_person:@Sergio
-- [ ] Página gestão de conta para utilizadores
-- [ ] Página gestão contas para Administrador
-- [ ] Página gestão de tipos de utilizador
-- [x] Página gestão de funções de utilizador :frowning_person:@Sergio
-- [x] CRUD funções de utilizador :frowning_person:@Sergio
 - [ ] Página gestão de Marcas e Modelos
 - [ ] Página gestão de Equipamentos
-- [ ] Página gestão de parametros da APP
 - [ ] Página gestão de requisições
 - [ ] Página pedidos de requisições (FrontEnd)
 - [ ] Integração de Envio Email.
@@ -63,4 +48,25 @@
 - [ ] Testes Funcionais
 - [ ] Criar Documentação
 
-
+## Done:
+- [x] Middlewares @Paulo
+###### 
+- [x] Página Login @Deivid
+- [x] Página Registo @Deivid
+###### 
+- [x] Criar projeto. @Sergio
+- [x] Integrar AdminLTE. @Sergio
+- [x] Permissões Gate @Sergio
+- [x] Menus AdminLTE @Sergio
+- [x] Datatables AdminLTE @Sergio
+- [x] Modo Tabs AdminLTE @Sergio
+- [x] Página gestão de conta para utilizadores @Sergio
+- [x] Página gestão contas para Administrador @Sergio
+- [x] Página gestão de tipos de utilizador @Sergio
+- [x] Página gestão de funções de utilizador @Sergio
+- [x] Página gestão de parametros da APP @Sergio
+- [x] CRUD UserFunction @Sergio
+- [x] CRUD UserType @Sergio
+- [x] CRUD AppConfig @Sergio
+- [x] CRUD UserAccount @Sergio
+- [x] AppConfigSeeder @Sergio
