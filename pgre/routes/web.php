@@ -45,7 +45,9 @@ Route::group(['middleware' => 'auth'], function () {
     Route::put('/user/{user}', 'UserController@update');
 });
 
-Route::group(['middleware' => 'admin'], function () {
+
+Route::group(['middleware' => 'admin' , 'technician'], function () {
+
     Route::post('/user-management/functions/add', 'UserFunctionController@store');
     Route::get('/user-management/functions', 'UserFunctionController@index');
     Route::delete('/user-management/functions/{user_function}', 'UserFunctionController@destroy');
