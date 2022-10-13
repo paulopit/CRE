@@ -81,14 +81,11 @@
                                 <label for="function" class="col-md-4 col-form-label text-md-right">{{ __('Function') }}</label>
 
                                 <div class="col-md-6">
-
                                     <select id="function" type="date"  class="form-control @error('user_function_id') is-invalid @enderror" name="user_function_id" value="{{ old('user_function_id') }}" required autocomplete="user_function_id">
-                                        <option value="1">Colaborador</option>
-                                        <option value="2">Formador</option>
-                                        <option value="3">Estagiario</option>
-                                        <option value="4">Aluno</option>
+                                        @foreach($user_functions as $function)
+                                            <option value="{{$function->id}}">{{$function->function_name}}</option>
+                                        @endforeach
                                     </select>
-
                                         @error('user_function_id')
                                         <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
