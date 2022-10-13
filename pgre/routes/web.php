@@ -62,4 +62,11 @@ Route::group(['middleware' => 'admin'], function () {
     Route::get('/user-management/users', 'UserAccountController@index');
     Route::put('/user-management/user/{user}', 'UserAccountController@update');
 
+
+    Route::get('/equip-management/brands', 'BrandController@index');
+    Route::post('/equip-management/brands/add', 'BrandController@store');
+    Route::delete('/equip-management/brands/{brand}', 'BrandController@destroy');
+    Route::put('/equip-management/brands/{brand}', 'BrandController@update');
+
 });
+

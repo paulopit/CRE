@@ -14,7 +14,8 @@ class BrandController extends Controller
      */
     public function index()
     {
-        //
+        $brands = Brand::all();
+        return view('equip.brands.list', ['brands' => $brands]);
     }
 
     /**
@@ -35,7 +36,15 @@ class BrandController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $this->validate($request, [
+            'brand_name' => 'required'
+        ]);
+
+        $brand = new Brand();
+        $brand->name = $request->brand_name;
+        $brand->save();
+
+        return redirect('equip-management/brands')->with('success','Marca criada com sucesso!');
     }
 
     /**
@@ -69,7 +78,14 @@ class BrandController extends Controller
      */
     public function update(Request $request, Brand $brand)
     {
-        //
+        $this->validate($request, [
+            'brand_name' => 'required'
+        ]);
+
+        $brand = Brand::find($brand->id);
+        $brand->name = $request->brand_name;
+        $brand->save();
+        return redirect('equip-management/brands')->with('success','Marca editada com sucesso!');
     }
 
     /**
@@ -80,6 +96,15 @@ class BrandController extends Controller
      */
     public function destroy(Brand $brand)
     {
-        //
+        // ddd(count($brand->equipment_models));
+        // ddd('teste');
+        if(count($brand->equipment_models) == 0){
+            $brand->delete();
+            return redirect('equip-management/brands')->with('success','Marca eliminada com sucesso!');
+        }else{
+            return redirect('equip-management/brands')->with('error','Marca não pode ser eliminada pois contem modelos associados!');
+        }
+
+
     }
 }
