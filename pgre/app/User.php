@@ -42,12 +42,12 @@ class User extends Authenticatable
 
     public function user_function()
     {
-        return $this->hasOne(User_function::class);
+        return $this->belongsTo(User_function::class);
     }
 
     public function user_type()
     {
-        return $this->hasOne(User_type::class);
+        return $this->belongsTo(User_type::class);
     }
 
     public function requisitions()

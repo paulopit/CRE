@@ -43,4 +43,7 @@ Route::group(['middleware' => 'admin'], function () {
     Route::get('/admin/app-config', 'AppConfigController@index');
     Route::put('/admin/app-config', 'AppConfigController@update');
 
+    Route::get('/user-management/users', 'UserAccountController@index');
+    Route::put('/user-management/user/{user}', 'UserAccountController@update');
+
 });

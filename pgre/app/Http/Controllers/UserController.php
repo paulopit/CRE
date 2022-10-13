@@ -14,13 +14,13 @@ class UserController extends Controller
     {
         $userinfo = User::find(Auth::user()->id);
         $user_functions = User_function::all();
-        return view('user.show', ['userinfo' => $userinfo, 'user_functions' =>$user_functions]);
+        return view('user.my-account', ['userinfo' => $userinfo, 'user_functions' =>$user_functions]);
     }
 
     public function show(User $user)
     {
 
-        return view('user.show');
+        return view('user.my-account');
     }
     public function update(Request $request, User $user)
     {
