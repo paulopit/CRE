@@ -46,14 +46,10 @@
                                     <nobr>
                                         @component('user.functions.modal.edit', ['user_function' => $function])
                                         @endcomponent
-                                            <a href="" class="btn btn-xs btn-default text-primary mx-1 shadow table-btn" title="Edit" data-toggle="modal" data-target='#edit_user_function_{{$function->id}}' data-id=""> <i class="fa fa-lg fa-fw fa-pen"></i> </a>
-                                        <form action="{{url('/user-management/functions/' . $function->id)}}" method="POST" style="display: inline-block"; onsubmit="return confirm('Tem a certeza que pretende eliminar o registo?');">
-                                            @csrf
-                                            @method('DELETE')
-                                            <button class="btn btn-xs btn-default text-danger mx-1 shadow table-btn" title="Delete">
-                                                <i class="fa fa-lg fa-fw fa-trash"></i>
-                                            </button>
-                                        </form>
+                                        <a href="" class="btn btn-xs btn-default text-primary mx-1 shadow table-btn" title="Edit" data-toggle="modal" data-target='#edit_user_function_{{$function->id}}' data-id=""> <i class="fa fa-lg fa-fw fa-pen"></i> </a>
+                                        @component('user.functions.modal.delete', ['user_function' => $function])
+                                        @endcomponent
+                                        <a href="" class="btn btn-xs btn-default text-danger mx-1 shadow table-btn" title="delete" data-toggle="modal" data-target='#delete_user_function_{{$function->id}}' data-id=""><i class="fa fa-lg fa-fw fa-trash"></i></a>
                                         @component('user.functions.modal.view', ['user_function' => $function])
                                         @endcomponent
                                         <a href="" class="btn btn-xs btn-default text-teal mx-1 shadow table-btn" title="View" data-toggle="modal" data-target='#view_user_function_{{$function->id}}' data-id=""> <i class="fa fa-lg fa-fw fa-eye"></i> </a>

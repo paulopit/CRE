@@ -40,5 +40,8 @@ Route::group(['middleware' => 'admin'], function () {
     Route::delete('/user-management/types/{user_type}', 'UserTypeController@destroy');
     Route::put('/user-management/types/{user_type}', 'UserTypeController@update');
 
+    Route::get('/admin/appconfig', 'AppConfigController@index');
+
+
 
 });

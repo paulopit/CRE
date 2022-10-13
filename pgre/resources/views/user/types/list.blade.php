@@ -47,13 +47,9 @@
                                         @component('user.types.modal.edit', ['user_type' => $type])
                                         @endcomponent
                                             <a href="" class="btn btn-xs btn-default text-primary mx-1 shadow table-btn" title="Edit" data-toggle="modal" data-target='#edit_user_type_{{$type->id}}' data-id=""> <i class="fa fa-lg fa-fw fa-pen"></i> </a>
-                                        <form action="{{url('/user-management/types/' . $type->id)}}" method="POST" style="display: inline-block"; onsubmit="return confirm('Tem a certeza que pretende eliminar o registo?');">
-                                            @csrf
-                                            @method('DELETE')
-                                            <button class="btn btn-xs btn-default text-danger mx-1 shadow table-btn" title="Delete" @if($type->id < 4) disabled @endif >
-                                                <i class="fa fa-lg fa-fw fa-trash"></i>
-                                            </button>
-                                        </form>
+                                            @component('user.types.modal.delete', ['user_type' => $type])
+                                            @endcomponent
+                                            <a href="" class="btn btn-xs btn-default text-danger mx-1 shadow table-btn" title="delete" data-toggle="modal" data-target='#delete_user_type_{{$type->id}}' data-id="" @if($type->id < 4)  style="pointer-events:none;cursor:default;background: #dddddd;" @endif><i class="fa fa-lg fa-fw fa-trash"></i></a>
                                         @component('user.types.modal.view', ['user_type' => $type])
                                         @endcomponent
                                         <a href="" class="btn btn-xs btn-default text-teal mx-1 shadow table-btn" title="View" data-toggle="modal" data-target='#view_user_type_{{$type->id}}' data-id=""> <i class="fa fa-lg fa-fw fa-eye"></i> </a>
