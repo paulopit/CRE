@@ -31,7 +31,7 @@
 - Utilizar cores do cesae no layout.
 
 
-## To Do:
+## :rotating_light: To Do:
 
 - [ ] Migrations :frowning_person:@Paulo
 - [ ] Seeds
@@ -48,7 +48,7 @@
 - [ ] Testes Funcionais
 - [ ] Criar Documentação
 
-## Done:
+## :white_check_mark: Done:
 - [x] Middlewares @Paulo
 ###### 
 - [x] Página Login @Deivid
