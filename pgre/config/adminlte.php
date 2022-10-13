@@ -392,7 +392,7 @@ return [
         ],
         [
             'text' => 'Configurações',
-            'url'  => 'admin/AppConfig',
+            'url'  => 'admin/app-config',
             'can'  => 'admin-permission',
             'icon'    => 'fas fa-cogs',
         ],
@@ -572,6 +572,16 @@ return [
                     'type' => 'css',
                     'asset' => true,
                     'location' => 'vendor/datatables-plugins/buttons/css/buttons.bootstrap4.min.css',
+                ],
+            ],
+        ],
+        'BootstrapSwitch' => [
+            'active' => true,
+            'files' => [
+                [
+                    'type' => 'js',
+                    'asset' => true,
+                    'location' => 'vendor/bootstrap-switch/js/bootstrap-switch.min.js',
                 ],
             ],
         ],

@@ -15,11 +15,12 @@ class CreateAppConfigsTable extends Migration
     {
         Schema::create('app_configs', function (Blueprint $table) {
             $table->id();
-            $table->string('app_name')->nullable();
-            $table->string('app_logo')->nullable();
             $table->string('conf_alert_emails')->nullable();
+            $table->boolean('conf_alert_emails_check')->default(0);
             $table->integer('conf_low_stock_percentage');
+            $table->boolean('conf_low_stock_percentage_check')->default(0);
             $table->integer('conf_default_req_days');
+            $table->boolean('conf_default_req_days_check')->default(0);
             $table->timestamps();
         });
     }

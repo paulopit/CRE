@@ -14,7 +14,8 @@ class AppConfigController extends Controller
      */
     public function index()
     {
-        //
+        $app_config = App_config::find(1);
+        return view('app.configuration.parameters', ['app_config' => $app_config]);
     }
 
     /**
@@ -35,7 +36,7 @@ class AppConfigController extends Controller
      */
     public function store(Request $request)
     {
-        //
+
     }
 
     /**
@@ -67,9 +68,17 @@ class AppConfigController extends Controller
      * @param  \App\App_config  $app_config
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, App_config $app_config)
+    public function update(Request $request)
     {
-        //
+        $app_config = App_config::find(1);
+        $app_config->conf_alert_emails = $request->conf_alert_emails;
+        $app_config->conf_low_stock_percentage = $request->conf_low_stock_value;
+        $app_config->conf_default_req_days = $request->conf_default_req_days;
+        $app_config->conf_alert_emails_check = (boolean)json_decode(strtolower($request->conf_alert_emails_check)) ?? 0;
+        $app_config->conf_low_stock_percentage_check = (boolean)json_decode(strtolower($request->conf_low_stock_check)) ?? 0;
+        $app_config->conf_default_req_days_check = (boolean)json_decode(strtolower($request->conf_default_req_days_check)) ?? 0;
+        $app_config->save();
+        return redirect('admin/app-config')->with('success','Configurações alteradas com sucesso!');
     }
 
     /**
