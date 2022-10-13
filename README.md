@@ -33,7 +33,7 @@
 
 ## :rotating_light: To Do:
 
-- [ ] Migrations :frowning_person:@Paulo
+
 - [ ] Seeds
 - [ ] CRUD
 - [ ] Página gestão de Marcas e Modelos
@@ -50,6 +50,7 @@
 
 ## :white_check_mark: Done:
 - [x] Middlewares @Paulo
+- [x] Migrations completas @Paulo
 ###### 
 - [x] Página Login @Deivid
 - [x] Página Registo @Deivid
