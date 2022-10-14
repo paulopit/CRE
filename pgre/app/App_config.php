@@ -11,4 +11,9 @@ class App_config extends Model
         'conf_low_stock_percentage','conf_low_stock_percentage_check',
         'conf_default_req_days','conf_default_req_days_check'
     ];
+
+    public static function GetAppConfig()
+    {
+        return App_config::find(1);
+    }
 }

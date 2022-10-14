@@ -71,3 +71,14 @@
 - [x] CRUD AppConfig @Sergio
 - [x] CRUD UserAccount @Sergio
 - [x] AppConfigSeeder @Sergio
+
+
+
+## Exemplos:
+Chamar parametros da AppConfig nos templates blade:
+```php
+{{ App\App_config::GetAppConfig() }}
+```
+
+
+
