@@ -24,6 +24,16 @@ Route::get('/', function () {
 Route::get('/home', 'HomeController@index')->name('home');
 
 
+Route::group(['middleware' => 'management'], function () {
+
+    // ##Brand management
+    Route::get('/equip-management/brands', 'BrandController@index');
+    Route::post('/equip-management/brands/add', 'BrandController@store');
+    Route::delete('/equip-management/brands/{brand}', 'BrandController@destroy');
+    Route::put('/equip-management/brands/{brand}', 'BrandController@update');
+});
+
+
 Route::group(['middleware' => 'admin'], function () {
 
     // ##App Config
@@ -46,22 +56,7 @@ Route::group(['middleware' => 'admin'], function () {
     Route::delete('/user-management/functions/{user_function}', 'UserFunctionController@destroy');
     Route::put('/user-management/functions/{user_function}', 'UserFunctionController@update');
 
-    // ##Brands
-    Route::get('/equip-management/brands', 'BrandController@index');
-    Route::post('/equip-management/brands/add', 'BrandController@store');
-    Route::delete('/equip-management/brands/{brand}', 'BrandController@destroy');
-    Route::put('/equip-management/brands/{brand}', 'BrandController@update');
 });
-
-Route::group(['middleware' => 'technician'], function () {
-
-    // ##Brand management
-    Route::get('/equip-management/brands', 'BrandController@index');
-    Route::post('/equip-management/brands/add', 'BrandController@store');
-    Route::delete('/equip-management/brands/{brand}', 'BrandController@destroy');
-    Route::put('/equip-management/brands/{brand}', 'BrandController@update');
-});
-
 
 Route::group(['middleware' => 'auth'], function () {
     Route::get('/', 'HomeController@index')->name('home');
