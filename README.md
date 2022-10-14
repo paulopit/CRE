@@ -40,7 +40,6 @@
 - [ ] Página gestão de Equipamentos
 - [ ] Página gestão de requisições
 - [ ] Página pedidos de requisições (FrontEnd)
-- [ ] Integração de Envio Email.
 - [ ] Triggers envio de Emails.
 - [ ] Importação de equipamentos via ficheiro Excel
 - [ ] Webservice [Opcional]
@@ -61,6 +60,11 @@
 - [x] Menus AdminLTE @Sergio
 - [x] Datatables AdminLTE @Sergio
 - [x] Modo Tabs AdminLTE @Sergio
+- [x] Sistema de traduções @Sergio
+- [x] Configuração de timezone para Portugal @Sergio
+- [x] Função de leitura de parametros AppConfig @Sergio
+- [x] Integração de Envio Email. @Sergio
+- [x] Criado middleware 'management' @Sergio
 - [x] Página gestão de conta para utilizadores @Sergio
 - [x] Página gestão contas para Administrador @Sergio
 - [x] Página gestão de tipos de utilizador @Sergio
@@ -71,6 +75,7 @@
 - [x] CRUD AppConfig @Sergio
 - [x] CRUD UserAccount @Sergio
 - [x] AppConfigSeeder @Sergio
+
 
 
 
