@@ -67,6 +67,11 @@ return [
     |
     */
 
+    'available_locales' => [
+        'English' => 'en',
+        'Portuguese' => 'pt',
+    ],
+
     'timezone' => 'Europe/Lisbon',
 
     /*
