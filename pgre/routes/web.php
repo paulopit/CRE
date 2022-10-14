@@ -20,6 +20,8 @@ Route::get('/', function () {
 
 /*Auth::routes();*/
 
+Route::get('/test-email', 'MailController@testemail');
+
 
 Route::get('/home', 'HomeController@index')->name('home');
 
