@@ -4,7 +4,9 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
+use App\User;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
+use Illuminate\Http\Request;
 
 class LoginController extends Controller
 {
@@ -37,4 +39,27 @@ class LoginController extends Controller
     {
         $this->middleware('guest')->except('logout');
     }
+
+//    public function credentials(Request $request)
+//    {
+//        return [
+//            'email'     => $request->email,
+//            'password'  => $request->password,
+//            'is_active' => '1'
+//        ];
+//    }
+
+    protected function validateLogin(Request $request)
+    {
+        $this->validate($request, [
+            $this->username() => 'exists:users,' . $this->username() . ',is_active,1',
+            'password' => 'required|string',
+        ],
+            [
+                $this->username() . '.exists' => 'Dados de login inválidos ou a conta encontra-se desativada!'
+            ]);
+    }
+
+
+
 }
