@@ -11,9 +11,6 @@
 
 @section('content')
     <div class="">
-
-        <h1>{{ App\App_config::GetAppConfig() }}</h1>
-
         <div class="col-lg-12">
             <div class="card card-secondary">
                 <div class="card-header">
