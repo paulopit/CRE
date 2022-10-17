@@ -16,12 +16,13 @@ class CreateEquipmentTable extends Migration
         Schema::create('equipment', function (Blueprint $table) {
             $table->id();
             $table->string('description');
-            $table->string('serial_number');
-            $table->boolean('status_ok');
+            $table->string('serial_number')->unique();
+            $table->boolean('status_ok')->default('0');
             $table->foreignId('equipment_type_id')->constrained();
-            $table->foreignId('brand_id')->constrained();
-            $table->foreignId('reference')->constrained('equipment_images')->onDelete('cascade');
-            $table->string('obs');
+            $table->foreignId('equipment_model_id')->constrained();
+            $table->string('reference')->unique();
+            //$table->foreignId('reference')->unique()->constrained('equipment_images')->onDelete('cascade');
+            $table->string('obs')->nullable();
             $table->timestamps();
         });
     }

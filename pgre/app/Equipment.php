@@ -16,8 +16,4 @@ class Equipment extends Model
         return $this->hasOne(Model::class);
     }
 
-    public function equipment_image()
-    {
-        return $this->hasOne(Equipment_image::class);
-    }
 }
