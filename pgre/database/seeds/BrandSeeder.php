@@ -53,7 +53,7 @@ class BrandSeeder extends Seeder
             ['name' => 'Hanimex',
                 'created_at' => now(),
                 'updated_at' => now()
-            ],
+            ]
         ]);
     }
 }
