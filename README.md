@@ -35,7 +35,7 @@
 
 
 - [ ] Seeds
-- [ ] CRUD
+- [X] CRUD @Deivid
 - [ ] Página gestão de Marcas e Modelos
 - [ ] Página gestão de Equipamentos
 - [ ] Página gestão de requisições
