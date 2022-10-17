@@ -18,6 +18,7 @@ class DatabaseSeeder extends Seeder
         $this->call(BrandSeeder::class);
         $this->call(EquipmentModelSeeder::class);
         $this->call(EquipmentTypeSeeder::class);
+        $this->call(RequisitionLevelSeeder::class);
 
     }
 }

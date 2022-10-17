@@ -16,7 +16,7 @@ class CreateRequisitionLevelsTable extends Migration
         Schema::create('requisition_levels', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->boolean('closed');
+            $table->boolean('close_type')->default(0);
             $table->timestamps();
         });
     }

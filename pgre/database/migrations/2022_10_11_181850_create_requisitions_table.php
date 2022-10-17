@@ -15,22 +15,24 @@ class CreateRequisitionsTable extends Migration
     {
         Schema::create('requisitions', function (Blueprint $table) {
             $table->id();
+            $table->string('tag');
             $table->foreignId('request_user_id')->constrained('users')->onDelete('cascade');
             $table->foreignId('status_id')->constrained('requisition_levels')->onDelete('cascade');
-            $table->integer('request_days');
-            $table->date('end_date');
-            $table->string('obs');
-            $table->string('course');
-            $table->string('class');
-            $table->string('ufcd');
-            $table->foreignId('approved_user_id')->constrained('users')->onDelete('cascade');
+            $table->integer('request_days')->nullable();
+            $table->date('end_date')->nullable();
+            $table->string('obs')->nullable();
+            $table->string('course')->nullable();
+            $table->string('class')->nullable();
+            $table->string('ufcd')->nullable();
+            $table->string('teacher')->nullable();
+            $table->foreignId('approved_user_id')->nullable()->constrained('users')->onDelete('cascade');
             $table->boolean('approved')->default(0);
             $table->boolean('request_status')->default(0);
             $table->boolean('deliver_status')->default(0);
-            $table->string('pickup_name');
-            $table->string('deliver_name');
-            $table->date('approved_at');
-            $table->date('deliver_at');
+            $table->string('pickup_name')->nullable();
+            $table->string('deliver_name')->nullable();
+            $table->date('approved_at')->nullable();
+            $table->date('deliver_at')->nullable();
             $table->timestamps();
         });
     }

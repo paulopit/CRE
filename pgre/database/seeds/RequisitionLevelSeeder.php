@@ -11,6 +11,43 @@ class RequisitionLevelSeeder extends Seeder
      */
     public function run()
     {
-        //
+        \DB::table('requisition_levels')->insert([
+            [
+                'name' => 'Temporário',
+                'close_type' => 0,
+                'created_at' => now(),
+                'updated_at' => now()
+            ],
+            [
+                'name' => 'Submetido',
+                'close_type' => 0,
+                'created_at' => now(),
+                'updated_at' => now()
+            ],
+            [
+                'name' => 'Cancelado',
+                'close_type' => 1,
+                'created_at' => now(),
+                'updated_at' => now()
+            ],
+            [
+                'name' => 'Aprovado',
+                'close_type' => 0,
+                'created_at' => now(),
+                'updated_at' => now()
+            ],
+            [
+                'name' => 'Rejeitado',
+                'close_type' => 1,
+                'created_at' => now(),
+                'updated_at' => now()
+            ],
+            [
+                'name' => 'Devolvido',
+                'close_type' => 1,
+                'created_at' => now(),
+                'updated_at' => now()
+            ]
+        ]);
     }
 }

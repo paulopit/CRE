@@ -15,15 +15,47 @@ class RequisitionController extends Controller
      * @return \Illuminate\Http\Response
      */
 
+    private function GenerateRequisition($length = 10)
+    {
+        $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+        $charactersLength = strlen($characters);
+        $randomString = '';
+        for ($i = 0; $i < $length; $i++) {
+            $randomString .= $characters[rand(0, $charactersLength - 1)];
+        }
+        return $randomString;
+    }
+
+    private function GetTempRequisition(){
+        //Valida se já existe alguma requisição em estado 1 (Temporário) para este user.
+        $TempReq = Requisition::where('status_id','=', 1)
+            ->where('request_user_id', '=' , Auth::user()->id)
+            ->first();
+        return $TempReq;
+    }
+
+
     public function new()
     {
+        $TempReq = $this->GetTempRequisition();
+
+        if(empty($TempReq)){
+            //vamos criar um registo temporario novo.
+
+            $new_req = new Requisition();
+            $new_req->Tag = $this->GenerateRequisition();
+            $new_req->request_user_id = Auth::user()->id;
+            $new_req->status_id =1;
+            $new_req->save();
+
+            $TempReq = $new_req;
+        }//senão, já existe um registo temporário, vamos retornar os dados desse registo.
+
+
+
         $user_req = Auth::user();
         $user_func = User_function::all();
-
-
-
-
-        return view('requisition.new',['user_req' => $user_req, 'user_func' => $user_func]);
+        return view('requisition.new',['$temp_req' => $TempReq, 'user_req' => $user_req, 'user_func' => $user_func]);
     }
 
     public function index()
@@ -96,4 +128,5 @@ class RequisitionController extends Controller
     {
         //
     }
+
 }
