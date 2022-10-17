@@ -188,11 +188,7 @@ class EquipmentSeeder extends Seeder
                 'obs' => '',
                 'created_at' => now(),
                 'updated_at' => now()
-            ],
-
-
-
-
+            ]
         ]);
     }
 }
