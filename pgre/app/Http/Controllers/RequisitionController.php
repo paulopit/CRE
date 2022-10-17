@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Requisition;
+use App\User_function;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class RequisitionController extends Controller
 {
@@ -12,6 +14,18 @@ class RequisitionController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
+    public function new()
+    {
+        $user_req = Auth::user();
+        $user_func = User_function::all();
+
+
+
+
+        return view('requisition.new',['user_req' => $user_req, 'user_func' => $user_func]);
+    }
+
     public function index()
     {
         //

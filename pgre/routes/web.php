@@ -65,6 +65,8 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/dashboard', 'HomeController@dashboard')->name('dashboard');
     Route::get('/user/settings', 'UserController@index');
     Route::put('/user/{user}', 'UserController@update');
+
+    Route::get('/requisitions/new', 'RequisitionController@new');
 });
 
 

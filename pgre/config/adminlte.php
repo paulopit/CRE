@@ -311,6 +311,12 @@ return [
             'can'  => ['tech-permission', 'admin-permission'],
         ],
         [
+            'text' => 'Nova',
+            'url'  => 'requisitions/new',
+            'icon' => 'fas fa-plus',
+            'icon_color' => 'yellow',
+        ],
+        [
             'text' => 'Pendentes',
             'url'  => 'requisitions/pending',
             'icon' => 'fas fa-pause-circle',
