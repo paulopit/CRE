@@ -34,6 +34,17 @@ class RequisitionController extends Controller
         return $TempReq;
     }
 
+    private function Remove_outdated_temp_requisitions(){
+
+        $expDate = Carbon::now()->subHours(1); //requisicões com mais de 1h
+        $outdated = Requisition::where('status_id','=', 1)
+            ->where('created_date', '<' , $expDate)
+            ->get();
+
+        //mudar para estado cancelado
+        return true;
+    }
+
 
     public function new()
     {
