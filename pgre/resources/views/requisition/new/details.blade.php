@@ -14,7 +14,7 @@
         <div class="col-lg-12">
             <div class="card card-secondary">
                 <div class="card-header">
-                    <h3 class="card-title">Nova Requisição </h3>
+                    <h3 class="card-title">{{$temp_req->tag}} - Nova Requisição</h3>
                 </div>
                 <div class="card-body">
                     <form method="POST" action="{{url('requisitions/create')}}" enctype="multipart/form-data">
@@ -55,7 +55,7 @@
                             <x-adminlte-input name="req_course" label="Curso" placeholder="Curso" value="" fgroup-class="col-md-6">
                                 <x-slot name="prependSlot">
                                     <div class="input-group-text">
-                                        <i class="fas fa-user text-lightblue"></i>
+                                        <i class="fas fa-book text-lightblue"></i>
                                     </div>
                                 </x-slot>
                             </x-adminlte-input>
@@ -63,7 +63,7 @@
                             <x-adminlte-input name="req_class" label="Turma" placeholder="Turma" value="" fgroup-class="col-md-6">
                                 <x-slot name="prependSlot">
                                     <div class="input-group-text">
-                                        <i class="fas fa-user text-lightblue"></i>
+                                        <i class="fas fa-graduation-cap text-lightblue"></i>
                                     </div>
                                 </x-slot>
                             </x-adminlte-input>
@@ -71,7 +71,7 @@
                             <x-adminlte-input name="req_ufcd" label="Nome UFCD" placeholder="UFCD" value="" fgroup-class="col-md-6">
                                 <x-slot name="prependSlot">
                                     <div class="input-group-text">
-                                        <i class="fas fa-user text-lightblue"></i>
+                                        <i class="fas fa-university text-lightblue"></i>
                                     </div>
                                 </x-slot>
                             </x-adminlte-input>
@@ -79,11 +79,16 @@
                             <x-adminlte-input name="req_teacher" label="Nome Formador" placeholder="Nome Formador" value="" fgroup-class="col-md-6">
                                 <x-slot name="prependSlot">
                                     <div class="input-group-text">
-                                        <i class="fas fa-user text-lightblue"></i>
+                                        <i class="fas fa-user-tie text-lightblue"></i>
                                     </div>
                                 </x-slot>
                             </x-adminlte-input>
                         </div>
+
+                        @component('requisition.new.modal.add', ['requisition_details' => $temp_req, 'equip_types' => $equip_types])
+                        @endcomponent
+                        <a href="" class="btn btn-xs mt-3 mb-3" title="Adicionar Equipamento" data-toggle="modal" data-target='#add_req_equip_{{$temp_req->tag}}' data-id=""> <x-adminlte-button class="btn-flat" type="button" label="Adicionar Equipamento" theme="secondary" icon="fas fa-lg fa-plus"/></a>
+
 
                         <hr>
                         <h5 class="pb-3"> Equipamentos </h5>
@@ -102,6 +107,7 @@
                             $config['paging'] = false;
                             $config["lengthMenu"] = [ 10, 50, 100, 500];
                         @endphp
+
 
                         <x-adminlte-datatable id="req_lines" :heads="$header" theme="light" head-theme="dark" striped hoverable>
                         </x-adminlte-datatable>

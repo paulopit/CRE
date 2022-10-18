@@ -17,7 +17,7 @@ class CreateRequisitionsTable extends Migration
             $table->id();
             $table->string('tag');
             $table->foreignId('request_user_id')->constrained('users')->onDelete('cascade');
-            $table->foreignId('status_id')->constrained('requisition_levels')->onDelete('cascade');
+            $table->foreignId('level_id')->constrained('requisition_levels')->onDelete('cascade');
             $table->integer('request_days')->nullable();
             $table->date('end_date')->nullable();
             $table->string('obs')->nullable();

@@ -2,10 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Equipment_type;
 use App\Requisition;
 use App\User_function;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class RequisitionController extends Controller
 {
@@ -28,35 +31,34 @@ class RequisitionController extends Controller
 
     private function GetTempRequisition(){
         //Valida se já existe alguma requisição em estado 1 (Temporário) para este user.
-        $TempReq = Requisition::where('status_id','=', 1)
+        $TempReq = Requisition::where('level_id','=', 1)
             ->where('request_user_id', '=' , Auth::user()->id)
             ->first();
         return $TempReq;
     }
 
-    private function Remove_outdated_temp_requisitions(){
-
+    private function Check_outdated_requisitions(){
         $expDate = Carbon::now()->subHours(1); //requisicões com mais de 1h
-        $outdated = Requisition::where('status_id','=', 1)
-            ->where('created_date', '<' , $expDate)
+        $outdated = Requisition::where('level_id','=', 1)
+            ->where('created_at', '<' , $expDate)
             ->get();
-
-        //mudar para estado cancelado
-        return true;
+        foreach($outdated as $req){
+            $req->level_id =3; //mudar para estado cancelado
+        }
     }
 
 
     public function new()
     {
+        $this->Check_outdated_requisitions();
         $TempReq = $this->GetTempRequisition();
 
         if(empty($TempReq)){
             //vamos criar um registo temporario novo.
-
             $new_req = new Requisition();
-            $new_req->Tag = $this->GenerateRequisition();
+            $new_req->tag = $this->GenerateRequisition();
             $new_req->request_user_id = Auth::user()->id;
-            $new_req->status_id =1;
+            $new_req->level_id =1;
             $new_req->save();
 
             $TempReq = $new_req;
@@ -66,7 +68,13 @@ class RequisitionController extends Controller
 
         $user_req = Auth::user();
         $user_func = User_function::all();
-        return view('requisition.new',['$temp_req' => $TempReq, 'user_req' => $user_req, 'user_func' => $user_func]);
+        //listar apenas tipos de equipamentos que estão a ser utilizados.
+        $equip_types = Equipment_type::select('equipment_types.id', 'equipment_types.type')
+                                        ->join('equipment','equipment.equipment_type_id', '=', 'equipment_types.id')
+                                        ->groupBy('equipment_types.type','equipment_types.id')
+                                        ->get();
+
+        return view('requisition.new.details',['temp_req' => $TempReq, 'user_req' => $user_req, 'user_func' => $user_func,'equip_types' => $equip_types]);
     }
 
     public function index()

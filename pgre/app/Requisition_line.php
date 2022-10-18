@@ -8,7 +8,7 @@ class Requisition_line extends Model
 {
     public function requisition()
     {
-        return $this->hasOne(Requisition::class);
+        return $this->belongsTo(Requisition::class);
     }
 
     public function equipments()

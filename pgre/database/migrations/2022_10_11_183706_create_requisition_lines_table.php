@@ -15,7 +15,7 @@ class CreateRequisitionLinesTable extends Migration
     {
         Schema::create('requisition_lines', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('requisition_id')->constrained();
+            $table->foreignId('requisition_id')->constrained('requisitions','id');
             $table->foreignId('equipment_id')->constrained();
             $table->timestamps();
         });
