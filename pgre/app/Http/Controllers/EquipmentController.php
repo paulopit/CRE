@@ -36,10 +36,20 @@ class EquipmentController extends Controller
 
     public function getEquipmentsByRef($ref=""){
 
-        $equip_data['data'] = Equipment::orderby("reference","asc")
-            ->select('id','reference','description')
-            ->where('reference','LIKE','%'.$ref.'%')
+        $equip_data['data'] = Equipment::orderby("equipment.reference","asc")
+            ->select('equipment.id','equipment.reference','equipment.description')
+            ->leftJoin('requisition_lines', 'requisition_lines.equipment_id', '=', 'equipment.id')
+            ->leftJoin('requisitions', 'requisitions.id', '=', 'requisition_lines.requisition_id')
+            ->leftJoin('requisition_levels', 'requisition_levels.id', '=', 'requisitions.level_id')
+            ->groupby('equipment.id','equipment.reference','equipment.description')
+            ->where('equipment.reference','LIKE','%'.$ref.'%')
+            ->where('requisitions.id',null)
+            ->OrWhere('requisition_levels.close_type',1)
             ->get();
+//        $equip_data['data'] = Equipment::orderby("equipment.reference","asc")
+//            ->select('id','reference','description')
+//            ->where('reference','LIKE','%'.$ref.'%')
+//            ->get();
 
         return response()->json($equip_data);
     }
