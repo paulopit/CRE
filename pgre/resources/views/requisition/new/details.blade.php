@@ -9,6 +9,7 @@
     </div>
 @stop
 
+
 @section('content')
     <div class="">
         <div class="col-lg-12">
@@ -52,7 +53,7 @@
                                     </div>
                                 </x-slot>
                             </x-adminlte-input>
-                            <x-adminlte-input name="req_course" label="Curso" placeholder="Curso" value="" fgroup-class="col-md-6">
+                            <x-adminlte-input name="req_course" id="req_course" label="Curso" placeholder="Curso" value="{{$temp_req->course}}" fgroup-class="col-md-6">
                                 <x-slot name="prependSlot">
                                     <div class="input-group-text">
                                         <i class="fas fa-book text-lightblue"></i>
@@ -60,7 +61,7 @@
                                 </x-slot>
                             </x-adminlte-input>
 
-                            <x-adminlte-input name="req_class" label="Turma" placeholder="Turma" value="" fgroup-class="col-md-6">
+                            <x-adminlte-input name="req_class" id="req_class"  label="Turma" placeholder="Turma" value="{{$temp_req->class}}" fgroup-class="col-md-6">
                                 <x-slot name="prependSlot">
                                     <div class="input-group-text">
                                         <i class="fas fa-graduation-cap text-lightblue"></i>
@@ -68,7 +69,7 @@
                                 </x-slot>
                             </x-adminlte-input>
 
-                            <x-adminlte-input name="req_ufcd" label="Nome UFCD" placeholder="UFCD" value="" fgroup-class="col-md-6">
+                            <x-adminlte-input name="req_ufcd" id="req_ufcd"  label="Nome UFCD" placeholder="UFCD" value="{{$temp_req->ufcd}}" fgroup-class="col-md-6">
                                 <x-slot name="prependSlot">
                                     <div class="input-group-text">
                                         <i class="fas fa-university text-lightblue"></i>
@@ -76,7 +77,7 @@
                                 </x-slot>
                             </x-adminlte-input>
 
-                            <x-adminlte-input name="req_teacher" label="Nome Formador" placeholder="Nome Formador" value="" fgroup-class="col-md-6">
+                            <x-adminlte-input name="req_teacher" id="req_teacher"  label="Nome Formador" placeholder="Nome Formador" value="{{$temp_req->teacher}}" fgroup-class="col-md-6">
                                 <x-slot name="prependSlot">
                                     <div class="input-group-text">
                                         <i class="fas fa-user-tie text-lightblue"></i>
@@ -87,16 +88,16 @@
 
                         @component('requisition.new.modal.add', ['requisition_details' => $temp_req, 'equip_types' => $equip_types])
                         @endcomponent
-                        <a href="" class="btn btn-xs mt-3 mb-3" title="Adicionar Equipamento" data-toggle="modal" data-target='#add_req_equip_{{$temp_req->tag}}' data-id=""> <x-adminlte-button class="btn-flat" type="button" label="Adicionar Equipamento" theme="secondary" icon="fas fa-lg fa-plus"/></a>
-
+                        <a href="" class="btn btn-xs mt-3 mb-3" title="Adicionar Equipamento" onclick="Update_req_fields()" data-toggle="modal" data-target='#add_req_equip_{{$temp_req->tag}}' data-id=""> <x-adminlte-button class="btn-flat" type="button" label="Adicionar Equipamento" theme="secondary" icon="fas fa-lg fa-plus"/></a>
 
                         <hr>
                         <h5 class="pb-3"> Equipamentos </h5>
                         @php
                             $header = [
-                                ['label' => 'ID','width' => 3],
-                                ['label' => 'Referência','width' => 20],
-                                ['label' => 'Descrição','width' => 20],
+                                ['label' => 'Referência','width' => 10],
+                                ['label' => 'Descrição','width' => 30],
+                                ['label' => 'Estado','width' => 10],
+                                ['label' => 'Obs','width' => 20],
                                 ['label' => 'Ações', 'no-export' => false, 'width' => 5],
                             ];
 
@@ -108,8 +109,28 @@
                             $config["lengthMenu"] = [ 10, 50, 100, 500];
                         @endphp
 
-
                         <x-adminlte-datatable id="req_lines" :heads="$header" theme="light" head-theme="dark" striped hoverable>
+                            @foreach($temp_req->lines as $line)
+                                <tr>
+                                    <td>{{$line->equipment->reference}}</td>
+                                    <td>{{$line->equipment->description}}</td>
+                                    <td>@if($line->equipment->status_ok) <label style="color: green">OK</label> @else <label style="color: orange"> NOK </label> @endif</td>
+                                    <td>{{$line->equipment->obs}}</td>
+                                    <td>
+                                        <nobr>
+{{--                                            @component('user.management.modal.edit', ['user' => $user, 'user_functions' =>$user_functions,'user_types' => $user_types])--}}
+{{--                                            @endcomponent--}}
+{{--                                            <a href="" class="btn btn-xs btn-default text-primary mx-1 shadow table-btn" title="Edit" data-toggle="modal" data-target='#edit_user_{{$user->id}}' data-id=""> <i class="fa fa-lg fa-fw fa-pen"></i> </a>--}}
+                                            {{--                                        @component('user.types.modal.delete', ['user_type' => $type])--}}
+                                            {{--                                        @endcomponent--}}
+                                            {{--                                        <a href="" class="btn btn-xs btn-default text-danger mx-1 shadow table-btn" title="delete" data-toggle="modal" data-target='#delete_user_type_{{$type->id}}' data-id="" @if($type->id < 4)  style="pointer-events:none;cursor:default;background: #dddddd;" @endif><i class="fa fa-lg fa-fw fa-trash"></i></a>--}}
+                                            {{--                                        @component('user.types.modal.view', ['user_type' => $type])--}}
+                                            {{--                                        @endcomponent--}}
+                                            {{--                                        <a href="" class="btn btn-xs btn-default text-teal mx-1 shadow table-btn" title="View" data-toggle="modal" data-target='#view_user_type_{{$type->id}}' data-id=""> <i class="fa fa-lg fa-fw fa-eye"></i> </a>--}}
+                                        </nobr>
+                                    </td>
+                                </tr>
+                            @endforeach
                         </x-adminlte-datatable>
 
                         <div class="mt-3">
@@ -121,6 +142,27 @@
         </div>
     </div>
 
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script>
+
+
+        function Update_req_fields(){
+            var req_id = {{$temp_req->id}};
+            var req_course = $('#req_course').val();
+            var req_class = $('#req_class').val();
+            var req_ufcd = $('#req_ufcd').val();
+            var req_teacher = $('#req_teacher').val();
+            $.ajax({
+                type:'POST',
+                url:"{{ route('update_req_fields') }}",
+                data:{req_id:req_id,req_course:req_course, req_class:req_class, req_ufcd:req_ufcd, req_teacher:req_teacher, _token: '{{csrf_token()}}'},
+                success:function(data){
+                }
+            });
+
+        }
+
+    </script>
 
 
 @stop

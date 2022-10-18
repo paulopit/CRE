@@ -20,7 +20,8 @@ class CreateEquipmentTable extends Migration
             $table->boolean('status_ok')->default('0');
             $table->foreignId('equipment_type_id')->constrained();
             $table->foreignId('equipment_model_id')->constrained();
-            $table->string('reference')->unique();
+            $table->boolean('in_stock')->default(1);
+            $table->string('reference');
             //$table->foreignId('reference')->unique()->constrained('equipment_images')->onDelete('cascade');
             $table->string('obs')->nullable();
             $table->timestamps();

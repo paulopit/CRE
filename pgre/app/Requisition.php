@@ -13,7 +13,7 @@ class Requisition extends Model
 
     public function lines()
     {
-        return $this->belongsTo(Requisition_line::class);
+        return $this->hasMany(Requisition_line::class);
     }
 
     public function requisition_level()

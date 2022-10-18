@@ -74,7 +74,26 @@ class RequisitionController extends Controller
                                         ->groupBy('equipment_types.type','equipment_types.id')
                                         ->get();
 
+
         return view('requisition.new.details',['temp_req' => $TempReq, 'user_req' => $user_req, 'user_func' => $user_func,'equip_types' => $equip_types]);
+    }
+
+
+
+    public function updateFields(Request $request)
+    {
+
+
+        $requisition = Requisition::find($request->req_id);
+
+        $requisition->course = $request->req_course;
+        $requisition->class = $request->req_class;
+        $requisition->ufcd = $request->req_ufcd;
+        $requisition->teacher = $request->req_teacher;
+        $requisition->save();
+
+        return response()->json(['success'=>'Got Simple Ajax Request.']);
+//        return response()->json($request);
     }
 
     public function index()

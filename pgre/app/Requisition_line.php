@@ -11,8 +11,8 @@ class Requisition_line extends Model
         return $this->belongsTo(Requisition::class);
     }
 
-    public function equipments()
+    public function equipment()
     {
-        return $this->hasMany(Equipment::class);
+        return $this->belongsTo(Equipment::class);
     }
 }

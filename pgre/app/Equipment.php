@@ -16,4 +16,5 @@ class Equipment extends Model
         return $this->hasOne(Model::class);
     }
 
+
 }
