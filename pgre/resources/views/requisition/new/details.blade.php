@@ -16,10 +16,19 @@
                 <div class="card-header">
                     <h3 class="card-title">Nova Requisição - {{$temp_req->tag}}</h3>
                 </div>
+
+                @component('requisition.new.modal.add', ['requisition_details' => $temp_req, 'equip_types' => $equip_types])
+                @endcomponent
                 <div class="card-body">
                     <form method="POST" action="{{url('requisitions/create')}}" enctype="multipart/form-data">
                         @csrf
                         <div class="row">
+                            <div class="row" style="display: none;">
+                                <x-adminlte-input name="user_id" label="" placeholder="user_id" value="{{$user_req->id}}" fgroup-class="col-md-6">
+                                </x-adminlte-input>
+                                <x-adminlte-input name="req_id" label="" placeholder="req_id" value="{{$temp_req->id}}" fgroup-class="col-md-6">
+                                </x-adminlte-input>
+                            </div>
                             <x-adminlte-input name="user_name" label="Nome" placeholder="username" value="{{$user_req->name}}" fgroup-class="col-md-6" disabled="disabled">
                                 <x-slot name="prependSlot">
                                     <div class="input-group-text">
@@ -95,8 +104,6 @@
                             </x-adminlte-textarea>
                         </div>
 
-                        @component('requisition.new.modal.add', ['requisition_details' => $temp_req, 'equip_types' => $equip_types])
-                        @endcomponent
                         <a href="" class="btn btn-xs mt-3 mb-3" title="Adicionar Equipamento" onclick="Update_req_fields()" data-toggle="modal" data-target='#add_req_equip_{{$temp_req->tag}}' data-id=""> <x-adminlte-button class="btn-flat" type="button" label="Adicionar Equipamento" theme="secondary" icon="fas fa-lg fa-plus"/></a>
                         <hr>
                         <h5 class="pb-3"> Equipamentos </h5>
@@ -141,9 +148,12 @@
                                 </tr>
                             @endforeach
                         </x-adminlte-datatable>
-
                         <div class="mt-3">
-                            <x-adminlte-button class="btn-flat" type="submit" label="Submeter" theme="secondary" icon="fas fa-lg fa-save"/>
+                            @if(count($temp_req->lines) > 0)
+                                <x-adminlte-button class="btn-flat" type="submit" label="Submeter" theme="secondary" icon="fas fa-lg fa-save"/>
+                            @else
+                                <x-adminlte-button class="btn-flat" type="submit" label="Submeter" theme="secondary" disabled="disabled" icon="fas fa-lg fa-save"/>
+                            @endif
                         </div>
                     </form>
                 </div>

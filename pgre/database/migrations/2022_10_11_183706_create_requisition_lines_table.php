@@ -18,6 +18,8 @@ class CreateRequisitionLinesTable extends Migration
             $table->foreignId('requisition_id')->constrained('requisitions','id');
             $table->foreignId('equipment_id')->constrained();
             $table->timestamps();
+            $table->softDeletes();
+
         });
     }
 

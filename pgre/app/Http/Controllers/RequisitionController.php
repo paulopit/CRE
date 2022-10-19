@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Equipment;
 use App\Equipment_type;
 use App\Requisition;
+use App\Requisition_line;
 use App\User_function;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -38,12 +40,24 @@ class RequisitionController extends Controller
     }
 
     private function Check_outdated_requisitions(){
-        $expDate = Carbon::now()->subHours(1); //requisicões com mais de 1h
+
+        $expDate = Carbon::now()->subMinutes(30); //requisicões com mais de 30min
         $outdated = Requisition::where('level_id','=', 1)
-            ->where('created_at', '<' , $expDate)
+            ->where('updated_at', '<' , $expDate)
             ->get();
+
         foreach($outdated as $req){
-            $req->level_id =3; //mudar para estado cancelado
+            //validar se tem equipamentos associados para remover das linhas e atualizar o stock.
+            foreach ($req->lines as $line){
+                //atualizar stock do equipamento
+                $equip_rec = Equipment::find($line->equipment_id);
+                $equip_rec->in_stock = 1;
+                $equip_rec->save();
+                //remover linha
+                $line->delete();
+            }
+            $req->level_id =4; //mudar para estado cancelado
+            $req->save();
         }
     }
 
@@ -62,7 +76,11 @@ class RequisitionController extends Controller
             $new_req->save();
 
             $TempReq = $new_req;
-        }//senão, já existe um registo temporário, vamos retornar os dados desse registo.
+        }else{//senão, já existe um registo temporário, vamos atualizar a data de update.
+            $TempReq->updated_at = now();
+            $TempReq->save();
+        }
+
 
         $user_req = Auth::user();
         $user_func = User_function::all();
@@ -82,15 +100,12 @@ class RequisitionController extends Controller
     public function updateFields(Request $request)
     {
         $requisition = Requisition::find($request->req_id);
-
         $requisition->course = $request->req_course;
         $requisition->class = $request->req_class;
         $requisition->ufcd = $request->req_ufcd;
         $requisition->teacher = $request->req_teacher;
         $requisition->obs = $request->req_obs;
         $requisition->save();
-
-
 
         return response()->json(['success'=>'Fields updated successfully!']);
     }
@@ -105,9 +120,13 @@ class RequisitionController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Request $request)
     {
-        //
+
+        $req_info = Requisition::find($request->req_id);
+        $req_info->level_id = 2; //estado submetido
+        $req_info->save();
+        return redirect('/requisitions/new')->with('success','Requisição submetida com sucesso!');
     }
 
     /**

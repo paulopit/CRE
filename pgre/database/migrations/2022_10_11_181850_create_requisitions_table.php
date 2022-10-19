@@ -34,6 +34,7 @@ class CreateRequisitionsTable extends Migration
             $table->date('approved_at')->nullable();
             $table->date('deliver_at')->nullable();
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

@@ -67,6 +67,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::put('/user/{user}', 'UserController@update');
 
     Route::get('/requisitions/new', 'RequisitionController@new');
+    Route::post('/requisitions/create', 'RequisitionController@create');
 
     Route::get('/getEquipmentsByType/{id}', 'EquipmentController@getEquipmentsByType');
     Route::get('/getEquipmentsByRef/{ref}', 'EquipmentController@getEquipmentsByRef');
