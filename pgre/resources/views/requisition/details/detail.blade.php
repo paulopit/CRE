@@ -14,7 +14,7 @@
         <div class="col-lg-12">
             <div class="card card-secondary">
                 <div class="card-header">
-                    <h3 class="card-title">Detalhe Requisição - {{$req_details->tag}}</h3>
+                    <h3 class="card-title"> {{$req_details->tag}} - <span class="badge p-2 @if($req_details->level_id == 2) badge-warning @endif @if($req_details->level_id == 3) badge-success @endif @if($req_details->level_id > 3) badge-info @endif">{{$req_details->requisition_level->name}}</span> </h3>
                 </div>
 
                 <div class="card-body">
