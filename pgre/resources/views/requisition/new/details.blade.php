@@ -15,7 +15,7 @@
         <div class="col-lg-12">
             <div class="card card-secondary">
                 <div class="card-header">
-                    <h3 class="card-title">{{$temp_req->tag}} - Nova Requisição</h3>
+                    <h3 class="card-title">Nova Requisição - {{$temp_req->tag}}</h3>
                 </div>
                 <div class="card-body">
                     <form method="POST" action="{{url('requisitions/create')}}" enctype="multipart/form-data">
@@ -28,7 +28,7 @@
                                     </div>
                                 </x-slot>
                             </x-adminlte-input>
-                            <x-adminlte-select name="user_function" label="Função" fgroup-class="col-md-6">
+                            <x-adminlte-select name="user_function" label="Função" fgroup-class="col-md-6" disabled="disabled">
                                 <x-slot name="prependSlot">
                                     <div class="input-group-text">
                                         <i class="fas fa-user-md text-lightblue"></i>
@@ -85,11 +85,20 @@
                                 </x-slot>
                             </x-adminlte-input>
                         </div>
+                        <div class="row">
+                            <x-adminlte-textarea name="req_obs" id="req_obs" rows="5"  label="Observações" placeholder="Observações" fgroup-class="col-md-12">
+                                <x-slot name="prependSlot">
+                                    <div class="input-group-text">
+                                        <i class="fas fa-info text-lightblue"></i>
+                                    </div>
+                                </x-slot>
+                                {{$temp_req->obs}}
+                            </x-adminlte-textarea>
+                        </div>
 
                         @component('requisition.new.modal.add', ['requisition_details' => $temp_req, 'equip_types' => $equip_types])
                         @endcomponent
                         <a href="" class="btn btn-xs mt-3 mb-3" title="Adicionar Equipamento" onclick="Update_req_fields()" data-toggle="modal" data-target='#add_req_equip_{{$temp_req->tag}}' data-id=""> <x-adminlte-button class="btn-flat" type="button" label="Adicionar Equipamento" theme="secondary" icon="fas fa-lg fa-plus"/></a>
-
                         <hr>
                         <h5 class="pb-3"> Equipamentos </h5>
                         @php
@@ -145,25 +154,22 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script>
 
-
         function Update_req_fields(){
             var req_id = {{$temp_req->id}};
             var req_course = $('#req_course').val();
             var req_class = $('#req_class').val();
             var req_ufcd = $('#req_ufcd').val();
             var req_teacher = $('#req_teacher').val();
+            var req_obs = $('#req_obs').val();
             $.ajax({
                 type:'POST',
                 url:"{{ route('update_req_fields') }}",
-                data:{req_id:req_id,req_course:req_course, req_class:req_class, req_ufcd:req_ufcd, req_teacher:req_teacher, _token: '{{csrf_token()}}'},
+                data:{req_id:req_id,req_course:req_course, req_class:req_class, req_ufcd:req_ufcd, req_teacher:req_teacher,req_obs:req_obs, _token: '{{csrf_token()}}'},
                 success:function(data){
                 }
             });
-
         }
-
     </script>
-
 
 @stop
 

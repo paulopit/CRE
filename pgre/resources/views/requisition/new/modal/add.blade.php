@@ -70,17 +70,19 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 
 <script>
+
     function store_equip(){
         var equip_id = $('#sel_equipment').val();
         $.ajax({
-            url: '/equip-management/equipment/add/{{$requisition_details->id}}/'+equip_id,
-            type: 'get',
-            dataType: 'json',
-            success: function(response){
+            type:'POST',
+            url:"{{ route('add_req_equipment') }}",
+            data:{req_id:{{$requisition_details->id}},equip_id:equip_id, _token: '{{csrf_token()}}'},
+            success:function(data){
                 location.href = "/requisitions/new"
             }
         });
     }
+
 
     function search_ref(){
         var ref = $('#equip_ref').val();
@@ -108,6 +110,10 @@
                     $('#no_records_found').show();
                     $('#sel_equip_div').hide();
                 }
+            },
+            error:function(){
+                $('#no_records_found').show();
+                $('#sel_equip_div').hide();
             }
         });
     }

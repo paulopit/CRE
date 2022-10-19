@@ -65,15 +65,17 @@ class EquipmentController extends Controller
         //return redirect('user-management/types')->with('success','Tipo de utilizador criado com sucesso!');
     }
 
-    public function add($req_id=0, $equip_id=0){
+
+
+    public function add(Request $request){
 
         $new_line = new Requisition_line();
-        $new_line->requisition_id = $req_id;
-        $new_line->equipment_id = $equip_id;
+        $new_line->requisition_id = $request->req_id;
+        $new_line->equipment_id = $request->equip_id;
         $new_line->save();
 
         //tira equipamento de stock
-        $equip = Equipment::find($equip_id);
+        $equip = Equipment::find($request->equip_id);
         $equip->in_stock = false;
         $equip->save();
         return response()->json('sucesso');

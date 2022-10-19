@@ -64,13 +64,12 @@ class RequisitionController extends Controller
             $TempReq = $new_req;
         }//senão, já existe um registo temporário, vamos retornar os dados desse registo.
 
-
-
         $user_req = Auth::user();
         $user_func = User_function::all();
         //listar apenas tipos de equipamentos que estão a ser utilizados.
         $equip_types = Equipment_type::select('equipment_types.id', 'equipment_types.type')
                                         ->join('equipment','equipment.equipment_type_id', '=', 'equipment_types.id')
+                                        ->where('equipment.in_stock', 1)
                                         ->groupBy('equipment_types.type','equipment_types.id')
                                         ->get();
 
@@ -82,18 +81,18 @@ class RequisitionController extends Controller
 
     public function updateFields(Request $request)
     {
-
-
         $requisition = Requisition::find($request->req_id);
 
         $requisition->course = $request->req_course;
         $requisition->class = $request->req_class;
         $requisition->ufcd = $request->req_ufcd;
         $requisition->teacher = $request->req_teacher;
+        $requisition->obs = $request->req_obs;
         $requisition->save();
 
-        return response()->json(['success'=>'Got Simple Ajax Request.']);
-//        return response()->json($request);
+
+
+        return response()->json(['success'=>'Fields updated successfully!']);
     }
 
     public function index()

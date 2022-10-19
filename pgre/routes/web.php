@@ -70,9 +70,9 @@ Route::group(['middleware' => 'auth'], function () {
 
     Route::get('/getEquipmentsByType/{id}', 'EquipmentController@getEquipmentsByType');
     Route::get('/getEquipmentsByRef/{ref}', 'EquipmentController@getEquipmentsByRef');
-    Route::get('/equip-management/equipment/add/{req_id}/{equip_id}', 'EquipmentController@add');
 
     Route::post('/update-req-fields', 'RequisitionController@updateFields')->name('update_req_fields');
+    Route::post('/equip-management/equipment/add', 'EquipmentController@add')->name('add_req_equipment');
 
 
 
