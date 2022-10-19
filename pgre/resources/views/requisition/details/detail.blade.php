@@ -139,7 +139,6 @@
                                 </tr>
                             @endforeach
                         </x-adminlte-datatable>
-
                 </div>
             </div>
         </div>

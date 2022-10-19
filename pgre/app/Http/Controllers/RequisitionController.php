@@ -39,6 +39,25 @@ class RequisitionController extends Controller
         return $TempReq;
     }
 
+    private function CancelRequisition($requisition, $expired = false){
+        //validar se tem equipamentos associados para remover das linhas e atualizar o stock.
+        foreach ($requisition->lines as $line){
+            //atualizar stock do equipamento
+            $equip_rec = Equipment::find($line->equipment_id);
+            $equip_rec->in_stock = 1;
+            $equip_rec->save();
+            //remover linha
+            $line->delete();
+        }
+        if($expired){
+            $requisition->level_id =4; //mudar para estado expirado
+        }else{
+            $requisition->level_id =5; //mudar para estado cancelado
+        }
+        $requisition->save();
+    }
+
+
     private function Check_outdated_requisitions(){
 
         $expDate = Carbon::now()->subMinutes(30); //requisicões com mais de 30min
@@ -47,17 +66,7 @@ class RequisitionController extends Controller
             ->get();
 
         foreach($outdated as $req){
-            //validar se tem equipamentos associados para remover das linhas e atualizar o stock.
-            foreach ($req->lines as $line){
-                //atualizar stock do equipamento
-                $equip_rec = Equipment::find($line->equipment_id);
-                $equip_rec->in_stock = 1;
-                $equip_rec->save();
-                //remover linha
-                $line->delete();
-            }
-            $req->level_id =4; //mudar para estado cancelado
-            $req->save();
+            $this->CancelRequisition($req, true);
         }
     }
 
@@ -117,6 +126,39 @@ class RequisitionController extends Controller
         return view('requisition.list.pending',['pending_req' => $pending_req]);
     }
 
+    public function active()
+    {
+        $user = Auth::user();
+        $active_req = Requisition::where('request_user_id', $user->id)
+            ->where('level_id', 3) //aprovado
+            ->get()
+            ->sortBy('requested_at');
+        return view('requisition.list.active',['active_req' => $active_req]);
+    }
+
+    public function closed()
+    {
+        $user = Auth::user();
+        $closed_req = Requisition::where('request_user_id', $user->id)
+                                    ->whereIn('level_id', [5,6,7])
+                                    ->get()
+                                    ->sortBy('requested_at');
+        return view('requisition.list.closed',['closed_req' => $closed_req]);
+    }
+
+    public function cancel(Requisition $requisition)
+    {
+        $req_record =  Requisition::find($requisition->id);
+        $user = Auth::user();
+
+        if($req_record->request_user_id != $user->id){
+            return redirect('/requisitions/pending')->with('error','Não tem permissões para cancelar esta requisição.');
+        }
+        $this->CancelRequisition($req_record);
+
+        return redirect('/requisitions/pending')->with('success','Requisição cancelada com sucesso!');
+    }
+
     public function index()
     {
         //
@@ -133,7 +175,7 @@ class RequisitionController extends Controller
         $req_info->level_id = 2; //estado submetido
         $req_info->requested_at = now();
         $req_info->save();
-        return redirect('/requisitions/new')->with('success','Requisição submetida com sucesso!');
+        return response()->json(['success' => 'Requisição submetida com sucesso!']);
     }
 
     /**

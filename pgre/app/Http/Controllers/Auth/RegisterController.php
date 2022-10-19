@@ -84,6 +84,11 @@ class RegisterController extends Controller
         ]);
     }
 
+    public function showRegistrationForm()
+    {
+        $user_functions = User_function::all();
+        return view('auth.register',['user_functions' => $user_functions]);
+    }
 
 
 

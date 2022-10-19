@@ -67,9 +67,13 @@ Route::group(['middleware' => 'auth'], function () {
     Route::put('/user/{user}', 'UserController@update');
 
     Route::get('/requisitions/new', 'RequisitionController@new');
-    Route::post('/requisitions/create', 'RequisitionController@create');
+    Route::post('/requisitions/create', 'RequisitionController@create')->name('submit_req');
     Route::get('/requisitions/pending', 'RequisitionController@pending');
+    Route::get('/requisitions/active', 'RequisitionController@active');
+    Route::get('/requisitions/closed', 'RequisitionController@closed');
+
     Route::get('/requisitions/details/{requisition}', 'RequisitionController@show');
+    Route::post('/requisitions/cancel/{requisition}', 'RequisitionController@cancel');
 
     Route::get('/getEquipmentsByType/{id}', 'EquipmentController@getEquipmentsByType');
     Route::get('/getEquipmentsByRef/{ref}', 'EquipmentController@getEquipmentsByRef');

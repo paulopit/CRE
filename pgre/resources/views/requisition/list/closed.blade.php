@@ -1,6 +1,6 @@
 @extends('adminlte::page')
 
-@section('title', 'GRE - Requisições Pendentes')
+@section('title', 'GRE - Requisições Fechadas')
 
 @section('content_header')
     <div class="mb-3">
@@ -14,16 +14,15 @@
         <div class="col-lg-12">
             <div class="card card-secondary">
                 <div class="card-header">
-                    <h3 class="card-title">Requisições Pendentes</h3>
+                    <h3 class="card-title">Requisições Fechadas</h3>
                 </div>
                 <div class="card-body">
-                    @component('requisition.list.components.requisition_table', ['req_data' => $pending_req])
+                    @component('requisition.list.components.requisition_table', ['req_data' => $closed_req])
                     @endcomponent
                 </div>
             </div>
         </div>
     </div>
-
 @stop
 
 @section('css')

@@ -7,6 +7,9 @@
         @component('components.alerts')
         @endcomponent
     </div>
+    <x-adminlte-alert theme="success" id="success-alert" title="Sucesso" dismissable style="display:none">
+        <label>Requisição submetida com sucesso!</label>
+    </x-adminlte-alert>
 @stop
 
 @section('content')
@@ -20,8 +23,6 @@
                 @component('requisition.new.modal.add', ['requisition_details' => $temp_req, 'equip_types' => $equip_types])
                 @endcomponent
                 <div class="card-body">
-                    <form method="POST" action="{{url('requisitions/create')}}" enctype="multipart/form-data">
-                        @csrf
                         <div class="row">
                             <div class="row" style="display: none;">
                                 <x-adminlte-input name="user_id" label="" placeholder="user_id" value="{{$user_req->id}}" fgroup-class="col-md-6">
@@ -135,7 +136,7 @@
                                         <nobr>
                                             @component('requisition.new.modal.delete', ['equip' => $line])
                                             @endcomponent
-                                            <a href="" class="btn btn-xs btn-default text-danger mx-1 shadow table-btn" title="delete" data-toggle="modal" data-target='#remove_req_equip_{{$line->id}}' data-id=""><i class="fa fa-lg fa-fw fa-trash"></i></a>
+                                            <a href="" class="btn btn-xs btn-default text-danger mx-1 shadow table-btn" title="Remover" data-toggle="modal" data-target='#remove_req_equip_{{$line->id}}' data-id=""><i class="fa fa-lg fa-fw fa-trash"></i></a>
 {{--                                            @component('user.management.modal.edit', ['user' => $user, 'user_functions' =>$user_functions,'user_types' => $user_types])--}}
 {{--                                            @endcomponent--}}
 {{--                                            <a href="" class="btn btn-xs btn-default text-primary mx-1 shadow table-btn" title="Edit" data-toggle="modal" data-target='#edit_user_{{$user->id}}' data-id=""> <i class="fa fa-lg fa-fw fa-pen"></i> </a>--}}
@@ -150,12 +151,11 @@
                         </x-adminlte-datatable>
                         <div class="mt-3">
                             @if(count($temp_req->lines) > 0)
-                                <x-adminlte-button class="btn-flat" type="submit" label="Submeter" theme="secondary" icon="fas fa-lg fa-save"/>
+                                <x-adminlte-button class="btn-flat" id="submit_req" type="submit" label="Submeter" theme="secondary" icon="fas fa-lg fa-save" onclick="Submit_requisition()" />
                             @else
                                 <x-adminlte-button class="btn-flat" type="submit" label="Submeter" theme="secondary" disabled="disabled" icon="fas fa-lg fa-save"/>
                             @endif
                         </div>
-                    </form>
                 </div>
             </div>
         </div>
@@ -163,6 +163,20 @@
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script>
+
+        function Submit_requisition(){
+            var req_id = {{$temp_req->id}};
+            $.ajax({
+                type:'POST',
+                url:"{{ route('submit_req') }}",
+                data:{req_id:req_id, _token: '{{csrf_token()}}'},
+                success:function(data){
+                    $('#submit_req').attr("disabled", true);
+                    $("#success-alert").show();
+                    setTimeout(function() { window.location = '/requisitions/new'; }, 1000);
+                }
+            });
+        }
 
         function Update_req_fields(){
             var req_id = {{$temp_req->id}};
@@ -179,6 +193,8 @@
                 }
             });
         }
+
+
     </script>
 
 @stop
