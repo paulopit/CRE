@@ -61,7 +61,6 @@ class RequisitionController extends Controller
         }
     }
 
-
     public function new()
     {
         $this->Check_outdated_requisitions();
@@ -95,8 +94,6 @@ class RequisitionController extends Controller
         return view('requisition.new.details',['temp_req' => $TempReq, 'user_req' => $user_req, 'user_func' => $user_func,'equip_types' => $equip_types]);
     }
 
-
-
     public function updateFields(Request $request)
     {
         $requisition = Requisition::find($request->req_id);
@@ -108,6 +105,16 @@ class RequisitionController extends Controller
         $requisition->save();
 
         return response()->json(['success'=>'Fields updated successfully!']);
+    }
+
+    public function pending()
+    {
+        $user = Auth::user();
+        $pending_req = Requisition::where('request_user_id', $user->id)
+                                    ->where('level_id', 2)
+                                    ->get()
+                                    ->sortBy('requested_at');
+        return view('requisition.list.pending',['pending_req' => $pending_req]);
     }
 
     public function index()
@@ -122,9 +129,9 @@ class RequisitionController extends Controller
      */
     public function create(Request $request)
     {
-
         $req_info = Requisition::find($request->req_id);
         $req_info->level_id = 2; //estado submetido
+        $req_info->requested_at = now();
         $req_info->save();
         return redirect('/requisitions/new')->with('success','Requisição submetida com sucesso!');
     }
@@ -148,7 +155,8 @@ class RequisitionController extends Controller
      */
     public function show(Requisition $requisition)
     {
-        //
+        $req_details =  Requisition::find($requisition->id);
+        return view('requisition.details.detail',['req_details' => $req_details]);
     }
 
     /**

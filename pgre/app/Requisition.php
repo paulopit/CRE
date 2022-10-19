@@ -20,8 +20,16 @@ class Requisition extends Model
 
     public function requisition_level()
     {
-        return $this->hasOne(Requisition_level::class);
+        return $this->belongsTo(Requisition_level::class,'level_id');
     }
+
+    public function request_user()
+    {
+        return $this->belongsTo(User::class,'request_user_id');
+    }
+
+
+
 
     protected $dates = ['deleted_at'];
 

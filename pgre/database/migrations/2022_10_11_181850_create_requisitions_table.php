@@ -31,8 +31,9 @@ class CreateRequisitionsTable extends Migration
             $table->boolean('deliver_status')->default(0);
             $table->string('pickup_name')->nullable();
             $table->string('deliver_name')->nullable();
-            $table->date('approved_at')->nullable();
-            $table->date('deliver_at')->nullable();
+            $table->dateTime('approved_at')->nullable();
+            $table->dateTime('delivered_at')->nullable();
+            $table->dateTime('requested_at')->nullable();
             $table->timestamps();
             $table->softDeletes();
         });

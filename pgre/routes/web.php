@@ -68,6 +68,8 @@ Route::group(['middleware' => 'auth'], function () {
 
     Route::get('/requisitions/new', 'RequisitionController@new');
     Route::post('/requisitions/create', 'RequisitionController@create');
+    Route::get('/requisitions/pending', 'RequisitionController@pending');
+    Route::get('/requisitions/details/{requisition}', 'RequisitionController@show');
 
     Route::get('/getEquipmentsByType/{id}', 'EquipmentController@getEquipmentsByType');
     Route::get('/getEquipmentsByRef/{ref}', 'EquipmentController@getEquipmentsByRef');
