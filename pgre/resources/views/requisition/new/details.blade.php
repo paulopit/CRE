@@ -9,7 +9,6 @@
     </div>
 @stop
 
-
 @section('content')
     <div class="">
         <div class="col-lg-12">
@@ -127,12 +126,13 @@
                                     <td>{{$line->equipment->obs}}</td>
                                     <td>
                                         <nobr>
+                                            @component('requisition.new.modal.delete', ['equip' => $line])
+                                            @endcomponent
+                                            <a href="" class="btn btn-xs btn-default text-danger mx-1 shadow table-btn" title="delete" data-toggle="modal" data-target='#remove_req_equip_{{$line->id}}' data-id=""><i class="fa fa-lg fa-fw fa-trash"></i></a>
 {{--                                            @component('user.management.modal.edit', ['user' => $user, 'user_functions' =>$user_functions,'user_types' => $user_types])--}}
 {{--                                            @endcomponent--}}
 {{--                                            <a href="" class="btn btn-xs btn-default text-primary mx-1 shadow table-btn" title="Edit" data-toggle="modal" data-target='#edit_user_{{$user->id}}' data-id=""> <i class="fa fa-lg fa-fw fa-pen"></i> </a>--}}
-                                            {{--                                        @component('user.types.modal.delete', ['user_type' => $type])--}}
-                                            {{--                                        @endcomponent--}}
-                                            {{--                                        <a href="" class="btn btn-xs btn-default text-danger mx-1 shadow table-btn" title="delete" data-toggle="modal" data-target='#delete_user_type_{{$type->id}}' data-id="" @if($type->id < 4)  style="pointer-events:none;cursor:default;background: #dddddd;" @endif><i class="fa fa-lg fa-fw fa-trash"></i></a>--}}
+
                                             {{--                                        @component('user.types.modal.view', ['user_type' => $type])--}}
                                             {{--                                        @endcomponent--}}
                                             {{--                                        <a href="" class="btn btn-xs btn-default text-teal mx-1 shadow table-btn" title="View" data-toggle="modal" data-target='#view_user_type_{{$type->id}}' data-id=""> <i class="fa fa-lg fa-fw fa-eye"></i> </a>--}}

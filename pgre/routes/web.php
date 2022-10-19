@@ -73,7 +73,7 @@ Route::group(['middleware' => 'auth'], function () {
 
     Route::post('/update-req-fields', 'RequisitionController@updateFields')->name('update_req_fields');
     Route::post('/equip-management/equipment/add', 'EquipmentController@add')->name('add_req_equipment');
-
+    Route::post('/equip-management/equipment/remove/{line}', 'EquipmentController@remove')->name('remove_req_equipment');
 
 
 });

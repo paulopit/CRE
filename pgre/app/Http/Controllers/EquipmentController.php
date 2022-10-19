@@ -81,6 +81,21 @@ class EquipmentController extends Controller
         return response()->json('sucesso');
     }
 
+    public function remove(Requisition_line $line){
+
+        //delete requisition line
+        $record = Requisition_line::find($line->id);
+        $record->delete();
+
+        //update equip stock
+        $equip_id = $line->equipment_id;
+        $equip_rec = Equipment::find($equip_id);
+        $equip_rec->in_stock = 1;
+        $equip_rec->save();
+
+        return redirect('requisitions/new')->with('success','Equipamento removido com sucesso!');
+    }
+
     /**
      * Display the specified resource.
      *
