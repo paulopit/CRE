@@ -33,6 +33,13 @@ Route::group(['middleware' => 'management'], function () {
     Route::post('/equip-management/brands/add', 'BrandController@store');
     Route::delete('/equip-management/brands/{brand}', 'BrandController@destroy');
     Route::put('/equip-management/brands/{brand}', 'BrandController@update');
+
+    // ##Equipment management
+    Route::get('/equip-management/equipments', 'EquipmentController@index');
+    Route::post('/equip-management/equipments/add', 'EquipmentController@store');
+    Route::delete('/equip-management/equipments/{brand}', 'EquipmentController@destroy');
+    Route::put('/equip-management/equipments/{equipment}', 'EquipmentController@update');
+    Route::get('/get-models', 'EquipmentModelController@getModels')->name('get_models_info');
 });
 
 

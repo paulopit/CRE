@@ -2,7 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Brand;
 use App\Equipment;
+use App\Equipment_model;
+use App\Equipment_type;
 use App\Requisition_line;
 use Illuminate\Http\Request;
 
@@ -13,6 +16,16 @@ class EquipmentController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    private function GenerateReference($length = 15)
+    {
+        $characters = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+        $charactersLength = strlen($characters);
+        $randomString = '';
+        for ($i = 0; $i < $length; $i++) {
+            $randomString .= $characters[rand(0, $charactersLength - 1)];
+        }
+        return $randomString;
+    }
 
     public function getEquipmentsByType($type_id=0){
 
@@ -38,7 +51,11 @@ class EquipmentController extends Controller
 
     public function index()
     {
-
+        $equipments = Equipment::all();
+        $brands = Brand::all();
+        $equipment_types = Equipment_type::all();
+        $equipment_models = Equipment_model::all();
+        return view('equip.management.list', ['equipments' => $equipments, 'equipment_types' => $equipment_types, 'equipment_models' => $equipment_models, 'brands' => $brands]);
     }
 
 
@@ -47,7 +64,7 @@ class EquipmentController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Request $request)
     {
         //
     }
@@ -60,9 +77,23 @@ class EquipmentController extends Controller
      */
     public function store(Request $request)
     {
+        $this->validate($request, [
+            'description' => 'required',
+            'equipment_type' => 'required',
+            'models_select' => 'required',
+            ]);
 
-        //
-        //return redirect('user-management/types')->with('success','Tipo de utilizador criado com sucesso!');
+        $equipment = new Equipment();
+        $equipment->description = $request->description;
+        $equipment->equipment_type_id = $request->equipment_type;
+        $equipment->equipment_model_id = $request->models_select;
+        $equipment->serial_number = $request->serial_number;
+        $equipment->obs = $request->obs;
+        $equipment->reference = $request->reference ?? $this->GenerateReference();
+        $equipment->save();
+
+        return redirect('/equip-management/equipments')->with('success','Equipamento criada com sucesso!');
+
     }
 
 
@@ -104,7 +135,24 @@ class EquipmentController extends Controller
      */
     public function show(Equipment $equipment)
     {
-        //
+        $this->validate($request, [
+            'description' => 'required',
+            'reference' => 'required',
+            'description' => 'required',
+            'equipment_type_id' => 'required',
+            'equipment_model_id' => 'required'
+        ]);
+
+        $equipment= new Equipment();
+        $equipment->description = $request->description;
+        $equipment->serial_number = $request->serial_number;
+        $equipment->equipment_type_id = $request->equipment_type_id;
+        $equipment->equipment_model_id = $request->equipment_model_id;
+        $equipment->reference = $request->reference;
+        $equipment->obs = $request->obs;
+        $equipment->save();
+
+        return redirect('equip-management/equipments')->with('success','Equipamento criado com sucesso!');
     }
 
     /**
@@ -140,4 +188,5 @@ class EquipmentController extends Controller
     {
         //
     }
+
 }

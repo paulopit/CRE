@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Equipment_model;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Request;
 
 class EquipmentModelController extends Controller
@@ -12,10 +13,23 @@ class EquipmentModelController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    public function getModels(Request $request)
+    {
+        $brand_id = $request->brand_id;
+        $models = Equipment_model::where('brand_id', $brand_id)
+            ->select('id', 'name')
+            ->get();
+
+        return response()->json($models);
+
+
+    }
+
     public function index()
     {
         //
     }
+
 
     /**
      * Show the form for creating a new resource.
