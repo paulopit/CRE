@@ -58,6 +58,14 @@ Route::group(['middleware' => 'admin'], function () {
     Route::delete('/user-management/functions/{user_function}', 'UserFunctionController@destroy');
     Route::put('/user-management/functions/{user_function}', 'UserFunctionController@update');
 
+    Route::get('/user-info', 'RequisitionController@getUserInfo')->name('get_user_info');
+
+    Route::get('/requisition-management/new', 'RequisitionController@manage_new');
+    Route::post('/requisition-management/update-req-fields', 'RequisitionController@manage_updateFields')->name('manage_update_req_fields');
+
+
+
+
 });
 
 Route::group(['middleware' => 'auth'], function () {

@@ -6,6 +6,7 @@ use App\Equipment;
 use App\Equipment_type;
 use App\Requisition;
 use App\Requisition_line;
+use App\User;
 use App\User_function;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -29,6 +30,14 @@ class RequisitionController extends Controller
             $randomString .= $characters[rand(0, $charactersLength - 1)];
         }
         return $randomString;
+    }
+
+    private function GetTempAdminRequisition(){
+        //Valida se já existe alguma requisição em estado 1 (Temporário) criada por este user.
+        $TempReq = Requisition::where('level_id','=', 1)
+            ->where('created_by', '=' , Auth::user()->id)
+            ->first();
+        return $TempReq;
     }
 
     private function GetTempRequisition(){
@@ -80,6 +89,7 @@ class RequisitionController extends Controller
             $new_req = new Requisition();
             $new_req->tag = $this->GenerateRequisition();
             $new_req->request_user_id = Auth::user()->id;
+            $new_req->created_by = Auth::user()->id;
             $new_req->level_id =1;
             $new_req->save();
 
@@ -103,10 +113,72 @@ class RequisitionController extends Controller
         return view('requisition.new.details',['temp_req' => $TempReq, 'user_req' => $user_req, 'user_func' => $user_func,'equip_types' => $equip_types]);
     }
 
+    public function manage_new()
+    {
+        $this->Check_outdated_requisitions();
+        $TempReq = $this->GetTempAdminRequisition();
+
+        if(empty($TempReq)){
+            //vamos criar um registo temporario novo.
+            $new_req = new Requisition();
+            $new_req->tag = $this->GenerateRequisition();
+            $new_req->created_by = Auth::user()->id;
+            $new_req->level_id =1;
+            $new_req->save();
+
+            $TempReq = $new_req;
+        }else{//senão, já existe um registo temporário, vamos atualizar a data de update.
+            $TempReq->updated_at = now();
+            $TempReq->save();
+        }
+        $user_req = Auth::user();
+        $user_func = User_function::all();
+        $user_list = User::where('user_type_id', 3)
+                            ->where('is_active', 1)
+                            ->get();
+        $assigned_usr = User::find($TempReq->request_user_id);
+
+
+        //listar apenas tipos de equipamentos que estão a ser utilizados.
+        $equip_types = Equipment_type::select('equipment_types.id', 'equipment_types.type')
+            ->join('equipment','equipment.equipment_type_id', '=', 'equipment_types.id')
+            ->where('equipment.in_stock', 1)
+            ->groupBy('equipment_types.type','equipment_types.id')
+            ->get();
+
+        return view('requisition.management.new.new',['assigned_usr'=> $assigned_usr, 'temp_req' => $TempReq, 'user_req' => $user_req, 'user_list' => $user_list,'equip_types' => $equip_types]);
+    }
+
+
+    public function getUserInfo(Request $request)
+    {
+        $user_id = $request->user_id;
+        $user_info = User::Join('user_functions','user_functions.id', '=', 'users.user_function_id')
+                            ->select('user_functions.function_name', 'users.phone', 'users.email')
+                            ->where('users.id',$user_id)
+                            ->get();
+        return response()->json(['user_info' => $user_info]);
+    }
+
+
     public function updateFields(Request $request)
     {
         $requisition = Requisition::find($request->req_id);
         $requisition->course = $request->req_course;
+        $requisition->class = $request->req_class;
+        $requisition->ufcd = $request->req_ufcd;
+        $requisition->teacher = $request->req_teacher;
+        $requisition->obs = $request->req_obs;
+        $requisition->save();
+
+        return response()->json(['success'=>'Fields updated successfully!']);
+    }
+
+    public function manage_updateFields(Request $request)
+    {
+        $requisition = Requisition::find($request->req_id);
+        $requisition->course = $request->req_course;
+        $requisition->request_user_id = $request->user_id;
         $requisition->class = $request->req_class;
         $requisition->ufcd = $request->req_ufcd;
         $requisition->teacher = $request->req_teacher;

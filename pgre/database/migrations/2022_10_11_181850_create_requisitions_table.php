@@ -16,7 +16,7 @@ class CreateRequisitionsTable extends Migration
         Schema::create('requisitions', function (Blueprint $table) {
             $table->id();
             $table->string('tag');
-            $table->foreignId('request_user_id')->constrained('users')->onDelete('cascade');
+            $table->foreignId('request_user_id')->nullable()->constrained('users')->onDelete('cascade');
             $table->foreignId('level_id')->constrained('requisition_levels')->onDelete('cascade');
             $table->integer('request_days')->nullable();
             $table->date('end_date')->nullable();
@@ -25,15 +25,26 @@ class CreateRequisitionsTable extends Migration
             $table->string('class')->nullable();
             $table->string('ufcd')->nullable();
             $table->string('teacher')->nullable();
-            $table->foreignId('approved_user_id')->nullable()->constrained('users')->onDelete('cascade');
-            $table->boolean('approved')->default(0);
+
             $table->boolean('request_status')->default(0);
             $table->boolean('deliver_status')->default(0);
-            $table->string('pickup_name')->nullable();
-            $table->string('deliver_name')->nullable();
+
             $table->dateTime('approved_at')->nullable();
+            $table->foreignId('approved_by')->nullable()->constrained('users')->onDelete('cascade');
+
+            $table->dateTime('canceled_at')->nullable();
+            $table->foreignId('canceled_by')->nullable()->constrained('users')->onDelete('cascade');
+
+            $table->dateTime('picked_up_at')->nullable();
+            $table->string('picked_up_by')->nullable()->nullable();
+
             $table->dateTime('delivered_at')->nullable();
+            $table->foreignId('delivered_by')->nullable()->constrained('users')->onDelete('cascade');
+
             $table->dateTime('requested_at')->nullable();
+            $table->foreignId('requested_by')->nullable()->constrained('users')->onDelete('cascade');
+
+            $table->foreignId('created_by')->nullable()->constrained('users')->onDelete('cascade');
             $table->timestamps();
             $table->softDeletes();
         });
