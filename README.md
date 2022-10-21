@@ -38,8 +38,6 @@
 - [X] CRUD @Deivid
 - [ ] Página gestão de Marcas e Modelos
 - [ ] Página gestão de Equipamentos
-- [ ] Página gestão de requisições
-- [ ] Página pedidos de requisições (FrontEnd)
 - [ ] Triggers envio de Emails.
 - [ ] Importação de equipamentos via ficheiro Excel
 - [ ] Webservice [Opcional]
@@ -75,6 +73,8 @@
 - [x] CRUD AppConfig @Sergio
 - [x] CRUD UserAccount @Sergio
 - [x] AppConfigSeeder @Sergio
+- [x] Página pedidos de requisições (FrontEnd User) @Sergio
+- [ ] Página gestão de requisições (BackEnd User) @Sergio
 
 
 
