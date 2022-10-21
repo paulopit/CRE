@@ -25,7 +25,13 @@ class RequisitionLevelSeeder extends Seeder
                 'updated_at' => now()
             ],
             [
-                'name' => 'Aprovado',
+                'name' => 'Aguarda Levantamento',
+                'close_type' => 0,
+                'created_at' => now(),
+                'updated_at' => now()
+            ],
+            [
+                'name' => 'Requisitado',
                 'close_type' => 0,
                 'created_at' => now(),
                 'updated_at' => now()

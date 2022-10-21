@@ -124,7 +124,7 @@ class EquipmentController extends Controller
         $equip_rec->in_stock = 1;
         $equip_rec->save();
 
-        return redirect('requisitions/new')->with('success','Equipamento removido com sucesso!');
+        return back()->with('success','Equipamento removido com sucesso!');
     }
 
     /**
@@ -133,7 +133,7 @@ class EquipmentController extends Controller
      * @param  \App\Equipment  $equipment
      * @return \Illuminate\Http\Response
      */
-    public function show(Equipment $equipment)
+    public function show(Request $request)
     {
         $this->validate($request, [
             'description' => 'required',

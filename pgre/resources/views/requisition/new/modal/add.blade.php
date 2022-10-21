@@ -1,8 +1,6 @@
 <div class="modal fade" id="add_req_equip_{{$requisition_details->tag}}">
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
-            <form method="POST" action="{{url('/equip-management/equipment/store')}}" enctype="multipart/form-data">
-                @csrf
                 <div class="modal-header">
                     <h5 class="modal-title">Adicionar equipamento</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -63,7 +61,6 @@
                 </div>
                 <div class="modal-footer">
                 </div>
-            </form>
         </div>
     </div>
 </div>
@@ -78,7 +75,8 @@
             url:"{{ route('add_req_equipment') }}",
             data:{req_id:{{$requisition_details->id}},equip_id:equip_id, _token: '{{csrf_token()}}'},
             success:function(data){
-                location.href = "/requisitions/new"
+                location.reload();
+                //location.href = "/requisitions/new"
             }
         });
     }

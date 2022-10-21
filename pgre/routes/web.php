@@ -40,6 +40,15 @@ Route::group(['middleware' => 'management'], function () {
     Route::delete('/equip-management/equipments/{brand}', 'EquipmentController@destroy');
     Route::put('/equip-management/equipments/{equipment}', 'EquipmentController@update');
     Route::get('/get-models', 'EquipmentModelController@getModels')->name('get_models_info');
+
+    Route::get('/requisition-management/new', 'RequisitionController@manage_new');
+    Route::post('/requisition-management/update-req-fields', 'RequisitionController@manage_updateFields')->name('manage_update_req_fields');
+    Route::get('/requisition-management/pending', 'RequisitionController@manage_pending');
+
+    Route::get('/requisition-management/details/{requisition}', 'RequisitionController@managementDetails');
+    Route::post('/requisition-management/confirm', 'RequisitionController@managementConfirm');
+    Route::post('/requisition-management/deny', 'RequisitionController@managementDeny');
+
 });
 
 
@@ -66,12 +75,6 @@ Route::group(['middleware' => 'admin'], function () {
     Route::put('/user-management/functions/{user_function}', 'UserFunctionController@update');
 
     Route::get('/user-info', 'RequisitionController@getUserInfo')->name('get_user_info');
-
-    Route::get('/requisition-management/new', 'RequisitionController@manage_new');
-    Route::post('/requisition-management/update-req-fields', 'RequisitionController@manage_updateFields')->name('manage_update_req_fields');
-
-
-
 
 });
 

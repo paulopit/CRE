@@ -34,8 +34,8 @@ class RequisitionController extends Controller
 
     private function GetTempAdminRequisition(){
         //Valida se já existe alguma requisição em estado 1 (Temporário) criada por este user.
-        $TempReq = Requisition::where('level_id','=', 1)
-            ->where('created_by', '=' , Auth::user()->id)
+        $TempReq = Requisition::where('level_id', 1)
+            ->where('created_by', Auth::user()->id)
             ->first();
         return $TempReq;
     }
@@ -56,12 +56,12 @@ class RequisitionController extends Controller
             $equip_rec->in_stock = 1;
             $equip_rec->save();
             //remover linha
-            $line->delete();
+            //$line->delete();
         }
         if($expired){
-            $requisition->level_id =4; //mudar para estado expirado
+            $requisition->level_id =5; //mudar para estado expirado
         }else{
-            $requisition->level_id =5; //mudar para estado cancelado
+            $requisition->level_id =6; //mudar para estado cancelado
         }
         $requisition->save();
     }
@@ -117,6 +117,9 @@ class RequisitionController extends Controller
     {
         $this->Check_outdated_requisitions();
         $TempReq = $this->GetTempAdminRequisition();
+
+
+
 
         if(empty($TempReq)){
             //vamos criar um registo temporario novo.
@@ -198,11 +201,21 @@ class RequisitionController extends Controller
         return view('requisition.list.pending',['pending_req' => $pending_req]);
     }
 
+    public function manage_pending()
+    {
+        $pending_req = Requisition::where('level_id', 2)
+            ->get()
+            ->sortBy('requested_at');
+        return view('requisition.management.filters.pending',['pending_req' => $pending_req]);
+    }
+
+
+
     public function active()
     {
         $user = Auth::user();
         $active_req = Requisition::where('request_user_id', $user->id)
-            ->where('level_id', 3) //aprovado
+            ->where('level_id', 3) //Aguarda levantamento
             ->get()
             ->sortBy('requested_at');
         return view('requisition.list.active',['active_req' => $active_req]);
@@ -212,7 +225,7 @@ class RequisitionController extends Controller
     {
         $user = Auth::user();
         $closed_req = Requisition::where('request_user_id', $user->id)
-                                    ->whereIn('level_id', [5,6,7])
+                                    ->whereIn('level_id', [6,7,8])
                                     ->get()
                                     ->sortBy('requested_at');
         return view('requisition.list.closed',['closed_req' => $closed_req]);
@@ -230,6 +243,39 @@ class RequisitionController extends Controller
 
         return redirect('/requisitions/pending')->with('success','Requisição cancelada com sucesso!');
     }
+
+
+
+    public function managementDetails(Requisition $requisition)
+    {
+        $req_details =  Requisition::find($requisition->id);
+        return view('requisition.management.details.details',['req_details' => $req_details]);
+    }
+
+    public function managementConfirm(Request $request)
+    {
+        $manager = Auth::user();
+        $req_record =  Requisition::find($request->req_id);
+        $req_record->level_id = 3; //Aguarda Levantamento
+        $req_record->aproved_at = now();
+        $req_record->aproved_by = $manager->id;
+        $req_record->save();
+        return redirect()->back()->with('success','Requisição aprovada com sucesso!');
+    }
+
+    public function managementDeny(Request $request)
+    {
+        $manager = Auth::user();
+        $req_record =  Requisition::find($request->req_id);
+        $req_record->level_id = 6; //Cancelado
+        $req_record->canceled_at = now();
+        $req_record->canceled_by = $manager->id;
+        $req_record->canceled_obs = $manager->deny_rec_obs;
+        $this->CancelRequisition($req_record);
+        $req_record->save();
+        return redirect()->back()->with('success','Requisição cancelada com sucesso!');
+    }
+
 
     public function index()
     {

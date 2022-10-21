@@ -34,9 +34,10 @@ class CreateRequisitionsTable extends Migration
 
             $table->dateTime('canceled_at')->nullable();
             $table->foreignId('canceled_by')->nullable()->constrained('users')->onDelete('cascade');
+            $table->string('canceled_obs')->nullable();
 
             $table->dateTime('picked_up_at')->nullable();
-            $table->string('picked_up_by')->nullable()->nullable();
+            $table->string('picked_up_by')->nullable();
 
             $table->dateTime('delivered_at')->nullable();
             $table->foreignId('delivered_by')->nullable()->constrained('users')->onDelete('cascade');

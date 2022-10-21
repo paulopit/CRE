@@ -45,7 +45,40 @@ class UserSeeder extends Seeder
                 'password' => Hash::make('aluno'),
                 'created_at' => now(),
                 'updated_at' => now()
-            ]
+            ],
+            [
+                'name' => 'user1',
+                'phone' => null,
+                'birth_date' => carbon::createFromDate(1900, 1, 1),
+                'user_function_id' => 4,
+                'user_type_id' => 3,
+                'email' => 'user1@admin.com',
+                'password' => Hash::make('user'),
+                'created_at' => now(),
+                'updated_at' => now()
+            ],
+            [
+                'name' => 'user2',
+                'phone' => null,
+                'birth_date' => carbon::createFromDate(1900, 1, 1),
+                'user_function_id' => 4,
+                'user_type_id' => 3,
+                'email' => 'user2@admin.com',
+                'password' => Hash::make('user'),
+                'created_at' => now(),
+                'updated_at' => now()
+            ],
+            [
+            'name' => 'user3',
+            'phone' => null,
+            'birth_date' => carbon::createFromDate(1900, 1, 1),
+            'user_function_id' => 4,
+            'user_type_id' => 3,
+            'email' => 'user3@admin.com',
+            'password' => Hash::make('user'),
+            'created_at' => now(),
+            'updated_at' => now()
+        ]
         ]);
     }
 }

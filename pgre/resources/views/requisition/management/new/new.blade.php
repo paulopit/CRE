@@ -7,6 +7,9 @@
         @component('components.alerts')
         @endcomponent
     </div>
+        <x-adminlte-alert id="success-alert" theme="success" title="Sucesso" dismissable style="display: none;">
+            <label>Requisição submetida com sucesso!</label>
+        </x-adminlte-alert>
 @stop
 
 @section('content')
@@ -22,7 +25,7 @@
                 <div class="card-body">
                     <div class="row">
                         <div class="row" style="display: none;">
-                            <x-adminlte-input name="user_id" id="user_id" label="" placeholder="user_id" value="" fgroup-class="col-md-6">
+                            <x-adminlte-input name="user_id" id="user_id" label="" placeholder="user_id" value="{{$temp_req->request_user_id}}" fgroup-class="col-md-6">
                             </x-adminlte-input>
                             <x-adminlte-input name="req_id" id="req_id" label="" placeholder="req_id" value="{{$temp_req->id}}" fgroup-class="col-md-6">
                             </x-adminlte-input>
@@ -217,7 +220,7 @@
                 success:function(data){
                     $('#submit_req').attr("disabled", true);
                     $("#success-alert").show();
-                    setTimeout(function() { window.location = '/requisitions/new'; }, 1000);
+                    setTimeout(function() {location.reload(); }, 1000);
                 }
             });
         }
@@ -225,6 +228,7 @@
         function Update_req_fields(){
             var req_id = {{$temp_req->id}};
             var user_id = $('#user_id').val();
+            //console.log('user_id: ' + user_id);
             var req_course = $('#req_course').val();
             var req_class = $('#req_class').val();
             var req_ufcd = $('#req_ufcd').val();
@@ -238,8 +242,6 @@
                 }
             });
         }
-
-
     </script>
 
 @stop

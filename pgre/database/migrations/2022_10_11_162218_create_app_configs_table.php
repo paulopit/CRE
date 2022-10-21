@@ -21,6 +21,8 @@ class CreateAppConfigsTable extends Migration
             $table->boolean('conf_low_stock_percentage_check')->default(0);
             $table->integer('conf_default_req_days');
             $table->boolean('conf_default_req_days_check')->default(0);
+            $table->integer('conf_default_expire_minutes');
+            $table->boolean('conf_default_expire_minutes_check')->default(0);
             $table->timestamps();
         });
     }
