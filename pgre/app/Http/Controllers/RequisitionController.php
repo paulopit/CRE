@@ -241,10 +241,8 @@ class RequisitionController extends Controller
         }
         $this->CancelRequisition($req_record);
 
-        return redirect('/requisitions/pending')->with('success','Requisição cancelada com sucesso!');
+        return redirect('/requisitions/pending')->with('success','Requisição cancelacd da com sucesso!');
     }
-
-
 
     public function managementDetails(Requisition $requisition)
     {
@@ -257,10 +255,10 @@ class RequisitionController extends Controller
         $manager = Auth::user();
         $req_record =  Requisition::find($request->req_id);
         $req_record->level_id = 3; //Aguarda Levantamento
-        $req_record->aproved_at = now();
-        $req_record->aproved_by = $manager->id;
+        $req_record->approved_at = now();
+        $req_record->approved_by = $manager->id;
         $req_record->save();
-        return redirect()->back()->with('success','Requisição aprovada com sucesso!');
+        return redirect('/requisition-management/pending')->with('success','Requisição aprovada com sucesso!');
     }
 
     public function managementDeny(Request $request)
@@ -273,7 +271,7 @@ class RequisitionController extends Controller
         $req_record->canceled_obs = $manager->deny_rec_obs;
         $this->CancelRequisition($req_record);
         $req_record->save();
-        return redirect()->back()->with('success','Requisição cancelada com sucesso!');
+        return redirect('/requisition-management/pending')->with('success','Requisição cancelada com sucesso!');
     }
 
 
@@ -289,9 +287,11 @@ class RequisitionController extends Controller
      */
     public function create(Request $request)
     {
+        $user = Auth::user();
         $req_info = Requisition::find($request->req_id);
         $req_info->level_id = 2; //estado submetido
         $req_info->requested_at = now();
+        $req_info->requested_by = $user->id;
         $req_info->save();
         return response()->json(['success' => 'Requisição submetida com sucesso!']);
     }
