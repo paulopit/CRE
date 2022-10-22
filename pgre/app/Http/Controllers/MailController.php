@@ -12,7 +12,7 @@ class MailController extends Controller
     {
         $details = [
             'title' => 'Email de teste GRE',
-            'body' => 'Envio de email de teste do GRE'
+            'body' => 'Envio de email de teste do GRE - o paulo é feio!'
         ];
         Mail::to('salter.sfernandes@gmail.com')->send(new MailSender($details));
     }
