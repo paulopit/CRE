@@ -346,7 +346,7 @@ return [
             'text' => 'Criar Nova',
             'url'  => 'requisition-management/new',
             'icon' => 'fas fa-plus-circle',
-            'icon_color' => 'blue',
+            'icon_color' => 'white',
             'can'  => ['tech-permission', 'admin-permission'],
         ],
         [

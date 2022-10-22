@@ -16,9 +16,11 @@ class MailSender extends Mailable
      *
      * @return void
      */
-    public function __construct($details)
+    public function __construct($subject,$details)
     {
         $this->details = $details;
+        $this->subject = $subject;
+
     }
 
     /**
@@ -28,7 +30,7 @@ class MailSender extends Mailable
      */
     public function build()
     {
-        return $this->subject('Mail from GRE')
+        return $this->subject($this->subject)
             ->view('emails.test_email',['details' => $this->details]);
     }
 }

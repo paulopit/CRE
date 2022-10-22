@@ -85,6 +85,9 @@ class RequisitionController extends Controller
 
     public function new()
     {
+
+
+
         $this->Check_outdated_requisitions();
         $TempReq = $this->GetTempRequisition();
 
@@ -121,9 +124,6 @@ class RequisitionController extends Controller
     {
         $this->Check_outdated_requisitions();
         $TempReq = $this->GetTempAdminRequisition();
-
-
-
 
         if(empty($TempReq)){
             //vamos criar um registo temporario novo.
@@ -264,6 +264,7 @@ class RequisitionController extends Controller
         $req_record->approved_at = now();
         $req_record->approved_by = $manager->id;
         $req_record->save();
+        MailController::SendEmail($req_record->request_user->email,'GRE - Requisição '. $req_record->tag  , 'Requisição Aceite', 'A sua requisição foi aceite! Pode proceder a seu levantamento.');
         return redirect('/requisition-management/pending')->with('success','Requisição aprovada com sucesso!');
     }
 
@@ -276,7 +277,8 @@ class RequisitionController extends Controller
         $req_record->canceled_obs = $request->deny_rec_obs;
         $this->CancelRequisition($req_record, 7); //7 - Rejeitado
         $req_record->save();
-        return redirect('/requisition-management/pending')->with('success','Requisição cancelada com sucesso!');
+        MailController::SendEmail($req_record->request_user->email,'GRE - Requisição '. $req_record->tag  , 'Requisição Rejeitada', 'A sua requisição foi rejeitada!');
+        return redirect('/requisition-management/pending')->with('success','Requisição rejeitada com sucesso!');
     }
 
 
@@ -298,6 +300,7 @@ class RequisitionController extends Controller
         $req_info->requested_at = now();
         $req_info->requested_by = $user->id;
         $req_info->save();
+        MailController::SendAdministrationEmail('GRE - Nova Requisição', 'Nova requisição', 'Foi efetuada uma nova requisição');
         return response()->json(['success' => 'Requisição submetida com sucesso!']);
     }
 
