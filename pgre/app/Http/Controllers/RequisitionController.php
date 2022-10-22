@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\App_config;
 use App\Equipment;
 use App\Equipment_type;
 use App\Requisition;
@@ -64,8 +65,12 @@ class RequisitionController extends Controller
 
 
     private function Check_outdated_requisitions(){
-
         $expDate = Carbon::now()->subMinutes(30); //requisicões com mais de 30min
+        //validar se existe override de timer de requisições expiradas.
+        $AppConfiguration = App_config::GetAppConfig();
+        if($AppConfiguration->conf_default_expire_minutes_check && is_numeric($AppConfiguration->conf_default_expire_minutes)){
+            $expDate = Carbon::now()->subMinutes($AppConfiguration->conf_default_expire_minutes);
+        }
         $outdated = Requisition::where('level_id','=', 1)
             ->where('updated_at', '<' , $expDate)
             ->get();

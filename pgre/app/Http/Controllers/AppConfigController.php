@@ -74,9 +74,11 @@ class AppConfigController extends Controller
         $app_config->conf_alert_emails = $request->conf_alert_emails;
         $app_config->conf_low_stock_percentage = $request->conf_low_stock_value;
         $app_config->conf_default_req_days = $request->conf_default_req_days;
+        $app_config->conf_default_expire_minutes = $request->conf_default_expire_minutes;
         $app_config->conf_alert_emails_check = (boolean)json_decode(strtolower($request->conf_alert_emails_check)) ?? 0;
         $app_config->conf_low_stock_percentage_check = (boolean)json_decode(strtolower($request->conf_low_stock_check)) ?? 0;
         $app_config->conf_default_req_days_check = (boolean)json_decode(strtolower($request->conf_default_req_days_check)) ?? 0;
+        $app_config->conf_default_expire_minutes_check = (boolean)json_decode(strtolower($request->conf_default_expire_minutes_check)) ?? 0;
         $app_config->save();
         return redirect('admin/app-config')->with('success','Configurações alteradas com sucesso!');
     }

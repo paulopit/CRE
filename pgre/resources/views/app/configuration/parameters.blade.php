@@ -78,6 +78,24 @@
                                         @endif
                                     </div>
                                 </div>
+                                <div class="row">
+                                    <div class="col-lg-6">
+                                        <x-adminlte-input name="conf_default_expire_minutes" label="Expira Requisição (minutos)" type="number" min="1" max="9999" placeholder="Valor minutos" value="{{$app_config->conf_default_expire_minutes}}" fgroup-class="col-md-12">
+                                            <x-slot name="prependSlot">
+                                                <div class="input-group-text">
+                                                    <i class="fas fa-box text-lightblue"></i>
+                                                </div>
+                                            </x-slot>
+                                        </x-adminlte-input>
+                                    </div>
+                                    <div class="col-lg-6">
+                                        @if($app_config->conf_default_expire_minutes_check)
+                                            <x-adminlte-input-switch label="Ativo" name="conf_default_expire_minutes_check" data-on-color="lightblue" data-off-color="secondary" checked/>
+                                        @else
+                                            <x-adminlte-input-switch label="Ativo" name="conf_default_expire_minutes_check" data-on-color="lightblue" data-off-color="secondary"/>
+                                        @endif
+                                    </div>
+                                </div>
                             </div>
                             <div class="col-lg-6">
                             </div>
