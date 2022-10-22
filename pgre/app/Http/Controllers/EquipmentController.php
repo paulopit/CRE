@@ -135,7 +135,7 @@ class EquipmentController extends Controller
      */
     public function show(Request $request)
     {
-        $this->validate($request, [
+        /*$this->validate($request, [
             'description' => 'required',
             'reference' => 'required',
             'description' => 'required',
@@ -152,7 +152,7 @@ class EquipmentController extends Controller
         $equipment->obs = $request->obs;
         $equipment->save();
 
-        return redirect('equip-management/equipments')->with('success','Equipamento criado com sucesso!');
+        return redirect('equip-management/equipments')->with('success','Equipamento criado com sucesso!');*/
     }
 
     /**
