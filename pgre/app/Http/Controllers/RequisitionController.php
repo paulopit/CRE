@@ -48,21 +48,17 @@ class RequisitionController extends Controller
         return $TempReq;
     }
 
-    private function CancelRequisition($requisition, $expired = false){
+    private function CancelRequisition($requisition, $level_id){
         //validar se tem equipamentos associados para remover das linhas e atualizar o stock.
         foreach ($requisition->lines as $line){
             //atualizar stock do equipamento
             $equip_rec = Equipment::find($line->equipment_id);
             $equip_rec->in_stock = 1;
             $equip_rec->save();
-            //remover linha
-            //$line->delete();
+            $line->is_active = 0;
+            $line->save();
         }
-        if($expired){
-            $requisition->level_id =5; //mudar para estado expirado
-        }else{
-            $requisition->level_id =6; //mudar para estado cancelado
-        }
+        $requisition->level_id =$level_id;
         $requisition->save();
     }
 
@@ -75,7 +71,10 @@ class RequisitionController extends Controller
             ->get();
 
         foreach($outdated as $req){
-            $this->CancelRequisition($req, true);
+            $req->canceled_at = now();
+            $req->canceled_by = 0;
+            $req->canceled_obs = "Requisição expirada";
+            $this->CancelRequisition($req, 5); //5- Expirado
         }
     }
 
@@ -239,9 +238,11 @@ class RequisitionController extends Controller
         if($req_record->request_user_id != $user->id){
             return redirect('/requisitions/pending')->with('error','Não tem permissões para cancelar esta requisição.');
         }
-        $this->CancelRequisition($req_record);
-
-        return redirect('/requisitions/pending')->with('success','Requisição cancelacd da com sucesso!');
+        $req_record->canceled_at = now();
+        $req_record->canceled_by = $user->id;
+        $req_record->canceled_obs = "Cancelada pelo User " . $user->name;
+        $this->CancelRequisition($req_record, 6); // 6- cancelado
+        return redirect('/requisitions/pending')->with('success','Requisição cancelada com sucesso!');
     }
 
     public function managementDetails(Requisition $requisition)
@@ -265,11 +266,10 @@ class RequisitionController extends Controller
     {
         $manager = Auth::user();
         $req_record =  Requisition::find($request->req_id);
-        $req_record->level_id = 6; //Cancelado
         $req_record->canceled_at = now();
         $req_record->canceled_by = $manager->id;
-        $req_record->canceled_obs = $manager->deny_rec_obs;
-        $this->CancelRequisition($req_record);
+        $req_record->canceled_obs = $request->deny_rec_obs;
+        $this->CancelRequisition($req_record, 7); //7 - Rejeitado
         $req_record->save();
         return redirect('/requisition-management/pending')->with('success','Requisição cancelada com sucesso!');
     }

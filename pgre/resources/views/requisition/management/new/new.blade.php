@@ -195,14 +195,16 @@
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script>
+
         $("#user_name").change(function(){
             var user_id = $(this).val();
-            console.log(user_id);
+            //console.log(user_id);
             $.ajax({
                 url: "{{ route('get_user_info') }}?user_id=" + $(this).val(),
                 method: 'GET',
                 success: function(data) {
                     $("#user_id").val(user_id);
+
                     $("#user_function").val(data.user_info[0].function_name);
                     $("#user_phone").val(data.user_info[0].phone);
                     $("#user_email").val(data.user_info[0].email);
