@@ -8,12 +8,12 @@ class Equipment extends Model
 {
     public function equipment_type()
     {
-        return $this->hasOne(Equipment_type::class);
+        return $this->belongsTo(Equipment_type::class);
     }
 
-    public function model()
+    public function equipment_model()
     {
-        return $this->hasOne(Model::class);
+        return $this->belongsTo(Equipment_model::class);
     }
 
 

@@ -49,12 +49,13 @@
                                 <td>{{$equipment->id}}</td>
                                 <td>{{$equipment->description}}</td>
                                 <td>{{$equipment->serial_number}}</td>
-                                @if ($equipment->status_ok == 1)
-                                    <td style="color: green">Ok</td>
-                                @elseif ($equipment->status_ok == 0)
-                                    <td style="color: red">NOk</td>
+                                @if($equipment->status_ok == 1)
+                                    <td style="color: green">OK</td>
+                                @else
+                                    <td style="color: orange"> NOK </td>
                                 @endif
-                                @foreach($equipment_types as $equipment_type)
+
+                            @foreach($equipment_types as $equipment_type)
                                     @if($equipment_type->id == $equipment->equipment_type_id)
                                         <td>{{$equipment_type->type}}</td>
                                     @endif
@@ -73,7 +74,7 @@
                                         <a href="" class="btn btn-xs btn-default text-primary mx-1 shadow table-btn" title="Edit" data-toggle="modal" data-target='#edit_equip_brand_{{$equipment->id}}' data-id=""> <i class="fa fa-lg fa-fw fa-pen"></i> </a>
                                         @component('equip.management.modal.view', ['equipment' => $equipment])
                                         @endcomponent
-                                        <a href="" class="btn btn-xs btn-default text-teal mx-1 shadow table-btn" title="View" data-toggle="modal" data-target='#view_equip_brand_{{$equipment->id}}' data-id=""> <i class="fa fa-lg fa-fw fa-eye"></i> </a>
+                                        <a href="" class="btn btn-xs btn-default text-teal mx-1 shadow table-btn" title="View" data-toggle="modal" data-target='#view_equip_info_{{$equipment->id}}' data-id=""> <i class="fa fa-lg fa-fw fa-eye"></i> </a>
                                     </nobr>
                                 </td>
                             </tr>
