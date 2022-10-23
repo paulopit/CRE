@@ -77,7 +77,7 @@ class RequisitionController extends Controller
 
         foreach($outdated as $req){
             $req->canceled_at = now();
-            $req->canceled_by = 0;
+            $req->canceled_by = 1;
             $req->canceled_obs = "Requisição expirada";
             $this->CancelRequisition($req, 5); //5- Expirado
         }
@@ -85,9 +85,6 @@ class RequisitionController extends Controller
 
     public function new()
     {
-
-
-
         $this->Check_outdated_requisitions();
         $TempReq = $this->GetTempRequisition();
 
@@ -105,8 +102,6 @@ class RequisitionController extends Controller
             $TempReq->updated_at = now();
             $TempReq->save();
         }
-
-
         $user_req = Auth::user();
         $user_func = User_function::all();
         //listar apenas tipos de equipamentos que estão a ser utilizados.
@@ -115,7 +110,6 @@ class RequisitionController extends Controller
                                         ->where('equipment.in_stock', 1)
                                         ->groupBy('equipment_types.type','equipment_types.id')
                                         ->get();
-
 
         return view('requisition.new.details',['temp_req' => $TempReq, 'user_req' => $user_req, 'user_func' => $user_func,'equip_types' => $equip_types]);
     }
@@ -176,6 +170,8 @@ class RequisitionController extends Controller
         $requisition->ufcd = $request->req_ufcd;
         $requisition->teacher = $request->req_teacher;
         $requisition->obs = $request->req_obs;
+        if($request->req_days < 1) $request->req_days = 1;
+        $requisition->request_days = $request->req_days;
         $requisition->save();
 
         return response()->json(['success'=>'Fields updated successfully!']);
@@ -190,6 +186,8 @@ class RequisitionController extends Controller
         $requisition->ufcd = $request->req_ufcd;
         $requisition->teacher = $request->req_teacher;
         $requisition->obs = $request->req_obs;
+        if($request->req_days < 1) $request->req_days = 1;
+        $requisition->request_days = $request->req_days;
         $requisition->save();
 
         return response()->json(['success'=>'Fields updated successfully!']);
@@ -213,6 +211,13 @@ class RequisitionController extends Controller
         return view('requisition.management.filters.pending',['pending_req' => $pending_req]);
     }
 
+    public function manage_deliver()
+    {
+        $deliver_req = Requisition::where('level_id', 3) //Aguarda Levantamento
+            ->get()
+            ->sortBy('requested_at');
+        return view('requisition.management.filters.deliver',['deliver_req' => $deliver_req]);
+    }
 
 
     public function active()

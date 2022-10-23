@@ -94,7 +94,7 @@
                         @endif
 
 
-                        <x-adminlte-input name="req_course" id="req_course" label="Curso" placeholder="Curso" value="{{$temp_req->course}}" fgroup-class="col-md-6">
+                        <x-adminlte-input name="req_course" id="req_course" label="Curso" placeholder="Curso" value="{{$temp_req->course}}" fgroup-class="col-md-3">
                             <x-slot name="prependSlot">
                                 <div class="input-group-text">
                                     <i class="fas fa-book text-lightblue"></i>
@@ -102,7 +102,7 @@
                             </x-slot>
                         </x-adminlte-input>
 
-                        <x-adminlte-input name="req_class" id="req_class"  label="Turma" placeholder="Turma" value="{{$temp_req->class}}" fgroup-class="col-md-6">
+                        <x-adminlte-input name="req_class" id="req_class"  label="Turma" placeholder="Turma" value="{{$temp_req->class}}" fgroup-class="col-md-3">
                             <x-slot name="prependSlot">
                                 <div class="input-group-text">
                                     <i class="fas fa-graduation-cap text-lightblue"></i>
@@ -110,7 +110,7 @@
                             </x-slot>
                         </x-adminlte-input>
 
-                        <x-adminlte-input name="req_ufcd" id="req_ufcd"  label="Nome UFCD" placeholder="UFCD" value="{{$temp_req->ufcd}}" fgroup-class="col-md-6">
+                        <x-adminlte-input name="req_ufcd" id="req_ufcd"  label="Nome UFCD" placeholder="UFCD" value="{{$temp_req->ufcd}}" fgroup-class="col-md-3">
                             <x-slot name="prependSlot">
                                 <div class="input-group-text">
                                     <i class="fas fa-university text-lightblue"></i>
@@ -118,10 +118,17 @@
                             </x-slot>
                         </x-adminlte-input>
 
-                        <x-adminlte-input name="req_teacher" id="req_teacher"  label="Nome Formador" placeholder="Nome Formador" value="{{$temp_req->teacher}}" fgroup-class="col-md-6">
+                        <x-adminlte-input name="req_teacher" id="req_teacher"  label="Nome Formador" placeholder="Nome Formador" value="{{$temp_req->teacher}}" fgroup-class="col-md-3">
                             <x-slot name="prependSlot">
                                 <div class="input-group-text">
                                     <i class="fas fa-user-tie text-lightblue"></i>
+                                </div>
+                            </x-slot>
+                        </x-adminlte-input>
+                        <x-adminlte-input name="req_days" id="req_days"  label="Nº Dias" type="number" min="1" max="999" placeholder="Nº Dias" value="{{$temp_req->request_days ?? 1}}" fgroup-class="col-md-3">
+                            <x-slot name="prependSlot">
+                                <div class="input-group-text">
+                                    <i class="fas fa-hashtag text-lightblue"></i>
                                 </div>
                             </x-slot>
                         </x-adminlte-input>
@@ -236,10 +243,11 @@
             var req_ufcd = $('#req_ufcd').val();
             var req_teacher = $('#req_teacher').val();
             var req_obs = $('#req_obs').val();
+            var req_days = $('#req_days').val();
             $.ajax({
                 type:'POST',
                 url:"{{ route('manage_update_req_fields') }}",
-                data:{user_id:user_id,req_id:req_id,req_course:req_course, req_class:req_class, req_ufcd:req_ufcd, req_teacher:req_teacher,req_obs:req_obs, _token: '{{csrf_token()}}'},
+                data:{user_id:user_id,req_id:req_id,req_course:req_course, req_class:req_class, req_ufcd:req_ufcd, req_teacher:req_teacher,req_obs:req_obs,req_days:req_days, _token: '{{csrf_token()}}'},
                 success:function(data){
                 }
             });

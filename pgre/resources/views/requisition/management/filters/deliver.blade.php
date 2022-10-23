@@ -17,7 +17,7 @@
                     <h3 class="card-title">Requisições por Aprovar</h3>
                 </div>
                 <div class="card-body">
-                    @component('requisition.list.components.requisition_table', ['req_data' => $pending_req])
+                    @component('requisition.management.filters.components.table_model', ['req_data' => $deliver_req])
                     @endcomponent
                 </div>
             </div>
