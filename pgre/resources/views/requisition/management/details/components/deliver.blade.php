@@ -1,7 +1,7 @@
 <div class="modal fade" id="deliver_req_{{$req_details->id}}">
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
-            <form method="POST" action="{{url('/requisition-management/register_delivery/')}}" enctype="multipart/form-data">
+            <form method="POST" action="{{url('/requisition-management/register_delivery')}}" enctype="multipart/form-data">
                 @csrf
                 <div class="modal-header">
                     <h5 class="modal-title">Registar Entrega</h5>
@@ -29,7 +29,6 @@
                         </x-slot>
                     </x-adminlte-input>
 
-
                     @if(count($req_details->lines) > 0)
                         <hr/>
                         <label>Estado equipamentos</label>
@@ -37,9 +36,9 @@
                             @foreach($req_details->lines as $equip)
                                 <div class="col-lg-12">
                                     @if($equip->equipment->status_ok)
-                                        <x-adminlte-input-switch data-on-text="OK" data-off-text="NOK" label="{{$equip->equipment->reference}} - {{$equip->equipment->description}}" name="equipment_status_{{$equip->id}}" data-on-color="lightblue" data-off-color="secondary" checked/>
+                                        <x-adminlte-input-switch data-on-text="OK" data-off-text="NOK" label="{{$equip->equipment->reference}} - {{$equip->equipment->description}}" name="equipment_status_{{$equip->equipment_id}}" data-on-color="lightblue" data-off-color="secondary" checked/>
                                     @else
-                                        <x-adminlte-input-switch data-on-text="OK" data-off-text="NOK" label="{{$equip->equipment->reference}} - {{$equip->equipment->description}}" name="equipment_status_{{$equip->id}}" data-on-color="lightblue" data-off-color="secondary"/>
+                                        <x-adminlte-input-switch data-on-text="OK" data-off-text="NOK" label="{{$equip->equipment->reference}} - {{$equip->equipment->description}}" name="equipment_status_{{$equip->equipment_id}}" data-on-color="lightblue" data-off-color="secondary"/>
                                     @endif
                                 </div>
                             @endforeach

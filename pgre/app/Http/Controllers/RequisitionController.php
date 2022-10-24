@@ -66,6 +66,7 @@ class RequisitionController extends Controller
 
     private function Check_outdated_requisitions(){
         $expDate = Carbon::now()->subMinutes(30); //requisicões com mais de 30min
+
         //validar se existe override de timer de requisições expiradas.
         $AppConfiguration = App_config::GetAppConfig();
         if($AppConfiguration->conf_default_expire_minutes_check && is_numeric($AppConfiguration->conf_default_expire_minutes)){
@@ -74,7 +75,6 @@ class RequisitionController extends Controller
         $outdated = Requisition::where('level_id','=', 1)
             ->where('updated_at', '<' , $expDate)
             ->get();
-
         foreach($outdated as $req){
             $req->canceled_at = now();
             $req->canceled_by = 1;
@@ -96,7 +96,6 @@ class RequisitionController extends Controller
             $new_req->created_by = Auth::user()->id;
             $new_req->level_id =1;
             $new_req->save();
-
             $TempReq = $new_req;
         }else{//senão, já existe um registo temporário, vamos atualizar a data de update.
             $TempReq->updated_at = now();
@@ -110,7 +109,6 @@ class RequisitionController extends Controller
                                         ->where('equipment.in_stock', 1)
                                         ->groupBy('equipment_types.type','equipment_types.id')
                                         ->get();
-
         return view('requisition.new.details',['temp_req' => $TempReq, 'user_req' => $user_req, 'user_func' => $user_func,'equip_types' => $equip_types]);
     }
 
@@ -146,7 +144,6 @@ class RequisitionController extends Controller
             ->where('equipment.in_stock', 1)
             ->groupBy('equipment_types.type','equipment_types.id')
             ->get();
-
         return view('requisition.management.new.new',['assigned_usr'=> $assigned_usr, 'temp_req' => $TempReq, 'user_req' => $user_req, 'user_list' => $user_list,'equip_types' => $equip_types]);
     }
 
@@ -269,7 +266,10 @@ class RequisitionController extends Controller
         $req_record->approved_at = now();
         $req_record->approved_by = $manager->id;
         $req_record->save();
+
+
         MailController::SendEmail($req_record->request_user->email,'GRE - Requisição '. $req_record->tag  , 'Requisição Aceite', 'A sua requisição foi aceite! Pode proceder a seu levantamento.');
+
         return redirect('/requisition-management/pending')->with('success','Requisição aprovada com sucesso!');
     }
 
@@ -285,6 +285,40 @@ class RequisitionController extends Controller
         MailController::SendEmail($req_record->request_user->email,'GRE - Requisição '. $req_record->tag  , 'Requisição Rejeitada', 'A sua requisição foi rejeitada!');
         return redirect('/requisition-management/pending')->with('success','Requisição rejeitada com sucesso!');
     }
+
+
+    public function registerDelivery(Request $request){
+
+        $manager = Auth::user(); //user logado
+
+
+        $req_record = Requisition::find($request->req_id); //requisição a alterar
+        $req_days = 1;
+        if(is_numeric($request->req_days)) //validar se é numerico, caso seja preenche com o valor, senao insere sempre o valor 1
+            $req_days = $request->req_days;
+        $req_record->request_days =  $req_days; //valor de dias preenchido no form
+        $req_record->picked_up_by =  $request->req_pickup_name; //nome preenchido no form - quem levantou
+        $req_record->picked_up_at = now(); // hora atual
+        $req_record->delivered_by = $manager->id; // utilizador logado - quem entregou
+        $req_record->delivered_at = now();
+        $req_record->level_id = 4; // 4- Requisitado
+        //vamos calcular a data limite da requisição.
+        $limit_date = Carbon::now()->addDays($req_days); //vamos criar a data limite
+        $req_record->end_date = $limit_date->setTime(23,59,59); //vamos fixar a data limite ás 23:59:59 sempre.
+        $req_record->save();
+
+        foreach($req_record->lines as $line){ //percorrer todas as linhas (seja todos os equipamentos desta requisição)
+            if(isset($request['equipment_status_' . $line->equipment_id])){ //validar se no request foi selecionado OK.
+                $line->equipment->status_ok = 1;
+            }else{ //nao veio no request, logo estava marcado NOK
+                $line->equipment->status_ok = 0;
+            }
+            $line->equipment->save();
+        }
+        return redirect('/requisition-management/deliver')->with('success','Requisição entregue com sucesso!');
+    }
+
+
 
 
     public function index()
