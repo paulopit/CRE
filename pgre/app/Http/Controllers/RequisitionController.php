@@ -216,6 +216,14 @@ class RequisitionController extends Controller
         return view('requisition.management.filters.deliver',['deliver_req' => $deliver_req]);
     }
 
+    public function manage_active()
+    {
+        $active_req= Requisition::where('level_id', 4) //Requisitado
+        ->get()
+            ->sortBy('requested_at');
+        return view('requisition.management.filters.active',['active_req' => $active_req]);
+    }
+
 
     public function active()
     {

@@ -1,6 +1,6 @@
 @extends('adminlte::page')
 
-@section('title', 'GRE - Requisições por Entregar')
+@section('title', 'GRE - Requisições em Empréstimo')
 
 @section('content_header')
     <div class="mb-3">
@@ -14,16 +14,15 @@
         <div class="col-lg-12">
             <div class="card card-secondary">
                 <div class="card-header">
-                    <h3 class="card-title">Requisições por Entregar</h3>
+                    <h3 class="card-title">Requisições em Empréstimo</h3>
                 </div>
                 <div class="card-body">
-                    @component('requisition.management.filters.components.table_model', ['req_data' => $deliver_req])
+                    @component('requisition.management.filters.components.table_model', ['req_data' => $active_req])
                     @endcomponent
                 </div>
             </div>
         </div>
     </div>
-
 @stop
 
 @section('css')

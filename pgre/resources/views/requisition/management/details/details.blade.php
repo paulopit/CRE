@@ -101,36 +101,43 @@
 
                             </div>
 
-                            @if($req_details->level_id == 2)
-                                <div class="col-lg-2" style="display: flex; justify-content: flex-end">
-                                    @component('requisition.management.details.components.deny', ['req_details' => $req_details])
-                                    @endcomponent
-                                    <a href="" title="Rejeitar" data-toggle="modal" style="margin-right: 10px" data-target='#deny_req_{{$req_details->id}}' data-id="">
-                                        <x-adminlte-button class="btn-flat" type="" label="Rejeitar" theme="danger" icon="far fa-times-circle"/>
-                                    </a>
-                                    @component('requisition.management.details.components.accept', ['req_details' => $req_details])
-                                    @endcomponent
-                                    <a href="" title="Aceitar" data-toggle="modal" style="margin-right: 10px" data-target='#accept_req_{{$req_details->id}}' data-id="">
-                                        <x-adminlte-button class="btn-flat" type="" label="Aceitar" theme="success" icon="fas fa-lg fa-check-double"/>
-                                    </a>
-                                </div>
-                            @endif
 
-                            @if($req_details->level_id == 3)
-                                <div class="col-lg-2" style="display: flex; justify-content: flex-end">
-                                    @component('requisition.management.details.components.deliver', ['req_details' => $req_details])
-                                    @endcomponent
-                                    <a href="" title="Entregar" data-toggle="modal" style="margin-right: 10px" data-target='#deliver_req_{{$req_details->id}}' data-id="">
-                                        <x-adminlte-button class="btn-flat" type="" label="Registar entrega" theme="success" icon="fas fa-lg fa-check-double"/>
-                                    </a>
-                                </div>
-                            @endif
-
-
-
+                            @switch($req_details->level_id)
+                                @case(2)
+                                    <div class="col-lg-2" style="display: flex; justify-content: flex-end">
+                                        @component('requisition.management.details.components.deny', ['req_details' => $req_details])
+                                        @endcomponent
+                                        <a href="" title="Rejeitar" data-toggle="modal" style="margin-right: 10px" data-target='#deny_req_{{$req_details->id}}' data-id="">
+                                            <x-adminlte-button class="btn-flat" type="" label="Rejeitar" theme="danger" icon="far fa-times-circle"/>
+                                        </a>
+                                        @component('requisition.management.details.components.accept', ['req_details' => $req_details])
+                                        @endcomponent
+                                        <a href="" title="Aceitar" data-toggle="modal" style="margin-right: 10px" data-target='#accept_req_{{$req_details->id}}' data-id="">
+                                            <x-adminlte-button class="btn-flat" type="" label="Aceitar" theme="success" icon="fas fa-lg fa-check-double"/>
+                                        </a>
+                                    </div>
+                                @break
+                                @case(3)
+                                    <div class="col-lg-2" style="display: flex; justify-content: flex-end">
+                                        @component('requisition.management.details.components.deliver', ['req_details' => $req_details])
+                                        @endcomponent
+                                        <a href="" title="Entregar" data-toggle="modal" style="margin-right: 10px" data-target='#deliver_req_{{$req_details->id}}' data-id="">
+                                            <x-adminlte-button class="btn-flat" type="" label="Registar entrega" theme="success" icon="fas fa-lg fa-check-double"/>
+                                        </a>
+                                    </div>
+                                @break
+                                @case(4)
+                                    <div class="col-lg-2" style="display: flex; justify-content: flex-end">
+                                        @component('requisition.management.details.components.return', ['req_details' => $req_details])
+                                        @endcomponent
+                                        <a href="" title="Devolver" data-toggle="modal" style="margin-right: 10px" data-target='#return_req_{{$req_details->id}}' data-id="">
+                                            <x-adminlte-button class="btn-flat" type="" label="Registar devolução" theme="success" icon="fas fa-lg fa-undo"/>
+                                        </a>
+                                    </div>
+                                    @break
+                            @endswitch
 
                         </div>
-
                         <hr>
                         <h5 class="pb-3"> Equipamentos </h5>
                         @php
