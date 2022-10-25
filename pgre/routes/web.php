@@ -41,6 +41,14 @@ Route::group(['middleware' => 'management'], function () {
     Route::put('/equip-management/equipments/{equipment}', 'EquipmentController@update');
     Route::get('/get-models', 'EquipmentModelController@getModels')->name('get_models_info');
 
+    // ##Model management
+    Route::get('/equip-management/models', 'EquipmentModelController@index');
+    Route::post('/equip-management/models/add', 'EquipmentModelController@store');
+    Route::delete('/equip-management/models/{model}', 'EquipmentModelController@destroy');
+    Route::put('/equip-management/models/{model}', 'EquipmentModelController@update');
+
+
+
     Route::get('/requisition-management/new', 'RequisitionController@manage_new');
     Route::post('/requisition-management/update-req-fields', 'RequisitionController@manage_updateFields')->name('manage_update_req_fields');
     Route::get('/requisition-management/pending', 'RequisitionController@manage_pending');
