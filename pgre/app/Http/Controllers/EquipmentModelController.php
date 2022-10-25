@@ -58,7 +58,7 @@ class EquipmentModelController extends Controller
 
         $equipment_models = new Equipment_model();
         $equipment_models->name         = $request->model_name;
-        $equipment_models->brand_id     = $request->model_brand;
+        $equipment_models->brand_id     = $request->brand;
         $equipment_models->save();
 
         return redirect('equip-management/models')->with('success','Modelo criada com sucesso!');
@@ -102,7 +102,7 @@ class EquipmentModelController extends Controller
 //        dd($model);
         $equipment_model = Equipment_model::find($model->id);
         $equipment_model->name          = $request->model_name;
-        $equipment_model->brand_id      = $request->model_brand;
+        $equipment_model->brand_id      = $request->brand;
 
         $equipment_model->save();
 //        dd($equipment_model);

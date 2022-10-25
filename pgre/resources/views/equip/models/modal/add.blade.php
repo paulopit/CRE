@@ -11,7 +11,7 @@
                 </div>
 
                 <div class="modal-body">
-                    <x-adminlte-input name="model_name" label="" placeholder="Modelo" value="" fgroup-class="col-md-12">
+                    <x-adminlte-input name="model_name" label="Modelo" placeholder="Modelo" value="" fgroup-class="col-md-12">
                         <x-slot name="prependSlot">
                             <div class="input-group-text">
                                 <i class="fas fa-user-md text-lightblue"></i>
@@ -19,12 +19,13 @@
                         </x-slot>
                     </x-adminlte-input>
 
-                    <x-adminlte-select name="model_brand" label="Model" fgroup-class="col-md-12">
+                    <x-adminlte-select name="brand" label="Marca" fgroup-class="col-md-12">
                         <x-slot name="prependSlot">
                             <div class="input-group-text">
                                 <i class="fas fa-user-md text-lightblue"></i>
                             </div>
                         </x-slot>
+                        <option value="" disabled selected>--- Selecione uma marca ---</option>
                         @foreach($brands as $brand)
                             <option value="{{$brand->id}}">{{$brand->name}}</option>
                         @endforeach

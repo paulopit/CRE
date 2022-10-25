@@ -8,7 +8,7 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                    <x-adminlte-input name="model_name" label="" placeholder="Modelo" value="{{$equipment_model->name}}" disabled="disabled" fgroup-class="col-md-12">
+                    <x-adminlte-input name="model_name" label="Modelo" placeholder="Modelo" value="{{$equipment_model->name}}" disabled="disabled" fgroup-class="col-md-12">
                         <x-slot name="prependSlot">
                             <div class="input-group-text">
                                 <i class="fas fa-user-md text-lightblue"></i>
@@ -18,7 +18,7 @@
 
 
 
-                    <x-adminlte-select name="model_brand" label="Model" disabled="disabled"  fgroup-class="col-md-12">
+                    <x-adminlte-select name="model_brand" label="Marca" disabled="disabled"  fgroup-class="col-md-12">
                         <x-slot name="prependSlot">
                             <div class="input-group-text">
                                 <i class="fas fa-user-md text-lightblue"></i>
