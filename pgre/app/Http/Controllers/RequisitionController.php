@@ -327,6 +327,32 @@ class RequisitionController extends Controller
     }
 
 
+    public function registerReturn(Request $request){
+
+        $manager = Auth::user();
+        $req_record = Requisition::find($request->req_id);
+        $req_record->returned_by =  $request->req_return_name;
+        $req_record->returned_at = now();
+        $req_record->closed_by = $manager->id;
+        $req_record->closed_at = now();
+        $req_record->level_id = 8; // 8- Devolvido
+        $req_record->save();
+
+        foreach($req_record->lines as $line){
+            $line->is_active = 0; // inativar todas as linhas da requisição.
+            $line->equipment->in_stock = 1; //voltar a colocar os equipamentos em stock.
+            if(isset($request['equipment_status_' . $line->equipment_id])){
+                $line->equipment->status_ok = 1;
+            }else{
+                $line->equipment->status_ok = 0;
+            }
+            $line->save();
+            $line->equipment->save();
+        }
+
+        return redirect('/requisition-management/active')->with('success','Requisição devolvida com sucesso!');
+    }
+
 
 
     public function index()

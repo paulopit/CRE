@@ -15,7 +15,7 @@
                         </x-adminlte-input>
                     </div>
 
-                    <x-adminlte-input name="req_pickup_name" label="Requerente" placeholder="Requerente" value="" fgroup-class="col-md-12">
+                    <x-adminlte-input name="req_return_name" label="Devolvido por" placeholder="Devolvido por" value="{{$req_details->request_user->name}}" fgroup-class="col-md-12">
                         <x-slot name="prependSlot">
                             <div class="input-group-text">
                                 <i class="fas fa-user text-lightblue"></i>

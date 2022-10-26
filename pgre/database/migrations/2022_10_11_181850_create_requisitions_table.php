@@ -45,6 +45,12 @@ class CreateRequisitionsTable extends Migration
             $table->dateTime('requested_at')->nullable();
             $table->foreignId('requested_by')->nullable()->constrained('users')->onDelete('cascade');
 
+            $table->dateTime('returned_at')->nullable();
+            $table->string('returned_by')->nullable();
+
+            $table->dateTime('closed_at')->nullable();
+            $table->string('closed_by')->nullable()->constrained('users')->onDelete('cascade');
+
             $table->foreignId('created_by')->nullable()->constrained('users')->onDelete('cascade');
             $table->timestamps();
             $table->softDeletes();
