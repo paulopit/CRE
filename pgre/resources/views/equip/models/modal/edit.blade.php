@@ -19,9 +19,6 @@
                             </div>
                         </x-slot>
                     </x-adminlte-input>
-                </div>
-
-                <div class="modal-body">
                     <x-adminlte-select name="brand" label="Marca" fgroup-class="col-md-12">
                         <x-slot name="prependSlot">
                             <div class="input-group-text">

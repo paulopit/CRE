@@ -106,7 +106,7 @@ class EquipmentModelController extends Controller
 
         $equipment_model->save();
 //        dd($equipment_model);
-        return redirect('equip-management/models')->with('success','Marca editada com sucesso!');
+        return redirect('equip-management/models')->with('success','Modelo editado com sucesso!');
     }
 
     /**

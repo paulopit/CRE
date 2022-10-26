@@ -1,6 +1,6 @@
 @extends('adminlte::page')
 
-@section('title', 'GRE - Modelos')
+@section('title', 'GRE - Modelos de Equipamentos')
 
 @section('content_header')
     <div class="mb-3">
@@ -26,7 +26,7 @@
                         $header = [
                             'ID',
                             ['label' => 'Nome','width' => 50],
-                            ['label' => 'Brand','width' => 50],
+                            ['label' => 'Marca','width' => 50],
                             ['label' => 'Ações', 'no-export' => false, 'width' => 5],
                         ];
 
@@ -43,12 +43,7 @@
                             <tr>
                                 <td>{{$equipment_model->id}}</td>
                                 <td>{{$equipment_model->name}}</td>
-                                @foreach($brands as $brand)
-                                    @if($brand->id == $equipment_model->brand_id)
-                                        <td>{{$brand->name}}</td>
-                                    @endif
-                                @endforeach
-
+                                <td>{{$equipment_model->brand->name}}</td>
                                 <td>
                                     <nobr>
                                         @component('equip.models.modal.edit', ['equipment_model' => $equipment_model, 'brands' => $brands])
