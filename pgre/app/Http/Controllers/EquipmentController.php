@@ -16,6 +16,17 @@ class EquipmentController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
+    private function ValidateSerialNumber($serialnumber, $equip_id )
+    {
+       $checkserial = Equipment::where('serial_number', $serialnumber)
+           ->where('id', '!=', $equip_id)
+           ->get();
+       if(count($checkserial) > 0)
+           return false;
+       return true;
+    }
+
     private function GenerateReference($length = 15)
     {
         $characters = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ';
@@ -87,6 +98,8 @@ class EquipmentController extends Controller
         $equipment->description = $request->description;
         $equipment->equipment_type_id = $request->equipment_type;
         $equipment->equipment_model_id = $request->models_select;
+        if(!$this->ValidateSerialNumber($request->serial_number))
+            return redirect('equip-management/equipments')->with('error','Número de Série já existe');
         $equipment->serial_number = $request->serial_number;
         $equipment->obs = $request->obs;
         $equipment->reference = $request->reference ?? $this->GenerateReference();
@@ -175,7 +188,22 @@ class EquipmentController extends Controller
      */
     public function update(Request $request, Equipment $equipment)
     {
-        //
+        $this->validate($request, [
+            'equip_description' => 'required'
+        ]);
+        //validar serials repetidos ou referencias
+        $equipment = Equipment::find($equipment->id);
+        $equipment->description = $request->equip_description;
+        if(!$this->ValidateSerialNumber($request->equip_serialnumber, $equipment->id))
+            return redirect('equip-management/equipments')->with('error','Número de Série já existe');
+        $equipment->serial_number = $request->equip_serialnumber;
+        $equipment->status_ok = $request['equip_status_ok_'.$equipment->id] ?? 0;
+        $equipment->equipment_type_id = $request->equip_type;
+        $equipment->equipment_model_id = $request->equip_model;
+        $equipment->reference = $request->equip_reference;
+        $equipment->obs = $request->equip_obs;
+        $equipment->save();
+        return redirect('equip-management/equipments')->with('success','Equipamento editado com sucesso!');
     }
 
     /**

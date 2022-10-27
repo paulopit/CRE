@@ -72,7 +72,15 @@
                             </div>
                         </x-slot>
                             <option value="" disabled selected>--- Selecione um modelo ---</option>
-                    </x-adminlte-select>
+                </x-adminlte-select>
+
+                <x-adminlte-input-file name="ifPholder" label="Imagem" igroup-size="sm" fgroup-class="col-md-12" placeholder="Seleccione uma imagem...">
+                        <x-slot name="prependSlot">
+                            <div class="input-group-text bg-lightblue">
+                                <i class="fas fa-upload"></i>
+                            </div>
+                        </x-slot>
+                </x-adminlte-input-file>
 
 
 
@@ -83,9 +91,8 @@
                         </div>
                     </x-slot>
                 </x-adminlte-textarea>
-            </div>
 
-
+        </div>
 
 
                 <div class="modal-footer">

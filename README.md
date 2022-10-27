@@ -44,6 +44,7 @@
 - [ ] Ajuste CSS
 - [ ] Testes Funcionais
 - [ ] Criar Documentação
+- [ ] Botão extender requisição [Opcional]
 
 ## :white_check_mark: Done:
 - [x] Middlewares @Paulo
