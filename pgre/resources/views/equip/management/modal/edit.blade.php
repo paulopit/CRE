@@ -86,7 +86,6 @@
                         <x-adminlte-input-switch label="Estado" data-on-text="Ok" data-off-text="NoK" name="equip_status_ok_{{$equipment->id}}" data-on-color="lightblue" data-off-color="secondary"/>
                     @endif
 
-
                 </div>
                 <div class="modal-footer">
                     <x-adminlte-button class="btn-flat" type="submit" label="Gravar" theme="secondary" icon="fas fa-lg fa-save"/>
