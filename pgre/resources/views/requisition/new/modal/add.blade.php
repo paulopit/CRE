@@ -8,29 +8,16 @@
                     </button>
                 </div>
                 <div class="modal-body">
-
                     <ul class="nav nav-tabs" id="search_tab" role="tablist">
                         <li class="nav-item" role="presentation">
-                            <button class="nav-link active" id="ref_tab" data-toggle="tab" data-target="#ref" type="button" role="tab" aria-controls="ref" aria-selected="true">Por Referência</button>
+                            <button class="nav-link active" id="type_tab" data-toggle="tab" data-target="#type" type="button" role="tab" aria-controls="contact" aria-selected="true">Por tipo equipamento</button>
                         </li>
                         <li class="nav-item" role="presentation">
-                            <button class="nav-link" id="type_tab" data-toggle="tab" data-target="#type" type="button" role="tab" aria-controls="contact" aria-selected="false">Por tipo equipamento</button>
+                            <button class="nav-link " id="ref_tab" data-toggle="tab" data-target="#ref" type="button" role="tab" aria-controls="ref" aria-selected="false">Por Referência</button>
                         </li>
                     </ul>
                     <div class="tab-content" id="myTabContent">
-                        <div class="tab-pane fade show active" id="ref" role="tabpanel" aria-labelledby="ref_tab">
-                            <x-adminlte-input name="equip_ref" label="" placeholder="Referência" value="" fgroup-class="col-md-12">
-                                <x-slot name="appendSlot">
-                                    <x-adminlte-button theme="outline-success" label="Search" onclick="search_ref()" />
-                                </x-slot>
-                                <x-slot name="prependSlot">
-                                    <div class="input-group-text">
-                                        <i class="fas fa-hashtag text-lightblue"></i>
-                                    </div>
-                                </x-slot>
-                            </x-adminlte-input>
-                        </div>
-                        <div class="tab-pane fade" id="type" role="tabpanel" aria-labelledby="type_tab">
+                        <div class="tab-pane fade show active" id="type" role="tabpanel" aria-labelledby="type_tab">
                             <x-adminlte-select name="equip_type" label="" fgroup-class="col-md-12">
                                 <x-slot name="prependSlot">
                                     <div class="input-group-text">
@@ -42,6 +29,18 @@
                                     <option value="{{$type->id}}">{{$type->type}}</option>
                                 @endforeach
                             </x-adminlte-select>
+                        </div>
+                        <div class="tab-pane fade" id="ref" role="tabpanel" aria-labelledby="ref_tab">
+                            <x-adminlte-input name="equip_ref" label="" placeholder="Referência" value="" fgroup-class="col-md-12">
+                                <x-slot name="appendSlot">
+                                    <x-adminlte-button theme="outline-success" label="Search" onclick="search_ref()" />
+                                </x-slot>
+                                <x-slot name="prependSlot">
+                                    <div class="input-group-text">
+                                        <i class="fas fa-hashtag text-lightblue"></i>
+                                    </div>
+                                </x-slot>
+                            </x-adminlte-input>
                         </div>
                         <hr/>
                         <label id="no_records_found" style="display: none">Nenhum registo encontrado!</label>

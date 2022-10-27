@@ -22,7 +22,7 @@
                     <x-adminlte-select name="brand" label="Marca" fgroup-class="col-md-12">
                         <x-slot name="prependSlot">
                             <div class="input-group-text">
-                                <i class="fas fa-user-md text-lightblue"></i>
+                                <i class="fas fa-copyright text-lightblue"></i>
                             </div>
                         </x-slot>
                         @foreach($brands as $brand)
