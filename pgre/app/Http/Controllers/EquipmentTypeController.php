@@ -18,7 +18,9 @@ class EquipmentTypeController extends Controller
 
     public function index()
     {
-        //
+        $equipment_types = Equipment_type::all();
+        return view('equip.types.list', ['equipment_types' => $equipment_types]);
+
     }
 
     /**
@@ -39,7 +41,16 @@ class EquipmentTypeController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $this->validate($request, [
+            'type_name' => 'required',
+
+        ]);
+
+        $equipment_type = new Equipment_type();
+        $equipment_type->type       = $request->type_name;
+        $equipment_type->save();
+
+        return redirect('/equip-management/types')->with('success','Tipo de Equipamento criada com sucesso!');
     }
 
     /**
@@ -71,9 +82,20 @@ class EquipmentTypeController extends Controller
      * @param  \App\Equipment_type  $equipment_type
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Equipment_type $equipment_type)
+    public function update(Request $request, Equipment_type $type)
     {
-        //
+        $this->validate($request, [
+            'type_name' => 'required',
+
+        ]);
+//        dd($type);
+        $equipment_type = Equipment_type::find($type->id);
+        $equipment_type->type          = $request->type_name;
+
+
+        $equipment_type->save();
+//        dd($equipment_type);
+        return redirect('equip-management/types')->with('success','Tipo de equipamento editado com sucesso!');
     }
 
     /**
