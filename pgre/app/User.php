@@ -52,7 +52,7 @@ class User extends Authenticatable
 
     public function requisitions()
     {
-        return $this->hasMany(Requisition::class);
+        return $this->hasMany(Requisition::class,'request_user_id');
     }
 
     public function requisition_lines()
