@@ -61,6 +61,8 @@ class RequisitionController extends Controller
         }
         $requisition->level_id =$level_id;
         $requisition->save();
+        if($requisition->level_id == 5) //5- Expirado
+            $requisition->delete();
     }
 
 
@@ -222,6 +224,14 @@ class RequisitionController extends Controller
         ->get()
             ->sortBy('requested_at');
         return view('requisition.management.filters.active',['active_req' => $active_req]);
+    }
+
+    public function manage_closed()
+    {
+        $closed_req= Requisition::whereIn('level_id', array(6,7, 8)) //6-Cancelado /7-Rejeitado /8-Devolvido
+        ->get()
+            ->sortByDesc('closed_at');
+        return view('requisition.management.filters.closed',['closed_req' => $closed_req]);
     }
 
 

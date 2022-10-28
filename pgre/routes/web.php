@@ -54,6 +54,7 @@ Route::group(['middleware' => 'management'], function () {
     Route::get('/requisition-management/pending', 'RequisitionController@manage_pending');
     Route::get('/requisition-management/deliver', 'RequisitionController@manage_deliver');
     Route::get('/requisition-management/active', 'RequisitionController@manage_active');
+    Route::get('/requisition-management/closed', 'RequisitionController@manage_closed');
 
     Route::get('/requisition-management/details/{requisition}', 'RequisitionController@managementDetails');
     Route::post('/requisition-management/confirm', 'RequisitionController@managementConfirm');
