@@ -15,14 +15,14 @@
                     <x-adminlte-input name="model_name" label="Modelo" placeholder="Model" value="{{$equipment_model->name}}" fgroup-class="col-md-12">
                         <x-slot name="prependSlot">
                             <div class="input-group-text">
-                                <i class="fas fa-user-md text-lightblue"></i>
+                                <i class="far fa-copyright text-lightblue"></i>
                             </div>
                         </x-slot>
                     </x-adminlte-input>
                     <x-adminlte-select name="brand" label="Marca" fgroup-class="col-md-12">
                         <x-slot name="prependSlot">
                             <div class="input-group-text">
-                                <i class="fas fa-copyright text-lightblue"></i>
+                                <i class="far fa-registered text-lightblue"></i>
                             </div>
                         </x-slot>
                         @foreach($brands as $brand)

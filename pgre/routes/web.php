@@ -47,6 +47,12 @@ Route::group(['middleware' => 'management'], function () {
     Route::delete('/equip-management/models/{model}', 'EquipmentModelController@destroy');
     Route::put('/equip-management/models/{model}', 'EquipmentModelController@update');
 
+    // ##type management
+    Route::get('/equip-management/types', 'EquipmentTypeController@index');
+    Route::post('/equip-management/types/add', 'EquipmentTypeController@store');
+    Route::delete('/equip-management/types/{type}', 'EquipmentTypeController@destroy');
+    Route::put('/equip-management/types/{type}', 'EquipmentTypeController@update');
+
 
 
     Route::get('/requisition-management/new', 'RequisitionController@manage_new');
