@@ -3,10 +3,6 @@
 @section('title', 'GRE - Marcas')
 
 @section('content_header')
-    <div class="mb-3">
-        @component('components.alerts')
-        @endcomponent
-    </div>
 @stop
 
 @component('equip.brands.modal.add')

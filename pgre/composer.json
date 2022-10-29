@@ -15,7 +15,8 @@
         "jeroennoten/laravel-adminlte": "^3.8",
         "laravel/framework": "^7.0",
         "laravel/tinker": "^2.0",
-        "laravel/ui": "2.4"
+        "laravel/ui": "2.4",
+        "realrashid/sweet-alert": "^5.1"
     },
     "require-dev": {
         "facade/ignition": "^2.0",
