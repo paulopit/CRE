@@ -3,10 +3,7 @@
 @section('title', 'GRE - Equipamentos')
 
 @section('content_header')
-    <div class="mb-3">
-        @component('components.alerts')
-        @endcomponent
-    </div>
+
 @stop
 
 @component('equip.management.modal.add', ['brands' => $brands, 'equipment_models' => $equipment_models, 'equipment_types' => $equipment_types])
@@ -14,6 +11,7 @@
 
 
 @section('content')
+    @include('sweetalert::alert')
     <div class="">
         <div class="col-lg-12">
             <div class="card card-secondary">

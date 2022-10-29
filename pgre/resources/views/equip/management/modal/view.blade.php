@@ -48,7 +48,7 @@
                             </div>
                         </x-slot>
                     </x-adminlte-input>
-
+                    {{$equipment->equipment_images}}
                     <div class="col-md-12">
                         @if($equipment->status_ok)
                             <x-adminlte-input-switch label="Estado" data-on-text="Ok" data-off-text="NoK" name="status_ok" data-on-color="lightblue" data-off-color="secondary" checked disabled/>

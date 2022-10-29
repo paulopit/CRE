@@ -17,7 +17,7 @@ class EquipmentController extends Controller
      * @return \Illuminate\Http\Response
      */
 
-    private function ValidateSerialNumber($serialnumber, $equip_id )
+    private function ValidateSerialNumber($serialnumber, $equip_id = 0 )
     {
        $checkserial = Equipment::where('serial_number', $serialnumber)
            ->where('id', '!=', $equip_id)
@@ -197,7 +197,7 @@ class EquipmentController extends Controller
         if(!$this->ValidateSerialNumber($request->equip_serialnumber, $equipment->id))
             return redirect('equip-management/equipments')->with('error','Número de Série já existe');
         $equipment->serial_number = $request->equip_serialnumber;
-        $equipment->status_ok = $request['equip_status_ok_'.$equipment->id] ?? 0;
+        $equipment->status_ok = boolval($request['equip_status_ok_'.$equipment->id]);
         $equipment->equipment_type_id = $request->equip_type;
         $equipment->equipment_model_id = $request->equip_model;
         $equipment->reference = $request->equip_reference;

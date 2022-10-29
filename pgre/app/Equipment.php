@@ -16,5 +16,4 @@ class Equipment extends Model
         return $this->belongsTo(Equipment_model::class);
     }
 
-
 }
