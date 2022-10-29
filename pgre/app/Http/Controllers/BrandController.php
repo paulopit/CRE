@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Brand;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 
 class BrandController extends Controller
 {
@@ -36,9 +37,18 @@ class BrandController extends Controller
      */
     public function store(Request $request)
     {
-        $this->validate($request, [
+
+        $validator = Validator::make($request->all(), [
             'brand_name' => 'required'
         ]);
+
+
+        if ($validator->fails()) {
+            return redirect('equip-management/brands')
+                ->with('errorForm', $validator->errors()->getMessages())
+                ->withInput();
+        }
+
 
         $brand = new Brand();
         $brand->name = $request->brand_name;

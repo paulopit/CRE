@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Equipment_type;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 
 class EquipmentTypeController extends Controller
 {
@@ -41,10 +42,17 @@ class EquipmentTypeController extends Controller
      */
     public function store(Request $request)
     {
-        $this->validate($request, [
-            'type_name' => 'required',
-
+        $validator = Validator::make($request->all(), [
+            'type_name' => 'required'
         ]);
+
+
+        if ($validator->fails()) {
+            return redirect('equip-management/brands')
+                ->with('errorForm', $validator->errors()->getMessages())
+                ->withInput();
+        }
+
 
         $equipment_type = new Equipment_type();
         $equipment_type->type       = $request->type_name;

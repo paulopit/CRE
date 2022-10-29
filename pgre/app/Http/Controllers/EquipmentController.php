@@ -8,6 +8,7 @@ use App\Equipment_model;
 use App\Equipment_type;
 use App\Requisition_line;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 
 class EquipmentController extends Controller
 {
@@ -88,11 +89,18 @@ class EquipmentController extends Controller
      */
     public function store(Request $request)
     {
-        $this->validate($request, [
+        $validator = Validator::make($request->all(), [
             'description' => 'required',
             'equipment_type' => 'required',
             'models_select' => 'required',
-            ]);
+        ]);
+
+
+        if ($validator->fails()) {
+            return redirect('equip-management/brands')
+                ->with('errorForm', $validator->errors()->getMessages())
+                ->withInput();
+        }
 
         $equipment = new Equipment();
         $equipment->description = $request->description;

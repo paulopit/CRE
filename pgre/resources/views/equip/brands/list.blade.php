@@ -10,6 +10,7 @@
 
 
 @section('content')
+    @include('sweetalert::alert')
     <div class="">
         <div class="col-lg-12">
             <div class="card card-secondary">

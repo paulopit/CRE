@@ -6,6 +6,7 @@ use App\Equipment_model;
 use App\Brand;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 
 class EquipmentModelController extends Controller
 {
@@ -51,10 +52,17 @@ class EquipmentModelController extends Controller
      */
     public function store(Request $request)
     {
-        $this->validate($request, [
-            'model_name' => 'required',
-
+        $validator = Validator::make($request->all(), [
+            'model_name' => 'required'
         ]);
+
+
+        if ($validator->fails()) {
+            return redirect('equip-management/brands')
+                ->with('errorForm', $validator->errors()->getMessages())
+                ->withInput();
+        }
+
 
         $equipment_models = new Equipment_model();
         $equipment_models->name         = $request->model_name;

@@ -20,7 +20,7 @@
                         </x-slot>
                     </x-adminlte-input>
 
-                    <x-adminlte-input required name="description" label="Descrição" placeholder="Descrição" value="" fgroup-class="col-md-12">
+                    <x-adminlte-input  name="description" label="Descrição" placeholder="Descrição" value="" fgroup-class="col-md-12">
                         <x-slot name="prependSlot">
                             <div class="input-group-text">
                                 <i class="fas fa-solid fa-pen text-lightblue"></i>
@@ -39,7 +39,7 @@
                         </x-slot>
                     </x-adminlte-input>
 
-                    <x-adminlte-select required name="equipment_type" id="equipment_type" label="Tipo de equipamento" fgroup-class="col-md-12">
+                    <x-adminlte-select  name="equipment_type" id="equipment_type" label="Tipo de equipamento" fgroup-class="col-md-12">
                         <x-slot name="prependSlot">
                             <div class="input-group-text">
                                 <i class="fas fa-toolbox text-lightblue"></i>
@@ -52,7 +52,7 @@
                     </x-adminlte-select>
 
 
-                <x-adminlte-select required name="brand" id="brand_model" label="Marca" fgroup-class="col-md-12">
+                <x-adminlte-select  name="brand" id="brand_model" label="Marca" fgroup-class="col-md-12">
                     <x-slot name="prependSlot">
                         <div class="input-group-text">
                             <i class="far fa-registered text-lightblue"></i>
@@ -64,7 +64,7 @@
                     @endforeach
                 </x-adminlte-select>
 
-                <x-adminlte-select required name="models_select" id="models_select" label="Modelos" fgroup-class="col-md-12">
+                <x-adminlte-select  name="models_select" id="models_select" label="Modelos" fgroup-class="col-md-12">
                         <x-slot name="prependSlot">
                             <div class="input-group-text">
                                 <i class="far fa-copyright text-lightblue"></i>
