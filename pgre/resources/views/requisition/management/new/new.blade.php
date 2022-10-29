@@ -9,12 +9,10 @@
         @component('components.alerts')
         @endcomponent
     </div>
-        <x-adminlte-alert id="success-alert" theme="success" title="Sucesso" dismissable style="display: none;">
-            <label>Requisição submetida com sucesso!</label>
-        </x-adminlte-alert>
 @stop
 
 @section('content')
+    @include('sweetalert::alert')
     <div class="">
         <div class="col-lg-12">
             <div class="card card-secondary">
@@ -231,6 +229,7 @@
                 url:"{{ route('submit_req') }}",
                 data:{req_id:req_id, _token: '{{csrf_token()}}'},
                 success:function(data){
+
                     Swal.fire({
                         title: 'Sucesso!',
                         text: 'Requisição criada com sucesso!',
@@ -241,9 +240,6 @@
                             location.reload();
                         }
                     })
-                   /* $('#submit_req').attr("disabled", true);
-                    $("#success-alert").show();
-                    setTimeout(function() {location.reload(); }, 1000);*/
                 }
             });
         }

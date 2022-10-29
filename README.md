@@ -86,5 +86,14 @@ Chamar parametros da AppConfig nos templates blade:
 {{ App\App_config::GetAppConfig() }}
 ```
 
+Incluir os alertas nas páginas:
+Na linha seguinte à @section('content')
+
+```php
+@include('sweetalert::alert')
+```
+
+
+
 
 

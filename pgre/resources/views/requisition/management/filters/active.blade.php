@@ -3,13 +3,10 @@
 @section('title', 'GRE - Requisições em Empréstimo')
 
 @section('content_header')
-    <div class="mb-3">
-        @component('components.alerts')
-        @endcomponent
-    </div>
 @stop
 
 @section('content')
+    @include('sweetalert::alert')
     <div class="">
         <div class="col-lg-12">
             <div class="card card-secondary">
