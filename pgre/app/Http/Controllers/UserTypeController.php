@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\User_type;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 
 class UserTypeController extends Controller
 {
@@ -36,9 +37,18 @@ class UserTypeController extends Controller
      */
     public function store(Request $request)
     {
-        $this->validate($request, [
+        $validator = Validator::make($request->all(), [
             'type_name' => 'required'
         ]);
+
+
+        if ($validator->fails()) {
+            return redirect('user-management/types')
+                ->with('errorForm', $validator->errors()->getMessages())
+                ->withInput();
+        }
+
+
         $user_type = new User_type();
         $user_type->type_name = $request->type_name;
         $user_type->save();
