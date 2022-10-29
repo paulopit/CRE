@@ -24,6 +24,7 @@ class CreateEquipmentTable extends Migration
             $table->string('reference');
             //$table->foreignId('reference')->unique()->constrained('equipment_images')->onDelete('cascade');
             $table->string('obs')->nullable();
+            $table->string('image_url')->nullable();
             $table->timestamps();
         });
     }
