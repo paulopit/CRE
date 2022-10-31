@@ -60,6 +60,8 @@ class RequisitionController extends Controller
             $line->save();
         }
         $requisition->level_id =$level_id;
+        $requisition->closed_by = Auth::user()->id;
+        $requisition->closed_at = now();
         $requisition->save();
         if($requisition->level_id == 5) //5- Expirado
             $requisition->delete();
@@ -298,6 +300,7 @@ class RequisitionController extends Controller
         $req_record->canceled_at = now();
         $req_record->canceled_by = $manager->id;
         $req_record->canceled_obs = $request->deny_rec_obs;
+
         $this->CancelRequisition($req_record, 7); //7 - Rejeitado
         $req_record->save();
         MailController::SendEmail($req_record->request_user->email,'GRE - Requisição '. $req_record->tag  , 'Requisição Rejeitada', 'A sua requisição foi rejeitada!');
