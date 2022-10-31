@@ -9,6 +9,7 @@ use App\Equipment_type;
 use App\Requisition_line;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Storage;
 
 class EquipmentController extends Controller
 {
@@ -102,7 +103,20 @@ class EquipmentController extends Controller
                 ->withInput();
         }
 
+
         $equipment = new Equipment();
+        if ($request->file('equip_image')) {
+            // Get Image File
+            $imagePath = $request->file('equip_image');
+            // Define Image Name
+            $imageName = $request->reference . '' . time() . '' . $imagePath->getClientOriginalName();
+            // Save Image on Storage
+            $path = $request->file('equip_image')->storeAs('images/equipment' , $imageName, 'public');
+            //Save Image Path
+            $equipment->image_url = $path;
+
+        }
+
         $equipment->description = $request->description;
         $equipment->equipment_type_id = $request->equipment_type;
         $equipment->equipment_model_id = $request->models_select;
@@ -112,6 +126,9 @@ class EquipmentController extends Controller
         $equipment->obs = $request->obs;
         $equipment->reference = $request->reference ?? $this->GenerateReference();
         $equipment->save();
+
+
+
 
         return redirect('/equip-management/equipments')->with('success','Equipamento criada com sucesso!');
 
