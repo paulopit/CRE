@@ -1,7 +1,7 @@
 <div class="modal fade" id="import_models">
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
-            <form method="POST" action="{{url('/equip-management/models/import')}}" enctype="multipart/form-data">
+            <form method="POST" action="{{url('/equip-management/models/excel-import')}}" enctype="multipart/form-data">
                 @csrf
                 <div class="modal-header">
                     <h5 class="modal-title">Importar modelos</h5>
@@ -10,8 +10,7 @@
                     </button>
                 </div>
                 <div class="modal-body">
-
-                    <x-adminlte-input-file name="import_file" label="Ficheiro excel" igroup-size="sm" fgroup-class="col-md-12" placeholder="Seleccione um ficheiro...">
+                    <x-adminlte-input-file name="import_file" label="Ficheiro excel" igroup-size="sm" fgroup-class="col-md-12" placeholder="Seleccione um ficheiro..." accept="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel">
                         <x-slot name="prependSlot">
                             <div class="input-group-text bg-lightblue">
                                 <i class="fas fa-upload"></i>

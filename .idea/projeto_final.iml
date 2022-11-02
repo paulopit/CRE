@@ -103,6 +103,15 @@
       <excludeFolder url="file://$MODULE_DIR$/pgre/vendor/jeroennoten/laravel-adminlte" />
       <excludeFolder url="file://$MODULE_DIR$/pgre/vendor/almasaeed2010/adminlte" />
       <excludeFolder url="file://$MODULE_DIR$/pgre/vendor/realrashid/sweet-alert" />
+      <excludeFolder url="file://$MODULE_DIR$/pgre/vendor/maennchen/zipstream-php" />
+      <excludeFolder url="file://$MODULE_DIR$/pgre/vendor/ezyang/htmlpurifier" />
+      <excludeFolder url="file://$MODULE_DIR$/pgre/vendor/myclabs/php-enum" />
+      <excludeFolder url="file://$MODULE_DIR$/pgre/vendor/psr/http-client" />
+      <excludeFolder url="file://$MODULE_DIR$/pgre/vendor/psr/http-factory" />
+      <excludeFolder url="file://$MODULE_DIR$/pgre/vendor/phpoffice/phpspreadsheet" />
+      <excludeFolder url="file://$MODULE_DIR$/pgre/vendor/maatwebsite/excel" />
+      <excludeFolder url="file://$MODULE_DIR$/pgre/vendor/markbaker/matrix" />
+      <excludeFolder url="file://$MODULE_DIR$/pgre/vendor/markbaker/complex" />
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />

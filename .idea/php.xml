@@ -99,6 +99,15 @@
       <path value="$PROJECT_DIR$/pgre/vendor/jeroennoten/laravel-adminlte" />
       <path value="$PROJECT_DIR$/pgre/vendor/almasaeed2010/adminlte" />
       <path value="$PROJECT_DIR$/pgre/vendor/realrashid/sweet-alert" />
+      <path value="$PROJECT_DIR$/pgre/vendor/maennchen/zipstream-php" />
+      <path value="$PROJECT_DIR$/pgre/vendor/ezyang/htmlpurifier" />
+      <path value="$PROJECT_DIR$/pgre/vendor/myclabs/php-enum" />
+      <path value="$PROJECT_DIR$/pgre/vendor/psr/http-client" />
+      <path value="$PROJECT_DIR$/pgre/vendor/psr/http-factory" />
+      <path value="$PROJECT_DIR$/pgre/vendor/phpoffice/phpspreadsheet" />
+      <path value="$PROJECT_DIR$/pgre/vendor/maatwebsite/excel" />
+      <path value="$PROJECT_DIR$/pgre/vendor/markbaker/matrix" />
+      <path value="$PROJECT_DIR$/pgre/vendor/markbaker/complex" />
     </include_path>
   </component>
   <component name="PhpProjectSharedConfiguration" php_language_level="7.2" />

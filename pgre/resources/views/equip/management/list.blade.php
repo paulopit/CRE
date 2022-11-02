@@ -21,14 +21,15 @@
                 <div class="card-body">
                     @php
                         $header = [
-                            'ID',
-                            ['label' => 'Nome','width' => 200],
-                            ['label' => 'Serial Number','width' => 200],
-                            ['label' => 'Estado','width' => 200],
-                            ['label' => 'Tipo Equipamento','width' => 200],
-                            ['label' => 'Modelo','width' => 200],
-                            ['label' => 'Referencia','width' => 200],
-                            ['label' => 'Observação','width' => 200],
+
+                            ['label' => 'ID','width' => 2],
+                            ['label' => 'Referencia','width' => 10],
+                            ['label' => 'Descrição','width' => 25],
+                            ['label' => 'Serial Number','width' => 10],
+                            ['label' => 'Marca','width' => 10],
+                            ['label' => 'Modelo','width' => 10],
+                            ['label' => 'Tipo Equipamento','width' => 15],
+                            ['label' => 'Estado','width' => 10],
                             ['label' => 'Ações', 'no-export' => false, 'width' => 5],
                         ];
 
@@ -44,26 +45,21 @@
                         @foreach($equipments as $equipment)
                             <tr>
                                 <td>{{$equipment->id}}</td>
+                                <td>{{$equipment->reference}}</td>
                                 <td>{{$equipment->description}}</td>
                                 <td>{{$equipment->serial_number}}</td>
+                                <td>{{$equipment->equipment_model->brand->name}}</td>
+                                <td>{{$equipment->equipment_model->name}}</td>
+                                @foreach($equipment_types as $equipment_type)
+                                    @if($equipment_type->id == $equipment->equipment_type_id)
+                                        <td>{{$equipment_type->type}}</td>
+                                    @endif
+                                @endforeach
                                 @if($equipment->status_ok == 1)
                                     <td style="color: green">OK</td>
                                 @else
                                     <td style="color: orange"> NOK </td>
                                 @endif
-
-                            @foreach($equipment_types as $equipment_type)
-                                    @if($equipment_type->id == $equipment->equipment_type_id)
-                                        <td>{{$equipment_type->type}}</td>
-                                    @endif
-                                @endforeach
-                                @foreach($equipment_models as $equipment_model)
-                                    @if($equipment_model->id == $equipment->equipment_model_id)
-                                        <td>{{$equipment_model->name}}</td>
-                                    @endif
-                                @endforeach
-                                <td>{{$equipment->reference}}</td>
-                                <td>{{$equipment->obs}}</td>
                                 <td>
                                     <nobr>
                                         @component('equip.management.modal.edit', ['equipment' => $equipment, 'brands' => $brands, 'equipment_models' => $equipment_models, 'equipment_types' => $equipment_types])
