@@ -14,7 +14,20 @@ class EquipmentTypeController extends Controller
      * @return \Illuminate\Http\Response
      */
 
-
+    public function create_type($type_name)
+    {
+        if(trim($type_name) == "")
+            return 1;
+        $check_type = Equipment_type::where('type', $type_name)->pluck('id')->first();
+        if($check_type == null){
+            $new_type = new Equipment_type();
+            $new_type->type = $type_name;
+            $new_type->save();
+            return $new_type->id;
+        }else{
+            return $check_type;
+        }
+    }
 
 
     public function index()

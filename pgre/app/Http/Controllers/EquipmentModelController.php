@@ -33,10 +33,10 @@ class EquipmentModelController extends Controller
         return response()->download(storage_path('app\public\templates\import_models_template.xlsx'));
     }
 
-    private function create_model($brand, $model)
+    public function create_model($brand, $model)
     {
         if(trim($brand) == "" || trim($model) == "")
-            return;
+            return 1;
         $brand_id = Brand::where('name', $brand)->pluck('id')->first();
         if($brand_id == null){ //criar marca
             $new_brand = new Brand();
@@ -47,12 +47,13 @@ class EquipmentModelController extends Controller
         //validar modelo
         $check_model = Equipment_model::where('name', $model)->where('brand_id',$brand_id)->first();
         if($check_model != null)
-            return; //repetido, ignora
+            return $check_model->id; //repetido, ignora e responde com o registo ja existente.
 
         $new_model = new Equipment_model();
         $new_model->brand_id = $brand_id;
         $new_model->name = $model;
         $new_model->save();
+        return $new_model->id;
     }
 
     public function excel_import(Request $request)

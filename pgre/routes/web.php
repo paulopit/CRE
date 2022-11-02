@@ -42,6 +42,8 @@ Route::group(['middleware' => 'management'], function () {
     Route::delete('/equip-management/equipments/{brand}', 'EquipmentController@destroy');
     Route::put('/equip-management/equipments/{equipment}', 'EquipmentController@update');
     Route::get('/get-models', 'EquipmentModelController@getModels')->name('get_models_info');
+    Route::get('/equip-management/equipments/import-template', 'EquipmentController@download_template');
+    Route::post('/equip-management/equipments/excel-import', 'EquipmentController@excel_import');
 
     // ##Model management
     Route::get('/equip-management/models', 'EquipmentModelController@index');

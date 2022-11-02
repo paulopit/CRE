@@ -10,6 +10,7 @@ use App\Requisition_line;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Storage;
+use Maatwebsite\Excel\Facades\Excel;
 
 class EquipmentController extends Controller
 {
@@ -47,6 +48,7 @@ class EquipmentController extends Controller
             ->select('equipment.id','equipment.reference','equipment.description')
             ->where('equipment.equipment_type_id',$type_id)
             ->where('equipment.in_stock', 1)
+            ->groupby('equipment.reference','equipment.id','equipment.description')
             ->get();
         return response()->json($equip_data);
     }
@@ -60,7 +62,92 @@ class EquipmentController extends Controller
         return response()->json($equip_data);
     }
 
+    public function download_template()
+    {
+        return response()->download(storage_path('app\public\templates\import_equipments_template.xlsx'));
+    }
 
+    public function excel_import(Request $request)
+    {
+        $error_log = [];
+
+        $validator = Validator::make($request->all(), [
+            'import_file' => ['required','mimes:xls,xlsx','max:4096'],
+        ]);
+
+        if ($validator->fails()) {
+            return redirect('equip-management/models')
+                ->with('errorForm', $validator->errors()->getMessages())
+                ->withInput();
+        }
+
+        $excel_data = Excel::toArray([], $request->file('import_file'));
+        foreach ($excel_data[0] as $key=>$line){
+            if($key == 0){ //valida cabeçalho
+                if(strtoupper($line[0]) != "REFERENCIA")
+                    return redirect('equip-management/equipments')->with('error', $line[0] . ' inválido para cabeçalho da primeira coluna');
+                if(strtoupper($line[1]) != "DESCRICAO")
+                    return redirect('equip-management/equipments')->with('error', $line[1] . ' inválido para cabeçalho da segunda coluna');
+                if(strtoupper($line[2]) != "NUMERO SERIE")
+                    return redirect('equip-management/equipments')->with('error', $line[2] . ' inválido para cabeçalho da terceira coluna');
+                if(strtoupper($line[3]) != "TIPO EQUIPAMENTO")
+                    return redirect('equip-management/equipments')->with('error', $line[3] . ' inválido para cabeçalho da quarta coluna');
+                if(strtoupper($line[4]) != "MARCA")
+                    return redirect('equip-management/equipments')->with('error', $line[4] . ' inválido para cabeçalho da quinta coluna');
+                if(strtoupper($line[5]) != "MODELO")
+                    return redirect('equip-management/equipments')->with('error', $line[5] . ' inválido para cabeçalho da sexta coluna');
+                if(strtoupper($line[6]) != "URL IMAGEM")
+                    return redirect('equip-management/equipments')->with('error', $line[6] . ' inválido para cabeçalho da sétima coluna');
+                if(strtoupper($line[7]) != "OBSERVACOES")
+                    return redirect('equip-management/equipments')->with('error', $line[7] . ' inválido para cabeçalho da oitava coluna');
+            }else{
+                $new_equip = new Equipment();
+                if($line[0] == ""){
+                    $new_equip->reference = $this->GenerateReference();
+                }else{
+                    $new_equip->reference = $line[0];
+                }
+                $model_id = (new EquipmentModelController)->create_model($line[4], $line[5]);
+                $equip_type_id = (new EquipmentTypeController)->create_type($line[3]);
+
+                $new_equip->description = $line[1];
+
+                if($line[2] != ""){
+                    if($this->ValidateSerialNumber($line[2])){
+                        $new_equip->serial_number = $line[2];
+
+                    }else{
+                        array_push($error_log,'Linha ' . $key . ' - numero de série já pertence a outro equipamento.');
+                        continue;
+                    }
+                }
+
+                $new_equip->status_ok = true;
+                $new_equip->in_stock = true;
+                $new_equip->equipment_model_id = $model_id;
+                $new_equip->equipment_type_id = $equip_type_id;
+                $new_equip->obs = $line[7];
+
+                if($line[6] != ""){
+                    $context = stream_context_create(array(
+                        'http' => array('ignore_errors' => true),
+                    ));
+                    $contents = @file_get_contents($line[6], false,$context);
+                    $name = substr($line[6], strrpos($line[6], '/') + 1);
+                    $location = 'images/equipment/' .$name;
+                    Storage::put('public/'.$location, $contents);
+                    $new_equip->image_url = $location;
+                }
+                $new_equip->save();
+            }
+        }
+        if(count($error_log) == 0){
+            return redirect('equip-management/equipments')->with('success','Ficheiro excel importado com  sucesso!');
+        }else{
+            return redirect('equip-management/equipments')
+                ->with('errorImport', $error_log);
+        }
+    }
 
     public function index()
     {

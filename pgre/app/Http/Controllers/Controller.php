@@ -33,6 +33,16 @@ class Controller extends BaseController
                 Alert::html('Falhou validação!', $html, 'error');
             }
 
+            if (session('errorImport')) {
+                $html = "<ul style='list-style: none;'>";
+                foreach(session('errorImport') as $error) {
+                    $html .= "<li>$error</li>";
+                }
+                $html .= "</ul>";
+
+                Alert::html('Ocorreram erros na importação!', $html, 'error');
+            }
+
             return $next($request);
         });
     }

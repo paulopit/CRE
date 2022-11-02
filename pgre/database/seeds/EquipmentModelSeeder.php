@@ -13,38 +13,38 @@ class EquipmentModelSeeder extends Seeder
     {
         \DB::table('equipment_models')->insert([
             [
-                'name' => '100D',
+                'name' => 'Outros',
                 'brand_id' => '1',
+                'created_at' => now(),
+                'updated_at' => now()
+            ],
+            [
+                'name' => '100D',
+                'brand_id' => '2',
                 'created_at' => now(),
                 'updated_at' => now()
             ],
             [
                 'name' => '90D',
-                'brand_id' => '1',
+                'brand_id' => '2',
                 'created_at' => now(),
                 'updated_at' => now()
             ],
             [
                 'name' => '60D',
-                'brand_id' => '1',
+                'brand_id' => '2',
                 'created_at' => now(),
                 'updated_at' => now()
             ],
             [
                 'name' => 'Outros',
-                'brand_id' => '1',
+                'brand_id' => '2',
                 'created_at' => now(),
                 'updated_at' => now()
             ],
             [
                 'name' => 'R6',
-                'brand_id' => '2',
-                'created_at' => now(),
-                'updated_at' => now()
-            ],
-            [
-                'name' => 'Outros',
-                'brand_id' => '2',
+                'brand_id' => '3',
                 'created_at' => now(),
                 'updated_at' => now()
             ],
@@ -93,6 +93,12 @@ class EquipmentModelSeeder extends Seeder
             [
                 'name' => 'Outros',
                 'brand_id' => '10',
+                'created_at' => now(),
+                'updated_at' => now()
+            ],
+            [
+                'name' => 'Outros',
+                'brand_id' => '11',
                 'created_at' => now(),
                 'updated_at' => now()
             ]

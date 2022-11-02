@@ -7,6 +7,9 @@
 
 @component('equip.management.modal.add', ['brands' => $brands, 'equipment_models' => $equipment_models, 'equipment_types' => $equipment_types])
 @endcomponent
+@component('equip.management.modal.import')
+@endcomponent
+
 
 
 @section('content')
@@ -16,7 +19,8 @@
             <div class="card card-secondary">
                 <div class="card-header">
                     <h3 class="card-title">Lista de Equipamentos </h3>
-                    <label class="float-right add_record_btn"><a href="" data-toggle="modal" data-target='#add_equipment' data-id="" ><i class="fas fa-plus-square"></i></a></label>
+                    <label class="float-right add_record_btn"><a href="" data-toggle="modal" data-target='#add_equipment' title="Criar equipamento" data-id="" ><i class="fas fa-plus-square"></i></a></label>
+                    <label class="float-right add_record_btn" style="margin-right: 15px!important;"><a href="" data-toggle="modal" title="Importar por Excel" data-target='#import_equipments' data-id="" ><i class="fas fa-file-excel"></i></a></label>
                 </div>
                 <div class="card-body">
                     @php

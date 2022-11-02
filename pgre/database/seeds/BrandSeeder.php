@@ -13,6 +13,11 @@ class BrandSeeder extends Seeder
     {
         \DB::table('brands')->insert([
             [
+                'name' => 'Outras',
+                'created_at' => now(),
+                'updated_at' => now()
+            ],
+            [
                 'name' => 'Canon',
                 'created_at' => now(),
                 'updated_at' => now()
@@ -51,10 +56,6 @@ class BrandSeeder extends Seeder
                 'updated_at' => now()
             ],
             ['name' => 'Hanimex',
-                'created_at' => now(),
-                'updated_at' => now()
-            ],
-            ['name' => 'Outras',
                 'created_at' => now(),
                 'updated_at' => now()
             ],
