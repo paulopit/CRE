@@ -27,6 +27,14 @@ class EquipmentModelController extends Controller
 
     }
 
+
+    public function download_template()
+    {
+        return response()->download(storage_path('app\public\templates\import_models_template.xlsx'));
+    }
+
+
+
     public function index()
     {
         $equipment_models = Equipment_model::all();

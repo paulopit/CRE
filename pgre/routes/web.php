@@ -28,6 +28,8 @@ Route::get('/home', 'HomeController@index')->name('home');
 
 Route::group(['middleware' => 'management'], function () {
 
+
+
     // ##Brand management
     Route::get('/equip-management/brands', 'BrandController@index');
     Route::post('/equip-management/brands/add', 'BrandController@store');
@@ -46,6 +48,8 @@ Route::group(['middleware' => 'management'], function () {
     Route::post('/equip-management/models/add', 'EquipmentModelController@store');
     Route::delete('/equip-management/models/{model}', 'EquipmentModelController@destroy');
     Route::put('/equip-management/models/{model}', 'EquipmentModelController@update');
+    Route::get('/equip-management/models/import-template', 'EquipmentModelController@download_template');
+
 
     // ##type management
     Route::get('/equip-management/types', 'EquipmentTypeController@index');

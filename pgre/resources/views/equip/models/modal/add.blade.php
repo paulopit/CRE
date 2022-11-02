@@ -4,7 +4,7 @@
             <form method="POST" action="{{url('/equip-management/models/add')}}" enctype="multipart/form-data">
                 @csrf
                 <div class="modal-header">
-                    <h5 class="modal-title">Adicionar marca de equipamento</h5>
+                    <h5 class="modal-title">Adicionar modelo de equipamento</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>

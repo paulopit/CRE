@@ -8,6 +8,8 @@
 
 @component('equip.models.modal.add', ['brands' => $brands, 'equipment_models' => $equipment_models])
 @endcomponent
+@component('equip.models.modal.import')
+@endcomponent
 
 
 @section('content')
@@ -17,7 +19,8 @@
             <div class="card card-secondary">
                 <div class="card-header">
                     <h3 class="card-title">Modelos de Equipamentos </h3>
-                    <label class="float-right add_record_btn"><a href="" data-toggle="modal" data-target='#add_equip_model' data-id="" ><i class="fas fa-plus-square"></i></a></label>
+                   <label class="float-right add_record_btn"><a href="" data-toggle="modal" data-target='#add_equip_model' data-id="" ><i class="fas fa-plus-square"></i></a></label>
+                    <label class="float-right add_record_btn" style="margin-right: 15px!important;"><a href="" data-toggle="modal" data-target='#import_models' data-id="" ><i class="fas fa-file-excel"></i></a></label>
                 </div>
                 <div class="card-body">
                     @php
