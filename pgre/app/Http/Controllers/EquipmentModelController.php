@@ -68,10 +68,19 @@ class EquipmentModelController extends Controller
         }
 
         $excel_data = Excel::toArray([], $request->file('import_file'));
-        foreach ($excel_data[0] as $line){
-            $this->create_model($line[0], $line[1]);
-        }
+        foreach ($excel_data[0] as $key=>$line){
+            if($key == 0){ //valida cabeçalho
+                if(strtoupper($line[0]) != "MARCA")
+                    return redirect('equip-management/models')
+                        ->with('error', $line[0] . ' inválido para cabeçalho da primeira coluna');
 
+                if(strtoupper($line[1]) != "MODELO")
+                    return redirect('equip-management/models')
+                        ->with('error', $line[1] . ' inválido para cabeçalho da segunda coluna');
+            }else{
+                $this->create_model($line[0], $line[1]);
+            }
+        }
         return redirect('equip-management/models')->with('success','Ficheiro excel importado com  sucesso!');
     }
 

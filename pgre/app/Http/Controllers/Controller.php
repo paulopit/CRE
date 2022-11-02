@@ -33,7 +33,6 @@ class Controller extends BaseController
                 Alert::html('Falhou validação!', $html, 'error');
             }
 
-
             return $next($request);
         });
     }
