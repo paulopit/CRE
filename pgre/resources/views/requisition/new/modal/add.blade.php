@@ -100,7 +100,8 @@
                         var id = response['data'][i].id;
                         var reference = response['data'][i].reference;
                         var description = response['data'][i].description;
-                        var option = "<option value='"+id+"'>"+reference+ " - " +description+"</option>";
+                        var total = response['data'][i].total;
+                        var option = "<option value='"+id+"'>"+reference+ " - " +description+ " (Qtd: " +total+ ")" +"</option>";
                         $("#sel_equipment").append(option);
                     }
                 }else{
@@ -136,7 +137,8 @@
                             var id = response['data'][i].id;
                             var reference = response['data'][i].reference;
                             var description = response['data'][i].description;
-                            var option = "<option value='"+id+"'>"+reference+ " - " +description+"</option>";
+                            var total = response['data'][i].total;
+                            var option = "<option value='"+id+"'>"+reference+ " - " +description+ " (Qtd: " +total+ ")" +"</option>";
                             $("#sel_equipment").append(option);
                         }
                     }else{

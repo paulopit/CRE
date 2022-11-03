@@ -8,6 +8,7 @@ use App\Equipment_model;
 use App\Equipment_type;
 use App\Requisition_line;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Storage;
 use Maatwebsite\Excel\Facades\Excel;
@@ -43,22 +44,38 @@ class EquipmentController extends Controller
 
     public function getEquipmentsByType($type_id=0){
 
-        //Obter todos os equipamentos do tipo de equipamento pedido, mas que se encontrem em stock,
-        $equip_data['data'] = Equipment::orderby("equipment.reference","asc")
-            ->select('equipment.id','equipment.reference','equipment.description')
-            ->where('equipment.equipment_type_id',$type_id)
+        $equip_data['data'] = [];
+            $reference_list =Equipment::where("equipment_type_id",$type_id)
             ->where('equipment.in_stock', 1)
-            ->groupby('equipment.reference','equipment.id','equipment.description')
-            ->get();
+            ->groupBy('reference')
+            ->pluck('reference');
+            foreach ($reference_list as $ref){
+                $record = Equipment::where('reference', $ref)
+                    ->where('equipment.in_stock', 1)
+                    ->get(['id','reference','description'])
+                    ->first();
+                $record['total'] = Equipment::where('reference', $ref)->where('equipment.in_stock', 1)->count();
+                array_push($equip_data['data'],$record);
+            }
         return response()->json($equip_data);
     }
 
     public function getEquipmentsByRef($ref=""){
-        $equip_data['data'] = Equipment::orderby("equipment.reference","asc")
-            ->select('equipment.id','equipment.reference','equipment.description')
-            ->where('equipment.reference','=',$ref)
-            ->where('equipment.in_stock', 1)
-            ->get();
+        $equip_data['data'] = [];
+
+            $record = Equipment::where('reference', $ref)
+                ->where('equipment.in_stock', 1)
+                ->get(['id','reference','description'])
+                ->first();
+            $record['total'] = Equipment::where('reference', $ref)->where('equipment.in_stock', 1)->count();
+
+            array_push($equip_data['data'],$record);
+
+//        $equip_data['data'] = Equipment::orderby("equipment.reference","asc")
+//            ->select('equipment.id','equipment.reference','equipment.description')
+//            ->where('equipment.reference','=',$ref)
+//            ->where('equipment.in_stock', 1)
+//            ->get();
         return response()->json($equip_data);
     }
 
