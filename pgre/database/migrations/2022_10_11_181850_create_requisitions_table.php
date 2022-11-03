@@ -26,8 +26,8 @@ class CreateRequisitionsTable extends Migration
             $table->string('ufcd')->nullable();
             $table->string('teacher')->nullable();
 
-            $table->boolean('request_status')->default(0);
-            $table->boolean('deliver_status')->default(0);
+            $table->dateTime('last_alert')->nullable();
+
 
             $table->dateTime('approved_at')->nullable();
             $table->foreignId('approved_by')->nullable()->constrained('users')->onDelete('cascade');

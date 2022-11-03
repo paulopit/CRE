@@ -437,11 +437,27 @@ return [
             ],
         ],
         [
+            'text'    => 'Ferramentas',
+            'icon'    => 'fas fa-toolbox',
+            'can'  => 'admin-permission',
+            'submenu' => [
+                [
+                    'text' => 'Processa alertas',
+                    'url'  => '/checkalerts',
+                    'icon'    => 'fas fa-fw fa-exclamation-triangle',
+                ],
+
+            ],
+        ],
+        [
             'text' => 'Configurações',
             'url'  => 'admin/app-config',
             'can'  => 'admin-permission',
             'icon'    => 'fas fa-cogs',
         ],
+
+
+
 //        [
 //            'text'        => 'pages',
 //            'url'         => 'admin/pages',

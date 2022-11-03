@@ -24,6 +24,8 @@ Route::get('/test-email', 'MailController@testemail');
 
 
 Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/checkalerts', 'AlertController@check_alerts')->name('check-alerts');
+
 
 
 Route::group(['middleware' => 'management'], function () {

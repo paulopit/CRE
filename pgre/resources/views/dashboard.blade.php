@@ -4,16 +4,15 @@
 
 @section('content_header')
     <div class="mt-3">
-
+        @component('components.alerts')
+        @endcomponent
     </div>
 @stop
 
 @section('content')
-
-
     <div class="row">
-
-        @if (Auth::user()->can('front-permission'))
+        @include('sweetalert::alert')
+    @if (Auth::user()->can('front-permission'))
             <div class="col-lg-3">
                 <x-adminlte-small-box title="{{count(Auth::user()->requisitions)}}" text="Total" icon="fas fa-ticket-alt text-white"
                                       theme="info" url="#" url-text="Ver requisições"/>

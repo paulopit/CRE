@@ -30,11 +30,7 @@ class HomeController extends Controller
     public function dashboard()
     {
         $user = Auth::user();
-
         $all_requisitions = Requisition::all();
-
-
-
         return view('dashboard', ['requisitions'=> $all_requisitions]);
     }
 }

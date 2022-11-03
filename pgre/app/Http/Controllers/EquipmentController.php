@@ -62,20 +62,12 @@ class EquipmentController extends Controller
 
     public function getEquipmentsByRef($ref=""){
         $equip_data['data'] = [];
-
             $record = Equipment::where('reference', $ref)
                 ->where('equipment.in_stock', 1)
                 ->get(['id','reference','description'])
                 ->first();
             $record['total'] = Equipment::where('reference', $ref)->where('equipment.in_stock', 1)->count();
-
             array_push($equip_data['data'],$record);
-
-//        $equip_data['data'] = Equipment::orderby("equipment.reference","asc")
-//            ->select('equipment.id','equipment.reference','equipment.description')
-//            ->where('equipment.reference','=',$ref)
-//            ->where('equipment.in_stock', 1)
-//            ->get();
         return response()->json($equip_data);
     }
 
@@ -207,7 +199,6 @@ class EquipmentController extends Controller
                 ->withInput();
         }
 
-
         $equipment = new Equipment();
         if ($request->file('equip_image')) {
             // Get Image File
@@ -220,22 +211,20 @@ class EquipmentController extends Controller
             $equipment->image_url = $path;
 
         }
-
         $equipment->description = $request->description;
         $equipment->equipment_type_id = $request->equipment_type;
         $equipment->equipment_model_id = $request->models_select;
-        if(!$this->ValidateSerialNumber($request->serial_number))
-            return redirect('equip-management/equipments')->with('error','Número de Série já existe');
-        $equipment->serial_number = $request->serial_number;
+        if($request->serial_number != ""){
+            if(!$this->ValidateSerialNumber($request->serial_number)){
+                return redirect('equip-management/equipments')->with('error','Número de Série já existe');
+            }else{
+                $equipment->serial_number = $request->serial_number;
+            }
+        }
         $equipment->obs = $request->obs;
         $equipment->reference = $request->reference ?? $this->GenerateReference();
         $equipment->save();
-
-
-
-
         return redirect('/equip-management/equipments')->with('success','Equipamento criada com sucesso!');
-
     }
 
 
@@ -277,24 +266,6 @@ class EquipmentController extends Controller
      */
     public function show(Request $request)
     {
-        /*$this->validate($request, [
-            'description' => 'required',
-            'reference' => 'required',
-            'description' => 'required',
-            'equipment_type_id' => 'required',
-            'equipment_model_id' => 'required'
-        ]);
-
-        $equipment= new Equipment();
-        $equipment->description = $request->description;
-        $equipment->serial_number = $request->serial_number;
-        $equipment->equipment_type_id = $request->equipment_type_id;
-        $equipment->equipment_model_id = $request->equipment_model_id;
-        $equipment->reference = $request->reference;
-        $equipment->obs = $request->obs;
-        $equipment->save();
-
-        return redirect('equip-management/equipments')->with('success','Equipamento criado com sucesso!');*/
     }
 
     /**

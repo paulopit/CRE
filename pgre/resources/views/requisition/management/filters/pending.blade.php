@@ -2,7 +2,9 @@
 
 @section('title', 'GRE - Requisições por Aprovar')
 
+
 @section('content_header')
+    <div class="mt-3"></div>
 @stop
 
 
