@@ -293,8 +293,12 @@ return [
         // Navbar items:
         [
             'type'         => 'navbar-search',
-            'text'         => 'search',
+            'text'         => 'Tag Requisição',
             'topnav_right' => true,
+            'url'          => 'navbar/search', // The url used to submit the data ('#' by default).
+            'method'       => 'post',          // 'get' or 'post' ('get' by default).
+            'input_name'   => 'searchVal',     // Name for the underlying input ('adminlteSearch' by default).
+            'id'           => 'navbarSearch'
         ],
         [
             'type'         => 'fullscreen-widget',
@@ -303,8 +307,12 @@ return [
 
         // Sidebar items:
         [
-            'type' => 'sidebar-menu-search',
-            'text' => 'search',
+            'type' => 'sidebar-custom-search',
+            'text' => 'Tag Requisição',
+            'url'        => 'navbar/search', // The url used to submit the data ('#' by default).
+            'method'     => 'post',           // 'get' or 'post' ('get' by default).
+            'input_name' => 'searchVal',      // Name for the underlying input ('adminlteSearch' by default).
+            'id'         => 'sidebarSearch'
         ],
         [
             'header' => 'AS MINHAS REQUISIÇÕES',

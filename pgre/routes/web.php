@@ -130,7 +130,11 @@ Route::group(['middleware' => 'auth'], function () {
     Route::post('/equip-management/equipment/add', 'EquipmentController@add')->name('add_req_equipment');
     Route::post('/equip-management/equipment/remove/{line}', 'EquipmentController@remove')->name('remove_req_equipment');
 
-
+    Route::match(
+        ['get', 'post'],
+        '/navbar/search',
+        'SearchController@showNavbarSearchResults'
+    );
 });
 
 

@@ -192,7 +192,6 @@ class EquipmentController extends Controller
             'models_select' => 'required',
         ]);
 
-
         if ($validator->fails()) {
             return redirect('equip-management/brands')
                 ->with('errorForm', $validator->errors()->getMessages())
@@ -209,7 +208,6 @@ class EquipmentController extends Controller
             $path = $request->file('equip_image')->storeAs('images/equipment' , $imageName, 'public');
             //Save Image Path
             $equipment->image_url = $path;
-
         }
         $equipment->description = $request->description;
         $equipment->equipment_type_id = $request->equipment_type;
@@ -226,7 +224,6 @@ class EquipmentController extends Controller
         $equipment->save();
         return redirect('/equip-management/equipments')->with('success','Equipamento criada com sucesso!');
     }
-
 
 
     public function add(Request $request){

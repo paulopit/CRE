@@ -4,14 +4,16 @@
 
 @section('content_header')
     <div class="mt-3">
-        @component('components.alerts')
-        @endcomponent
+                @component('components.alerts')
+                @endcomponent
     </div>
+
+
 @stop
 
 @section('content')
+    @include('sweetalert::alert')
     <div class="row">
-        @include('sweetalert::alert')
     @if (Auth::user()->can('front-permission'))
             <div class="col-lg-3">
                 <x-adminlte-small-box title="{{count(Auth::user()->requisitions)}}" text="Total" icon="fas fa-ticket-alt text-white"
@@ -55,8 +57,9 @@
             </div>
             @endif
     </div>
-
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 @stop
+
 
 @section('css')
     <link rel="stylesheet" href="/css/admin_custom.css">

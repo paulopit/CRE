@@ -76,6 +76,14 @@ class User extends Authenticatable
         return $tech;
     }
 
+    public function isManager()
+    {
+        $manager = false;
+        if(Auth::user() &&  Auth::user()->user_type_id < 3)
+            $manager = true;
+        return $manager;
+    }
+
     public function isAutenticated()
     {
         return Auth::user();
