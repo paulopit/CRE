@@ -17,6 +17,7 @@ class AppConfigSeeder extends Seeder
                 'conf_low_stock_percentage' => 10,
                 'conf_default_req_days' => 5,
                 'conf_default_expire_minutes' => 30,
+                'conf_api_key'=> Str::random(30),
                 'created_at' => now(),
                 'updated_at' => now()
             ]);

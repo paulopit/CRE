@@ -9,7 +9,7 @@ use Illuminate\Http\Request;
 
 class AlertController extends Controller
 {
-    private function Check_expired_requisitions(){
+    public static function Check_expired_requisitions(){
         $expired_requisitions = Requisition::where('end_date', '<', now())
                                 ->where('level_id',4) //4 - Requisitado
                                 ->get();
