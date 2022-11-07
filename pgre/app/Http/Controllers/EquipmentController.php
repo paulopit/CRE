@@ -222,7 +222,7 @@ class EquipmentController extends Controller
         $equipment->obs = $request->obs;
         $equipment->reference = $request->reference ?? $this->GenerateReference();
         $equipment->save();
-        return redirect('/equip-management/equipments')->with('success','Equipamento criada com sucesso!');
+        return redirect('/equip-management/equipments')->with('success','Equipamento criado com sucesso!');
     }
 
 
