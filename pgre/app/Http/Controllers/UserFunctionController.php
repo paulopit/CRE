@@ -95,6 +95,9 @@ class UserFunctionController extends Controller
     public function destroy(User_function $user_function)
     {
         $user_function = User_function::find($user_function->id);
+        if(count($user_function->users) > 0){
+            return redirect('user-management/functions')->with('error','Este registo está associado a um ou mais utilizadores, não é possivel apagar!');
+        }
         $user_function->delete();
         return redirect('user-management/functions')->with('success','Função eliminada com sucesso!');
     }

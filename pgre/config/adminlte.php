@@ -292,8 +292,7 @@ return [
     'menu' => [
         // Navbar items:
         [
-            'type'         => 'navbar-search',
-            'text'         => 'Tag Requisição',
+            'type'         => 'navbar',
             'topnav_right' => true,
             'url'          => 'navbar/search', // The url used to submit the data ('#' by default).
             'method'       => 'post',          // 'get' or 'post' ('get' by default).

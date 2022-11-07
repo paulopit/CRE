@@ -3,6 +3,8 @@
 @section('title', 'GRE - Tipos Utilizadores')
 
 @section('content_header')
+    <div class="mb-3">
+    </div>
 @stop
 
 @component('user.types.modal.add')

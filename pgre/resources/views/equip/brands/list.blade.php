@@ -3,6 +3,8 @@
 @section('title', 'GRE - Marcas')
 
 @section('content_header')
+    <div class="mb-3">
+    </div>
 @stop
 
 @component('equip.brands.modal.add')

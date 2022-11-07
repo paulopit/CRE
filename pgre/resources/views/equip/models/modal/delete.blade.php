@@ -1,7 +1,7 @@
-<div class="modal fade" id="delete_equip_model_{{$model->id}}">
+<div class="modal fade" id="delete_equip_model_{{$equipment_model->id}}">
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
-            <form action="{{url('/equip-management/models/' . $model->id)}}" method="POST" style="display: inline-block";>
+            <form action="{{url('/equip-management/models/' . $equipment_model->id)}}" method="POST" style="display: inline-block";>
                 @csrf
                 @method('DELETE')
                 <div class="modal-header">

@@ -3,6 +3,8 @@
 @section('title', 'GRE - Equipamentos')
 
 @section('content_header')
+    <div class="mb-3">
+    </div>
 @stop
 
 @component('equip.management.modal.add', ['brands' => $brands, 'equipment_models' => $equipment_models, 'equipment_types' => $equipment_types])
