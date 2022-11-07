@@ -12,7 +12,7 @@
 
 
                 <div class="modal-body">
-                    <x-adminlte-input name="reference" label="Reference" placeholder="Reference" value="" fgroup-class="col-md-12">
+                    <x-adminlte-input name="reference" label="Referencia" placeholder="Reference" value="" fgroup-class="col-md-12">
                         <x-slot name="prependSlot">
                             <div class="input-group-text">
                                 <i class="fas fa-solid fa-hashtag text-lightblue"></i>
@@ -31,7 +31,7 @@
 
 
 
-                    <x-adminlte-input name="serial_number" label="Nº Série" placeholder="Serial Number" value="" fgroup-class="col-md-12">
+                    <x-adminlte-input name="serial_number" label="Nº Série" placeholder="Nº Série" value="" fgroup-class="col-md-12">
                         <x-slot name="prependSlot">
                             <div class="input-group-text">
                                 <i class="fas fa-solid fa-fingerprint text-lightblue"></i>

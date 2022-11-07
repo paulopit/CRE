@@ -12,18 +12,26 @@
 
                     <img class="w-100 img-responsive" src="{{ asset('storage/'.$equipment->image_url) }}" alt="" title="">
 
-                    <x-adminlte-input name="serial_number" label="Nº Série" placeholder="Serial Number" value="{{$equipment->serial_number}}" fgroup-class="col-md-12" disabled="">
-                        <x-slot name="prependSlot">
-                            <div class="input-group-text">
-                                <i class="fas fa-solid fa-fingerprint text-lightblue"></i>
-                            </div>
-                        </x-slot>
-                    </x-adminlte-input>
-
                     <x-adminlte-input name="reference" label="Referência" placeholder="Marca" value="{{$equipment->reference}}" fgroup-class="col-md-12" disabled="">
                         <x-slot name="prependSlot">
                             <div class="input-group-text">
                                 <i class="fas fa-hashtag text-lightblue"></i>
+                            </div>
+                        </x-slot>
+                    </x-adminlte-input>
+
+                    <x-adminlte-input name="description" label="Descrição" placeholder="Descrição" value="{{$equipment->description}}" fgroup-class="col-md-12" disabled="">
+                        <x-slot name="prependSlot">
+                            <div class="input-group-text">
+                                <i class="fas fa-hashtag text-lightblue"></i>
+                            </div>
+                        </x-slot>
+                    </x-adminlte-input>
+
+                    <x-adminlte-input name="serial_number" label="Nº Série" placeholder="Nº Série" value="{{$equipment->serial_number}}" fgroup-class="col-md-12" disabled="">
+                        <x-slot name="prependSlot">
+                            <div class="input-group-text">
+                                <i class="fas fa-solid fa-fingerprint text-lightblue"></i>
                             </div>
                         </x-slot>
                     </x-adminlte-input>
