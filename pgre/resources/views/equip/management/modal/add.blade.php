@@ -12,7 +12,7 @@
 
 
                 <div class="modal-body">
-                    <x-adminlte-input name="reference" label="Referencia" placeholder="Reference" value="" fgroup-class="col-md-12">
+                    <x-adminlte-input name="reference" label="Referencia" placeholder="Referencia" value="" fgroup-class="col-md-12">
                         <x-slot name="prependSlot">
                             <div class="input-group-text">
                                 <i class="fas fa-solid fa-hashtag text-lightblue"></i>

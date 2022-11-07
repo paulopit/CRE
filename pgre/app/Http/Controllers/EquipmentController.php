@@ -193,7 +193,7 @@ class EquipmentController extends Controller
         ]);
 
         if ($validator->fails()) {
-            return redirect('equip-management/brands')
+            return redirect('equip-management/equipments')
                 ->with('errorForm', $validator->errors()->getMessages())
                 ->withInput();
         }

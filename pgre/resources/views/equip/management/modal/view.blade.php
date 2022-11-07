@@ -9,9 +9,13 @@
                 </div>
                 <div class="modal-body">
 
-
-                    <img class="w-100 img-responsive" src="{{ asset('storage/'.$equipment->image_url) }}" alt="" title="">
-
+                    <div class="row">
+                        <div class="text-center col-md-12">
+                            @if(isset($equipment->image_url))
+                                <img class="profile-user-img img-responsive w-50" src="{{asset('storage/'.$equipment->image_url) }}" alt="User profile picture">
+                            @endif
+                        </div>
+                    </div>
                     <x-adminlte-input name="reference" label="Referência" placeholder="Marca" value="{{$equipment->reference}}" fgroup-class="col-md-12" disabled="">
                         <x-slot name="prependSlot">
                             <div class="input-group-text">
@@ -61,16 +65,16 @@
                     {{$equipment->equipment_images}}
                     <div class="col-md-12">
                         @if($equipment->status_ok)
-                            <x-adminlte-input-switch label="Estado" data-on-text="Ok" data-off-text="NoK" name="status_ok" data-on-color="lightblue" data-off-color="secondary" checked disabled/>
+                            <x-adminlte-input-switch label="Estado" data-on-text="Ok" data-off-text="NoK" name="status_ok_{{$equipment->id}}" data-on-color="lightblue" data-off-color="secondary" checked disabled/>
                         @else
-                            <x-adminlte-input-switch label="Estado" data-on-text="Ok" data-off-text="NoK" name="status_ok" data-on-color="lightblue" data-off-color="secondary" disabled=""/>
+                            <x-adminlte-input-switch label="Estado" data-on-text="Ok" data-off-text="NoK" name="status_ok_{{$equipment->id}}" data-on-color="lightblue" data-off-color="secondary" disabled=""/>
                         @endif
                     </div>
                     <div class="col-md-12">
                         @if($equipment->in_stock)
-                            <x-adminlte-input-switch label="Stock" data-on-text="Yes" data-off-text="No" name="in_stock" data-on-color="lightblue" data-off-color="secondary" checked disabled/>
+                            <x-adminlte-input-switch label="Stock" data-on-text="Sim" data-off-text="Não" name="in_stock_{{$equipment->id}}" data-on-color="lightblue" data-off-color="secondary" checked disabled/>
                         @else
-                            <x-adminlte-input-switch label="Stock" data-on-text="Yes" data-off-text="No" name="in_stock" data-on-color="lightblue" data-off-color="secondary" disabled=""/>
+                            <x-adminlte-input-switch label="Stock" data-on-text="Sim" data-off-text="Não" name="in_stock_{{$equipment->id}}" data-on-color="lightblue" data-off-color="secondary" disabled=""/>
                         @endif
                     </div>
 

@@ -28,7 +28,6 @@
                     @php
                         $header = [
 
-                            ['label' => 'ID','width' => 2],
                             ['label' => 'Referencia','width' => 10],
                             ['label' => 'Descrição','width' => 25],
                             ['label' => 'Serial Number','width' => 10],
@@ -50,7 +49,6 @@
                     <x-adminlte-datatable id="equip_brands" :heads="$header" theme="light" head-theme="dark" striped hoverable with-buttons>
                         @foreach($equipments as $equipment)
                             <tr>
-                                <td>{{$equipment->id}}</td>
                                 <td>{{$equipment->reference}}</td>
                                 <td>{{$equipment->description}}</td>
                                 <td>{{$equipment->serial_number}}</td>
