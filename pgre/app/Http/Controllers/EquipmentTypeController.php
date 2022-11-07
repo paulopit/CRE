@@ -14,7 +14,7 @@ class EquipmentTypeController extends Controller
      * @return \Illuminate\Http\Response
      */
 
-    public function create_type($type_name)
+    public function create_type($type_name) //usado para importação via excel
     {
         if(trim($type_name) == "")
             return 1;
@@ -34,7 +34,6 @@ class EquipmentTypeController extends Controller
     {
         $equipment_types = Equipment_type::all();
         return view('equip.types.list', ['equipment_types' => $equipment_types]);
-
     }
 
     /**
@@ -56,22 +55,25 @@ class EquipmentTypeController extends Controller
     public function store(Request $request)
     {
         $validator = Validator::make($request->all(), [
-            'type_name' => 'required'
+            'type' => 'required'
         ]);
 
-
         if ($validator->fails()) {
-            return redirect('equip-management/brands')
+            return redirect('equip-management/types')
                 ->with('errorForm', $validator->errors()->getMessages())
                 ->withInput();
         }
 
+        //Valida se já existe um tipo igual
+        $validate_rec = Equipment_type::where('type', $request->type)->first();
+        if(isset($validate_rec))
+            return redirect('/equip-management/types')->with('error','Já existe um registo com o tipo ' . $request->type .'!');
 
         $equipment_type = new Equipment_type();
-        $equipment_type->type       = $request->type_name;
+        $equipment_type->type = $request->type;
         $equipment_type->save();
 
-        return redirect('/equip-management/types')->with('success','Tipo de Equipamento criada com sucesso!');
+        return redirect('/equip-management/types')->with('success','Tipo de Equipamento criado com sucesso!');
     }
 
     /**
@@ -107,13 +109,16 @@ class EquipmentTypeController extends Controller
     {
         $this->validate($request, [
             'type_name' => 'required',
-
         ]);
 //        dd($type);
+
+        //Valida se já existe um tipo igual
+        $validate_rec = Equipment_type::where('type', $request->type_name)->first();
+        if(isset($validate_rec))
+            return redirect('/equip-management/types')->with('error','Já existe um registo com o tipo ' . $request->type_name .'!');
+
         $equipment_type = Equipment_type::find($type->id);
         $equipment_type->type          = $request->type_name;
-
-
         $equipment_type->save();
 //        dd($equipment_type);
         return redirect('equip-management/types')->with('success','Tipo de equipamento editado com sucesso!');
@@ -125,8 +130,13 @@ class EquipmentTypeController extends Controller
      * @param  \App\Equipment_type  $equipment_type
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Equipment_type $equipment_type)
+    public function destroy(Equipment_type $type)
     {
-        //
+        $equip_type = Equipment_type::find($type->id);
+        if(count($equip_type->equipments) > 0){
+            return redirect('equip-management/types')->with('error','Este registo está associado a um ou mais equipamentos, não é possivel apagar!');
+        }
+        $equip_type->delete();
+        return redirect('equip-management/types')->with('success','Tipo de equipamento eliminado com sucesso!');
     }
 }

@@ -107,6 +107,8 @@ class UserTypeController extends Controller
             return redirect('user-management/types')->with('error','Este registo é nativo da aplicação, não pode ser apagado!');
         }else{
             $user_type = User_type::find($user_type->id);
+            if(count($user_type->users) > 0)
+                return redirect('user-management/types')->with('error','Este registo está associado a um ou mais utilizadores, não é possivel apagar!');
             $user_type->delete();
             return redirect('user-management/types')->with('success','Função eliminada com sucesso!');
         }

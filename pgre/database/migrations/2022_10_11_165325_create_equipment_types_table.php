@@ -15,7 +15,7 @@ class CreateEquipmentTypesTable extends Migration
     {
         Schema::create('equipment_types', function (Blueprint $table) {
             $table->id();
-            $table->string('type');
+            $table->string('type')->unique();
             $table->timestamps();
         });
     }

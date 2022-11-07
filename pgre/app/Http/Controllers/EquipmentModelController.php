@@ -113,13 +113,17 @@ class EquipmentModelController extends Controller
      */
     public function store(Request $request)
     {
+
         $validator = Validator::make($request->all(), [
-            'model_name' => 'required'
+            'model_name' => 'required',
+            'brand' => 'required'
         ]);
 
 
+
+
         if ($validator->fails()) {
-            return redirect('equip-management/brands')
+            return redirect('equip-management/models')
                 ->with('errorForm', $validator->errors()->getMessages())
                 ->withInput();
         }
@@ -130,7 +134,7 @@ class EquipmentModelController extends Controller
         $equipment_models->brand_id     = $request->brand;
         $equipment_models->save();
 
-        return redirect('equip-management/models')->with('success','Modelo criada com sucesso!');
+        return redirect('equip-management/models')->with('success','Modelo criado com sucesso!');
     }
 
     /**
@@ -162,14 +166,14 @@ class EquipmentModelController extends Controller
      * @param  \App\Equipment_model  $equipment_model
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Equipment_model $model)
+    public function update(Request $request, Equipment_model $equipment_model)
     {
         $this->validate($request, [
             'model_name' => 'required',
 
         ]);
 //        dd($model);
-        $equipment_model = Equipment_model::find($model->id);
+        $equipment_model = Equipment_model::find($equipment_model->id);
         $equipment_model->name          = $request->model_name;
         $equipment_model->brand_id      = $request->brand;
 
@@ -186,6 +190,12 @@ class EquipmentModelController extends Controller
      */
     public function destroy(Equipment_model $equipment_model)
     {
-        //
+        if(count($equipment_model->equipments) == 0){
+            $equipment_model->delete();
+            return redirect('equip-management/models')->with('success','Modelo eliminado com sucesso!');
+        }else{
+            return redirect('equip-management/models')->with('error','Modelo não pode ser eliminado pois está associado a um ou mais equipamentos!');
+        }
+
     }
 }

@@ -3,7 +3,8 @@
 @section('title', 'GRE - Modelos de Equipamentos')
 
 @section('content_header')
-
+    <div class="mb-3">
+    </div>
 @stop
 
 @component('equip.models.modal.add', ['brands' => $brands, 'equipment_models' => $equipment_models])
@@ -26,7 +27,7 @@
                     @php
                         $header = [
                             'ID',
-                            ['label' => 'Nome','width' => 50],
+                            ['label' => 'Modelo','width' => 50],
                             ['label' => 'Marca','width' => 50],
                             ['label' => 'Ações', 'no-export' => false, 'width' => 5],
                         ];
@@ -50,9 +51,9 @@
                                         @component('equip.models.modal.edit', ['equipment_model' => $equipment_model, 'brands' => $brands])
                                         @endcomponent
                                         <a href="" class="btn btn-xs btn-default text-primary mx-1 shadow table-btn" title="Edit" data-toggle="modal" data-target='#edit_equip_model_{{$equipment_model->id}}' data-id=""> <i class="fa fa-lg fa-fw fa-pen"></i> </a>
-{{--                                        @component('equip.models.modal.delete', ['model' => $model])--}}
-{{--                                        @endcomponent--}}
-{{--                                        <a href="" class="btn btn-xs btn-default text-danger mx-1 shadow table-btn" title="Delete" data-toggle="modal" data-target='#delete_equip_model_{{$model->id}}' data-id=""><i class="fa fa-lg fa-fw fa-trash"></i></a>--}}
+                                        @component('equip.models.modal.delete', ['equipment_model' => $equipment_model])
+                                        @endcomponent
+                                        <a href="" class="btn btn-xs btn-default text-danger mx-1 shadow table-btn" title="Delete" data-toggle="modal" data-target='#delete_equip_model_{{$equipment_model->id}}' data-id=""><i class="fa fa-lg fa-fw fa-trash"></i></a>
                                         @component('equip.models.modal.view', ['equipment_model' => $equipment_model, 'brands' => $brands])
                                         @endcomponent
                                         <a href="" class="btn btn-xs btn-default text-teal mx-1 shadow table-btn" title="View" data-toggle="modal" data-target='#view_equip_model_{{$equipment_model->id}}' data-id=""> <i class="fa fa-lg fa-fw fa-eye"></i> </a>

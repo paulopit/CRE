@@ -114,7 +114,5 @@ class BrandController extends Controller
         }else{
             return redirect('equip-management/brands')->with('error','Marca não pode ser eliminada pois contem modelos associados!');
         }
-
-
     }
 }

@@ -3,7 +3,8 @@
 @section('title', 'GRE - Modelos de Equipamentos')
 
 @section('content_header')
-
+    <div class="mb-3">
+    </div>
 @stop
 
 @component('equip.types.modal.add', ['equipment_types' => $equipment_types])
@@ -22,8 +23,7 @@
                 <div class="card-body">
                     @php
                         $header = [
-                            'ID',
-                            ['label' => 'Tipo','width' => 100],
+                            ['label' => 'Tipo Equipamento','width' => 100],
                             ['label' => 'Ações', 'no-export' => false, 'width' => 5],
                         ];
 
@@ -38,16 +38,15 @@
                     <x-adminlte-datatable id="type_model" :heads="$header" theme="light" head-theme="dark" striped hoverable with-buttons>
                         @foreach($equipment_types as $equipment_type)
                             <tr>
-                                <td>{{$equipment_type->id}}</td>
                                 <td>{{$equipment_type->type}}</td>
                                 <td>
                                     <nobr>
                                         @component('equip.types.modal.edit', ['equipment_type' => $equipment_type, 'equipment_types' => $equipment_types])
                                         @endcomponent
                                         <a href="" class="btn btn-xs btn-default text-primary mx-1 shadow table-btn" title="Edit" data-toggle="modal" data-target='#edit_type_equip_{{$equipment_type->id}}' data-id=""> <i class="fa fa-lg fa-fw fa-pen"></i> </a>
-                                        {{--                                        @component('equip.models.modal.delete', ['model' => $model])--}}
-                                        {{--                                        @endcomponent--}}
-                                        {{--                                        <a href="" class="btn btn-xs btn-default text-danger mx-1 shadow table-btn" title="Delete" data-toggle="modal" data-target='#delete_equip_model_{{$model->id}}' data-id=""><i class="fa fa-lg fa-fw fa-trash"></i></a>--}}
+                                        @component('equip.types.modal.delete', ['equipment_type' => $equipment_type])
+                                        @endcomponent
+                                        <a href="" class="btn btn-xs btn-default text-danger mx-1 shadow table-btn" title="Delete" data-toggle="modal" data-target='#delete_type_equip_{{$equipment_type->id}}' data-id=""><i class="fa fa-lg fa-fw fa-trash"></i></a>
                                         @component('equip.types.modal.view', ['equipment_types' => $equipment_types, 'equipment_type' => $equipment_type])
                                         @endcomponent
                                         <a href="" class="btn btn-xs btn-default text-teal mx-1 shadow table-btn" title="View" data-toggle="modal" data-target='#view_type_equip_{{$equipment_type->id}}' data-id=""> <i class="fa fa-lg fa-fw fa-eye"></i> </a>
