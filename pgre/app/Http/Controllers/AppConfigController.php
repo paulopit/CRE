@@ -71,6 +71,7 @@ class AppConfigController extends Controller
     public function update(Request $request)
     {
         $app_config = App_config::find(1);
+        $app_config->conf_api_key = $request->conf_api_key;
         $app_config->conf_alert_emails = $request->conf_alert_emails;
         $app_config->conf_low_stock_percentage = $request->conf_low_stock_value;
         $app_config->conf_default_req_days = $request->conf_default_req_days;

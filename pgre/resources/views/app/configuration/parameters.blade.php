@@ -4,12 +4,11 @@
 
 @section('content_header')
     <div class="mb-3">
-        @component('components.alerts')
-        @endcomponent
     </div>
 @stop
 
 @section('content')
+    @include('sweetalert::alert')
     <div class="">
         <div class="col-lg-12">
             <div class="card card-secondary">
@@ -22,6 +21,17 @@
                         @method('PUT')
                         <div class="row">
                             <div class="col-lg-6">
+                                <div class="row">
+                                    <div class="col-lg-6">
+                                        <x-adminlte-input name="conf_api_key" label="Chave API" placeholder="Chave API" value="{{$app_config->conf_api_key}}" fgroup-class="col-md-12">
+                                            <x-slot name="prependSlot">
+                                                <div class="input-group-text">
+                                                    <i class="fas fa-network-wired text-lightblue"></i>
+                                                </div>
+                                            </x-slot>
+                                        </x-adminlte-input>
+                                    </div>
+                                </div>
                                 <div class="row">
                                     <div class="col-lg-6">
                                         <x-adminlte-input name="conf_alert_emails" label="Email Alertas" placeholder="Email Alertas" value="{{$app_config->conf_alert_emails}}" fgroup-class="col-md-12">

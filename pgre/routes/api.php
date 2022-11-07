@@ -18,8 +18,14 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::post('/requisitions/all', 'ApiController@requisitions_all');
 Route::get('/alerts', 'ApiController@alerts');
+Route::post('/requisitions', 'ApiController@requisitions_list');
+Route::post('/requisitions/Tag', 'ApiController@requisitions_tag');
+
+
+Route::post('/models/add', 'ApiController@models_create');
+
+
 
 
 

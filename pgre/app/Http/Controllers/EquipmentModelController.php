@@ -33,10 +33,10 @@ class EquipmentModelController extends Controller
         return response()->download(storage_path('app\public\templates\import_models_template.xlsx'));
     }
 
-    public function create_model($brand, $model)
+    public static function create_model($brand, $model)
     {
-        if(trim($brand) == "" || trim($model) == "")
-            return 1;
+//        if(trim($brand) == "" || trim($model) == "")
+//            return 1;
         $brand_id = Brand::where('name', $brand)->pluck('id')->first();
         if($brand_id == null){ //criar marca
             $new_brand = new Brand();
