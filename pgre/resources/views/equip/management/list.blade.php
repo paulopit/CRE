@@ -68,8 +68,8 @@
                                     <nobr>
                                         @component('equip.management.modal.edit', ['equipment' => $equipment, 'brands' => $brands, 'equipment_models' => $equipment_models, 'equipment_types' => $equipment_types])
                                         @endcomponent
-                                        <a href="" class="btn btn-xs btn-default text-primary mx-1 shadow table-btn" title="Edit" data-toggle="modal" data-target='#edit_equip{{$equipment->id}}' data-id=""> <i class="fa fa-lg fa-fw fa-pen"></i> </a>
-                                        @component('equip.management.modal.view', ['equipment' => $equipment])
+                                        <a href="" class="btn btn-xs btn-default text-primary mx-1 shadow table-btn" title="Edit" data-toggle="modal" data-target='#edit_equip_{{$equipment->id}}' data-id=""> <i class="fa fa-lg fa-fw fa-pen"></i> </a>
+                                        @component('equip.management.modal.view', ['equipment' => $equipment, 'equipment_models' => $equipment_models])
                                         @endcomponent
                                         <a href="" class="btn btn-xs btn-default text-teal mx-1 shadow table-btn" title="View" data-toggle="modal" data-target='#view_equip_info_{{$equipment->id}}' data-id=""> <i class="fa fa-lg fa-fw fa-eye"></i> </a>
                                     </nobr>

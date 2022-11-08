@@ -9,8 +9,8 @@ use App\Equipment_type;
 use App\Requisition_line;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Validator;
 use Maatwebsite\Excel\Facades\Excel;
 
 class EquipmentController extends Controller
@@ -290,6 +290,20 @@ class EquipmentController extends Controller
         ]);
         //validar serials repetidos ou referencias
         $equipment = Equipment::find($equipment->id);
+
+        if ($request->file('equip_image')) {
+
+            Storage::delete('public/'.$equipment->image_url);
+            // Get Image File
+            $imagePath = $request->file('equip_image');
+            // Define Image Name
+            $imageName = $request->reference . '' . time() . '' . $imagePath->getClientOriginalName();
+            // Save Image on Storage
+            $path = $request->file('equip_image')->storeAs('images/equipment' , $imageName, 'public');
+            //Save Image Path
+            $equipment->image_url = $path;
+        }
+
         $equipment->description = $request->equip_description;
         if(!$this->ValidateSerialNumber($request->equip_serialnumber, $equipment->id))
             return redirect('equip-management/equipments')->with('error','Número de Série já existe');
@@ -300,6 +314,7 @@ class EquipmentController extends Controller
         $equipment->reference = $request->equip_reference;
         $equipment->obs = $request->equip_obs;
         $equipment->save();
+
         return redirect('equip-management/equipments')->with('success','Equipamento editado com sucesso!');
     }
 
