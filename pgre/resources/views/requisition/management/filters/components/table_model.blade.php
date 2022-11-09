@@ -22,7 +22,8 @@
         <tr>
             <td>{{$req->requested_at}}</td>
             <td>{{$req->tag}}</td>
-            <td>{{$req->requisition_level->name}}</td>
+
+            <td>@if (!$req->isExpired()) {{$req->requisition_level->name}} @else <span class="badge bg-danger p-2">Expirado</span> @endif</td>
             <td>{{$req->request_user->name}}</td>
             <td>{{$req->course}}</td>
             <td>{{$req->class}}</td>

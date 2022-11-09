@@ -3,7 +3,9 @@
 @section('title', 'GRE - Detalhe requisição ')
 
 @section('content_header')
-
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Black+Ops+One&display=swap" rel="stylesheet">
 @stop
 
 @section('content')
@@ -22,8 +24,8 @@
 
                 <div class="card-body">
                         <div class="row">
-
-                            @if($req_details->level_id == 4)
+                        @if ($req_details->isExpired())   <p class="rubber"> Expirado </p> @endif
+                        @if($req_details->level_id == 4)
                                 <x-adminlte-input name="picked_up_date" label="Data levantamento" placeholder="" value="{{$req_details->picked_up_at}}" fgroup-class="col-md-6" disabled="disabled">
                                     <x-slot name="prependSlot">
                                         <div class="input-group-text">

@@ -8,6 +8,14 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 class Requisition extends Model
 {
     use SoftDeletes;
+
+    public function isExpired(){
+        $expired = false;
+        if($this->level_id == 4 && $this->end_date < now())
+            $expired = true;
+        return $expired;
+    }
+
     public function users()
     {
         return $this->hasMany(User::class);
