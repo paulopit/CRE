@@ -19,7 +19,7 @@ class AlertController extends Controller
             $email_params = [
                 'title' => 'Prazo de devolução de requisição expirado',
                 'subject' => 'Requisição - '. $requisition->tag,
-                'body' => 'Olá ' . $requisition->request_user->name . 'A sua requisição encontra-se expirada desde ' .$requisition->end_date .' ! Proceda à sua devolução assim que possivel.' ,
+                'body' => 'Olá ' . $requisition->request_user->name . ', a sua requisição encontra-se expirada desde ' .$requisition->end_date .' ! Proceda à sua devolução assim que possivel.' ,
                 'link-url'=> env('APP_URL') .'/requisitions/details/' . $requisition->id,
                 'link-text' =>'Visualizar'
             ];
