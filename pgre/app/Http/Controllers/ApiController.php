@@ -8,7 +8,6 @@ use App\Equipment_model;
 use App\Requisition;
 use Exception;
 use Illuminate\Http\Request;
-use stdClass;
 
 class ApiController extends Controller
 {

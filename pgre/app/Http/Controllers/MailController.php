@@ -19,15 +19,27 @@ class MailController extends Controller
         Mail::to('salter.sfernandes@gmail.com')->send(new MailSender($details));
     }
 
-    public static function SendEmail($to, $subject, $title, $body){
-        $details = [
-            'title' => $title,
-            'body' => $body
-        ];
-        Mail::to($to)->send(new MailSender($subject,$details));
+    public static function SendEmail($to, $params,$bcc_admin = false){
+        $bcc = array();
+
+        if($bcc_admin){
+            $AppConfiguration = App_config::GetAppConfig();
+            if($AppConfiguration->conf_alert_emails_check && $AppConfiguration->conf_alert_emails != null && $AppConfiguration->conf_alert_emails != ""){
+                array_push($bcc,$AppConfiguration->conf_alert_emails);
+            }else{
+                $tech_users = User::where('user_type_id',2)->get();
+                foreach($tech_users as $user){
+                    if($user->email != null && $user->email != "")
+                    {
+                        array_push($bcc,$user->email);
+                    }
+                }
+            }
+        }
+        Mail::to($to)->bcc($bcc ?: [])->send(new MailSender($params['subject'],$params));
     }
 
-    public static function SendAdministrationEmail($subject,$title,$body){
+    public static function SendAdministrationEmail($params){
 
         $to = array();
         $AppConfiguration = App_config::GetAppConfig();
@@ -43,11 +55,8 @@ class MailController extends Controller
                 }
             }
         }
-        $details = [
-            'title' => $title,
-            'body' => $body
-        ];
-        Mail::to($to)->send(new MailSender($subject,$details));
+
+        Mail::to($to)->send(new MailSender($params['subject'],$params));
     }
 
 

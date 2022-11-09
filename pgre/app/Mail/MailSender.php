@@ -31,6 +31,6 @@ class MailSender extends Mailable
     public function build()
     {
         return $this->subject($this->subject)
-            ->view('emails.test_email',['details' => $this->details]);
+            ->view('emails.generic',['details' => $this->details]);
     }
 }
