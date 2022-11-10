@@ -33,6 +33,7 @@ class ApiController extends Controller
             return response()->json(['error' => 'Api_key is missing!'], 500);
         if(!$this->api_key_validation($request->Api_key))
             return response()->json(['error' => 'Invalid Api_key'], 500);
+
         $all_req = Requisition::with(['requisition_level:id,name', 'request_user:id,name','lines.equipment'])
                             ->where('level_id','!=',1)
                             ->get(); //ignorar as temporárias
@@ -57,7 +58,8 @@ class ApiController extends Controller
             return response()->json(['error' => 'Api_key is missing!'], 500);
         if(!$this->api_key_validation($request->Api_key))
             return response()->json(['error' => 'Invalid Api_key'], 500);
-        if(!isset($request->brand_name) || !isset($request->brand_name)){
+
+        if(!isset($request->brand_name) || !isset($request->model_name)){
             return response()->json(['error' => 'Brand or Model name is missing!'], 500);
         }
         $model_id = EquipmentModelController::create_model($request->brand_name,$request->model_name);
@@ -66,5 +68,9 @@ class ApiController extends Controller
                         ->first();
         return response()->json($model_info, 200);
     }
+
+    //Criar equipamentos completos
+
+
 
 }

@@ -367,6 +367,20 @@ class RequisitionController extends Controller
     }
 
 
+    public function extendRequisition(Request $request){
+        $req_record = Requisition::find($request->req_id);
+        $old_date = Carbon::parse($req_record->end_date);
+        $new_date = Carbon::parse($request->end_date);
+
+        //validar se a data pedida é superior a data existente
+        if($old_date->gt($new_date))
+            return redirect('/requisition-management/details/'. $request->req_id)->with('error','A nova data não pode ser inferior a data atual!');
+        $req_record->end_date = $request->end_date;
+        $req_record->save();
+        return redirect('/requisition-management/details/'. $request->req_id)->with('success','Prazo de entrega da requisição prolongado com sucesso!');
+    }
+
+
 
     public function index()
     {

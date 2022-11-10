@@ -33,18 +33,23 @@
 
 ## :rotating_light: To Do:
 
+- []
 
-- [ ] Seeds
+
+
+
+
+- [x] Seeds
 - [X] CRUD @Deivid
-- [ ] Página gestão de Marcas e Modelos
-- [ ] Página gestão de Equipamentos
-- [ ] Triggers envio de Emails.
-- [ ] Importação de equipamentos via ficheiro Excel
-- [ ] Webservice [Opcional]
-- [ ] Ajuste CSS
+- [x] Página gestão de Marcas e Modelos
+- [x] Página gestão de Equipamentos
+- [-] Triggers envio de Emails.
+- [x] Importação de equipamentos via ficheiro Excel
+- [-] Webservice [Opcional]
+- [-] Ajuste CSS
 - [ ] Testes Funcionais
 - [ ] Criar Documentação
-- [ ] Botão extender requisição [Opcional]
+- [x] Botão extender requisição [Opcional]
 
 ## :white_check_mark: Done:
 - [x] Middlewares @Paulo
@@ -75,7 +80,7 @@
 - [x] CRUD UserAccount @Sergio
 - [x] AppConfigSeeder @Sergio
 - [x] Página pedidos de requisições (FrontEnd User) @Sergio
-- [ ] Página gestão de requisições (BackEnd User) @Sergio
+- [x] Página gestão de requisições (BackEnd User) @Sergio
 
 
 
