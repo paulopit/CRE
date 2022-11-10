@@ -237,6 +237,7 @@ class EquipmentController extends Controller
         $equip = Equipment::find($request->equip_id);
         $equip->in_stock = false;
         $equip->save();
+        AlertController::check_low_stock($equip->reference);
         return response()->json('sucesso');
     }
 

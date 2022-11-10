@@ -73,12 +73,16 @@ class AppConfigController extends Controller
         $app_config = App_config::find(1);
         $app_config->conf_api_key = $request->conf_api_key;
         $app_config->conf_alert_emails = $request->conf_alert_emails;
-        $app_config->conf_low_stock_percentage = $request->conf_low_stock_value;
-        $app_config->conf_default_req_days = $request->conf_default_req_days;
-        $app_config->conf_default_expire_minutes = $request->conf_default_expire_minutes;
+        if(is_numeric($request->conf_low_stock_value) && $request->conf_low_stock_value <100 && $request->conf_low_stock_value > 0){
+            $app_config->conf_low_stock_percentage = $request->conf_low_stock_value;
+        }
+//        $app_config->conf_default_req_days = $request->conf_default_req_days;
+        if(is_numeric($request->conf_default_expire_minutes) && $request->conf_default_expire_minutes <10000 && $request->conf_default_expire_minutes > 0){
+            $app_config->conf_default_expire_minutes = $request->conf_default_expire_minutes;
+        }
         $app_config->conf_alert_emails_check = (boolean)json_decode(strtolower($request->conf_alert_emails_check)) ?? 0;
         $app_config->conf_low_stock_percentage_check = (boolean)json_decode(strtolower($request->conf_low_stock_check)) ?? 0;
-        $app_config->conf_default_req_days_check = (boolean)json_decode(strtolower($request->conf_default_req_days_check)) ?? 0;
+//        $app_config->conf_default_req_days_check = (boolean)json_decode(strtolower($request->conf_default_req_days_check)) ?? 0;
         $app_config->conf_default_expire_minutes_check = (boolean)json_decode(strtolower($request->conf_default_expire_minutes_check)) ?? 0;
         $app_config->save();
         return redirect('admin/app-config')->with('success','Configurações alteradas com sucesso!');

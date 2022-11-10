@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\App_config;
+use App\Equipment;
 use App\Requisition;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -39,6 +40,30 @@ class AlertController extends Controller
         }
     }
 
+    public static function check_low_stock($reference){
+        $AppConfiguration = App_config::GetAppConfig();
+        if(!$AppConfiguration->conf_low_stock_percentage_check) //se nao tiver checked para validar stock baixo
+            return false;
+        if($AppConfiguration->conf_low_stock_percentage == 0) //se nao percentagem 0 nao valida
+            return false;
+        $reference_total = Equipment::where('reference', $reference)->count();
+        $reference_in_stock = Equipment::where('reference', $reference)->where('in_stock',1) ->count();
+        if($reference_total == 0)
+            return false;
+        $perc_stock = ( $reference_in_stock / $reference_total) * 100 ;
+        if($perc_stock < $AppConfiguration->conf_low_stock_percentage){
+            $email_params = [
+                'title' => 'Alerta de stock baixo',
+                'subject' => 'Stock baixo da Referência  - '. $reference,
+                'body' => 'A referência  ' .$reference . ' encontra-se com stock baixo (' . $reference_in_stock . '/'. $reference_total .' un), abaixo do limite de alerta definido ('.$AppConfiguration->conf_low_stock_percentage .'%).' ,
+                'link-url'=> env('APP_URL') .'/equip-management/equipments',
+                'link-text' =>'Equipamentos'
+            ];
+            MailController::SendAdministrationEmail($email_params);
+            return true;
+        }
+        return false;
+    }
 
 
     public function check_alerts()
