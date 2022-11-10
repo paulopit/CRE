@@ -3,6 +3,7 @@
 @section('title', 'GRE - Requisições em Empréstimo')
 
 @section('content_header')
+    <div class="mt-3"></div>
 @stop
 
 @section('content')

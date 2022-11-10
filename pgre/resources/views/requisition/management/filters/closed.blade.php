@@ -3,7 +3,7 @@
 @section('title', 'GRE - Requisições Fechadas')
 
 @section('content_header')
-
+    <div class="mt-3"></div>
 @stop
 
 @section('content')

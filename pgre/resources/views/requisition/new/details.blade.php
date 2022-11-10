@@ -4,15 +4,11 @@
 
 @section('content_header')
     <div class="mb-3">
-        @component('components.alerts')
-        @endcomponent
     </div>
-    <x-adminlte-alert theme="success" id="success-alert" title="Sucesso" dismissable style="display:none">
-        <label>Requisição submetida com sucesso!</label>
-    </x-adminlte-alert>
 @stop
 
 @section('content')
+    @include('sweetalert::alert')
     <div class="">
         <div class="col-lg-12">
             <div class="card card-secondary">
