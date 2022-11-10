@@ -219,25 +219,40 @@
 
 
         function Submit_requisition(){
+            $("#submit_req").prop('disabled', true);
             var req_id = {{$temp_req->id}};
-            $.ajax({
-                type:'POST',
-                url:"{{ route('submit_req') }}",
-                data:{req_id:req_id, _token: '{{csrf_token()}}'},
-                success:function(data){
+            var user_id = $('#user_id').val();
+            Update_req_fields();
 
-                    Swal.fire({
-                        title: 'Sucesso!',
-                        text: 'Requisição criada com sucesso!',
-                        icon: 'success',
-                        confirmButtonText: 'Ok'
-                    }).then(function (result) {
-                        if (result.value) {
+            if(user_id == ""){
+                Swal.fire({
+                    title: 'Erro!',
+                    text: 'Tem de assignar a um utilizador!',
+                    icon: 'error',
+                    confirmButtonText: 'Ok'
+                }).then(function (result) {
+                    if (result.value) {
+                        return false;
+                    }
+                })
+            }else{
+                $.ajax({
+                    type:'POST',
+                    url:"{{ route('submit_req') }}",
+                    data:{req_id:req_id, _token: '{{csrf_token()}}'},
+                    success:function(data){
+
+                        Swal.fire({
+                            title: 'Sucesso!',
+                            text: 'Requisição criada com sucesso!',
+                            icon: 'success',
+                            confirmButtonText: 'Ok'
+                        }).then(function (result) {
                             location.reload();
-                        }
-                    })
-                }
-            });
+                        })
+                    }
+                });
+            }
         }
 
         function Update_req_fields(){
