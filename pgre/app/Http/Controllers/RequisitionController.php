@@ -287,8 +287,15 @@ class RequisitionController extends Controller
         $req_record->approved_by = $manager->id;
         $req_record->save();
 
+        $email_params = [
+            'title' => 'Requisição Aceite',
+            'subject' => 'Requisição - '. $req_record->tag,
+            'body' => 'Olá ' . $req_record->request_user->name . ', a sua requisição foi aceite! Pode proceder ao seu levantamento.' ,
+            'link-url'=> env('APP_URL') .'/requisitions/details/' . $request->req_id,
+            'link-text' =>'Visualizar'
+        ];
 
-        MailController::SendEmail($req_record->request_user->email,'GRE - Requisição '. $req_record->tag  , 'Requisição Aceite', 'A sua requisição foi aceite! Pode proceder a seu levantamento.');
+        MailController::SendEmail($req_record->request_user->email,$email_params);
 
         return redirect('/requisition-management/pending')->with('success','Requisição aprovada com sucesso!');
     }
@@ -303,7 +310,16 @@ class RequisitionController extends Controller
 
         $this->CancelRequisition($req_record, 7); //7 - Rejeitado
         $req_record->save();
-        MailController::SendEmail($req_record->request_user->email,'GRE - Requisição '. $req_record->tag  , 'Requisição Rejeitada', 'A sua requisição foi rejeitada!');
+
+        $email_params = [
+            'title' => 'Requisição Rejeitada',
+            'subject' => 'Requisição - '. $req_record->tag,
+            'body' => 'Olá ' . $req_record->request_user->name . ', a sua requisição foi rejeitada! Motivo: ' . $request->deny_rec_obs ,
+            'link-url'=> env('APP_URL') .'/requisitions/details/' . $request->req_id,
+            'link-text' =>'Visualizar'
+        ];
+
+        MailController::SendEmail($req_record->request_user->email,$email_params);
         return redirect('/requisition-management/pending')->with('success','Requisição rejeitada com sucesso!');
     }
 
@@ -311,7 +327,6 @@ class RequisitionController extends Controller
     public function registerDelivery(Request $request){
 
         $manager = Auth::user(); //user logado
-
 
         $req_record = Requisition::find($request->req_id); //requisição a alterar
         $req_days = 1;
@@ -336,6 +351,16 @@ class RequisitionController extends Controller
             }
             $line->equipment->save();
         }
+
+        $email_params = [
+            'title' => 'Requisição Entregue',
+            'subject' => 'Requisição - '. $req_record->tag,
+            'body' => 'Olá ' . $req_record->request_user->name . ', a sua requisição foi entregue a ' . $request->req_pickup_name .'. A devolução deve ser efetuada até ' . $req_record->end_date ,
+            'link-url'=> env('APP_URL') .'/requisitions/details/' . $request->req_id,
+            'link-text' =>'Visualizar'
+        ];
+
+        MailController::SendEmail($req_record->request_user->email,$email_params);
         return redirect('/requisition-management/deliver')->with('success','Requisição entregue com sucesso!');
     }
 
@@ -362,6 +387,15 @@ class RequisitionController extends Controller
             $line->save();
             $line->equipment->save();
         }
+
+        $email_params = [
+            'title' => 'Requisição Devolvida',
+            'subject' => 'Requisição - '. $req_record->tag,
+            'body' => 'Olá ' . $req_record->request_user->name . ', a sua requisição foi devolvida por ' . $request->req_return_name . '. Obrigado' ,
+            'link-url'=> env('APP_URL') .'/requisitions/details/' . $request->req_id,
+            'link-text' =>'Visualizar'
+        ];
+        MailController::SendEmail($req_record->request_user->email,$email_params);
 
         return redirect('/requisition-management/active')->with('success','Requisição devolvida com sucesso!');
     }
@@ -400,7 +434,16 @@ class RequisitionController extends Controller
         $req_info->requested_at = now();
         $req_info->requested_by = $user->id;
         $req_info->save();
-        MailController::SendAdministrationEmail('GRE - Nova Requisição', 'Nova requisição', 'Foi efetuada uma nova requisição');
+
+        $email_params = [
+            'title' => 'Submetida Nova Requisição',
+            'subject' => 'Submetida nova requisição - '. $req_info->tag,
+            'body' => 'Foi efetuada uma nova requisição pelo utilizador ' .$user->name ,
+            'link-url'=> env('APP_URL') .'/requisition-management/details/' . $request->req_id,
+            'link-text' =>'Visualizar'
+        ];
+        MailController::SendAdministrationEmail($email_params);
+
         return response()->json(['success' => 'Requisição submetida com sucesso!']);
     }
 
