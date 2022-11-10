@@ -231,9 +231,7 @@
                     icon: 'error',
                     confirmButtonText: 'Ok'
                 }).then(function (result) {
-                    if (result.value) {
-                        return false;
-                    }
+                    $("#submit_req").prop('disabled', false);
                 })
             }else{
                 $.ajax({
