@@ -13,6 +13,10 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+if (env('APP_ENV') === 'local') {
+    URL::forceSchema('https');
+}
+
 Route::get('/', function () {
     return view('auth.login');
 });
