@@ -110,10 +110,10 @@ class EquipmentTypeController extends Controller
         $this->validate($request, [
             'type_name' => 'required',
         ]);
-//        dd($type);
-
         //Valida se já existe um tipo igual
-        $validate_rec = Equipment_type::where('type', $request->type_name)->first();
+        $validate_rec = Equipment_type::where('type', $request->type_name)
+                                        ->where('id','!=',$type->id)
+                                        ->first();
         if(isset($validate_rec))
             return redirect('/equip-management/types')->with('error','Já existe um registo com o tipo ' . $request->type_name .'!');
 
