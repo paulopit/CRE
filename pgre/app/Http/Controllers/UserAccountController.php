@@ -32,7 +32,7 @@ class UserAccountController extends Controller
         $user_info->user_function_id = $request->user_function;
         if(isset( $request->user_type))
             $user_info->user_type_id = $request->user_type;
-        $user_info->is_active = (boolean)json_decode(strtolower($request['user_active_' . $user->id])) ?? 0;
+        $user_info->is_active = (boolean)json_decode(strtolower($request['user_active_' . $user->id])) ?? 1;
 
         $user_info->save();
         return redirect('user-management/users')->with('success','Conta de utilizador atualizada com sucesso!');
