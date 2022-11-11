@@ -19,6 +19,6 @@ return [
     'btn_close_all_other' => 'Fechar os outros',
     'tab_empty' => 'Nenhuma tab selecionada!',
     'tab_home' => 'Home',
-    'tab_loading' => 'A inicializar...',
+    'tab_loading' => 'A processar...',
 
 ];

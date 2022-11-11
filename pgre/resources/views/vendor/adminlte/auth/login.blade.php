@@ -19,7 +19,7 @@
 @endif
 
 @section('auth_header', __('adminlte::adminlte.login_message'))
-
+<link rel="stylesheet" href="/css/admin_custom.css">
 @section('auth_body')
     <form action="{{ $login_url }}" method="post">
         @csrf
