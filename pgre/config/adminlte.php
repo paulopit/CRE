@@ -93,7 +93,7 @@ return [
             'alt' => 'Auth Logo',
             'class' => '',
             'width' => 350,
-            'height' => 60,
+            'height' => 100,
         ],
     ],
 
