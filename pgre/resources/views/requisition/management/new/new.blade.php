@@ -156,11 +156,12 @@
 //                            $config['dom'] = '<"row" <"col-sm-7" B> <"col-sm-5 d-flex justify-content-end" i> >
 //                                              <"row" <"col-12" tr> >
 //                                              <"row" <"col-sm-12 d-flex justify-content-start" f> >';
+                        $config['language']  = [ 'url' => 'https://cdn.datatables.net/plug-ins/1.13.1/i18n/pt-PT.json' ];
                         $config['paging'] = false;
-                        $config["lengthMenu"] = [ 10, 50, 100, 500];
+                        $config['lengthMenu'] = [ 10, 50, 100, 500];
                     @endphp
 
-                    <x-adminlte-datatable id="req_lines" :heads="$header" theme="light" head-theme="dark" striped hoverable>
+                    <x-adminlte-datatable id="req_lines" :heads="$header" theme="light" head-theme="dark" :config="$config" striped hoverable>
                         @foreach($temp_req->lines as $line)
                             <tr>
                                 <td>{{$line->equipment->reference}}</td>
