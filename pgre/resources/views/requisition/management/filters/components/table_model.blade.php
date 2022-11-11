@@ -14,6 +14,8 @@
      //Config Botões
     $config['paging'] = true;
     $config['order'] = [[0, 'desc']];
+    $config['language']  = [ 'url' => 'https://cdn.datatables.net/plug-ins/1.13.1/i18n/pt-PT.json' ];
+
 //    $config["lengthMenu"] = [ 10, 50, 100, 500];
 @endphp
 
