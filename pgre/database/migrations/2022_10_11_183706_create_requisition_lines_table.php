@@ -17,6 +17,8 @@ class CreateRequisitionLinesTable extends Migration
             $table->id();
             $table->foreignId('requisition_id')->constrained('requisitions','id');
             $table->foreignId('equipment_id')->constrained();
+            $table->boolean('delivery_status')->default(1);
+            $table->boolean('return_status')->default(1);
             $table->boolean('is_active')->default(1);
             $table->timestamps();
             $table->softDeletes();

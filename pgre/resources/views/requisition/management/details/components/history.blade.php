@@ -62,7 +62,7 @@
                                         <div class="timeline-body">
                                             <b>Equipamentos entregues:</b></br>
                                             @foreach($req_details->lines as $line)
-                                                {{$line->equipment->reference}} - {{$line->equipment->description}} @if(isset($line->equipment->serial))| s/n: {{$line->equipment->serial}}@endif </br>
+                                                {{$line->equipment->reference}} - {{$line->equipment->description}} @if(isset($line->equipment->serial))| <b>s/n:</b> {{$line->equipment->serial}} - @endif <b>Estado:</b> @if($line->delivery_status == 1) OK @else NOK @endif  </br>
                                             @endforeach
                                             <b>Quem levantou:</b>
                                             </br>
@@ -80,7 +80,7 @@
                                         <div class="timeline-body">
                                             <b>Equipamentos devolvidos:</b></br>
                                             @foreach($req_details->lines as $line)
-                                                {{$line->equipment->reference}} - {{$line->equipment->description}} @if(isset($line->equipment->serial))| s/n: {{$line->equipment->serial}}@endif </br>
+                                                {{$line->equipment->reference}} - {{$line->equipment->description}} @if(isset($line->equipment->serial))| s/n: {{$line->equipment->serial}}@endif <b>Estado:</b> @if($line->return_status == 1) OK @else NOK @endif</br>
                                                 @endforeach
                                                 <b>Quem devolveu:</b>
                                                 </br>

@@ -138,7 +138,7 @@
                             <tr  >
                                 <td class="center-text"  align="center" style="font-family:'Poppins',Arial,Helvetica,sans-serif;font-size:16px;line-height:26px;font-weight:300;font-style:normal;color:#2d2d2d;text-decoration:none;letter-spacing:0px;">
 
-                                    <div  >
+                                    <div>
                                         {{ $details['body'] }}
                                     </div>
 

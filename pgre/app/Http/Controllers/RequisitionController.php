@@ -343,19 +343,22 @@ class RequisitionController extends Controller
         $req_record->end_date = $limit_date->setTime(23,59,59); //vamos fixar a data limite ás 23:59:59 sempre.
         $req_record->save();
 
-        foreach($req_record->lines as $line){ //percorrer todas as linhas (seja todos os equipamentos desta requisição)
+        foreach($req_record->lines as $line){ //percorrer todas as linhas ( ou seja, todos os equipamentos desta requisição)
             if(isset($request['equipment_status_' . $line->equipment_id])){ //validar se no request foi selecionado OK.
                 $line->equipment->status_ok = 1;
             }else{ //nao veio no request, logo estava marcado NOK
                 $line->equipment->status_ok = 0;
             }
+            //vamos registar o estado de entrega do equipamento na nossa linha.
+            $line->delivery_status = $line->equipment->status_ok;
+            $line->save();
             $line->equipment->save();
         }
 
         $email_params = [
             'title' => 'Requisição Entregue',
             'subject' => 'Requisição - '. $req_record->tag,
-            'body' => 'Olá ' . $req_record->request_user->name . ', a sua requisição foi entregue a ' . $request->req_pickup_name .'. A devolução deve ser efetuada até ' . $req_record->end_date ,
+            'body' => 'Olá ' . $req_record->request_user->name . ', a sua requisição foi entregue a ' . $request->req_pickup_name .'. A devolução deve ser efetuada até dia ' . $req_record->end_date->format('d-m-Y') ,
             'link-url'=> env('APP_URL') .'/requisitions/details/' . $request->req_id,
             'link-text' =>'Visualizar'
         ];
@@ -384,6 +387,7 @@ class RequisitionController extends Controller
             }else{
                 $line->equipment->status_ok = 0;
             }
+            $line->return_status = $line->equipment->status_ok;
             $line->save();
             $line->equipment->save();
         }
@@ -402,15 +406,27 @@ class RequisitionController extends Controller
 
 
     public function extendRequisition(Request $request){
-        $req_record = Requisition::find($request->req_id);
+        $req_record = Requisition::find($request->req_id); //vamos ler o nosso registo a alterar.
+
         $old_date = Carbon::parse($req_record->end_date);
-        $new_date = Carbon::parse($request->end_date);
+        $new_date = Carbon::createFromFormat('Y-m-d H:i:s', $request->end_date . ' 23:59:59');
 
         //validar se a data pedida é superior a data existente
         if($old_date->gt($new_date))
             return redirect('/requisition-management/details/'. $request->req_id)->with('error','A nova data não pode ser inferior a data atual!');
         $req_record->end_date = $request->end_date;
         $req_record->save();
+
+        //enviar um email.
+        $email_params = [
+            'title' => 'Requisição Extendida',
+            'subject' => 'Requisição - '. $req_record->tag,
+            'body' => 'Olá ' . $req_record->request_user->name . ', o prazo de entrega da sua requisição foi extendido até ao dia ' . $new_date->format('d-m-Y')  . '. Obrigado' ,
+            'link-url'=> env('APP_URL') .'/requisitions/details/' . $request->req_id,
+            'link-text' =>'Visualizar'
+        ];
+        MailController::SendEmail($req_record->request_user->email,$email_params);
+
         return redirect('/requisition-management/details/'. $request->req_id)->with('success','Prazo de entrega da requisição prolongado com sucesso!');
     }
 

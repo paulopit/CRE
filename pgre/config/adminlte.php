@@ -63,7 +63,7 @@ return [
     |
     */
 
-    'logo' => 'GRE',
+    'logo' => '&nbsp',
     'logo_img' => 'storage/img/logo_cesae-digital-branco.png',
     //'logo_img' => 'vendor/adminlte/dist/img/AdminLTELogo.png',
     'logo_img_class' => 'brand-image',

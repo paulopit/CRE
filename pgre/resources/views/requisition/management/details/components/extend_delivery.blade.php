@@ -14,7 +14,7 @@
                         <x-adminlte-input name="req_id" label="" placeholder="" value="{{$req_details->id}}" fgroup-class="col-md-12">
                         </x-adminlte-input>
                     </div>
-                    <x-adminlte-input name="end_date" label="Limite Devolução" type="datetime-local" placeholder="" value="{{$req_details->end_date}}" fgroup-class="col-md-12">
+                    <x-adminlte-input name="end_date" label="Limite Devolução" type="date" placeholder="" value="{{substr($req_details->end_date,0,10) }}" fgroup-class="col-md-12">
                         <x-slot name="prependSlot">
                             <div class="input-group-text">
                                 <i class="fas fa-calendar text-lightblue"></i>

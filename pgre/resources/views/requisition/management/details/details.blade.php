@@ -188,7 +188,7 @@
                             $config['language']  = [ 'url' => 'https://cdn.datatables.net/plug-ins/1.13.1/i18n/pt-PT.json' ];
                         @endphp
 
-                        <x-adminlte-datatable id="req_lines" :heads="$header" theme="light" head-theme="dark" :config="$config" striped hoverable>
+                        <x-adminlte-datatable id="req_lines" :heads="$header" theme="light" head-theme="dark"  :config="$config" striped hoverable>
                             @foreach($req_details->lines as $line)
                                 <tr>
                                     <td>{{$line->equipment->reference}}</td>

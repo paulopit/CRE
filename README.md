@@ -43,13 +43,19 @@
 - [X] CRUD @Deivid
 - [x] Página gestão de Marcas e Modelos
 - [x] Página gestão de Equipamentos
-- [-] Triggers envio de Emails.
+- [x] Triggers envio de Emails.
 - [x] Importação de equipamentos via ficheiro Excel
 - [-] Webservice [Opcional]
 - [-] Ajuste CSS
 - [ ] Testes Funcionais
 - [ ] Criar Documentação
 - [x] Botão extender requisição [Opcional]
+- [ ] Validar traduções
+- [ ] Possibilidade de Tecnico editar requisicoes por aprovar.
+- [x] Adicionar forma de controlar estados de entrega e devolução dos equiapamentos (Equip_lines)
+- [ ] Ao editar/criar equipamento com uma referencia, atualizar as descrições dos equip com mesma ref.
+- [ ] Nos users listar requisicoes de cada utilizador
+
 
 ## :white_check_mark: Done:
 - [x] Middlewares @Paulo
@@ -98,7 +104,12 @@ Na linha seguinte à @section('content')
 @include('sweetalert::alert')
 ```
 
+Adicionar traduções nas tabelas
 
+```php
+$config['language']  = [ 'url' => 'https://cdn.datatables.net/plug-ins/1.13.1/i18n/pt-PT.json' ];
+ :config="$config"  <- adicionar na tabela
+```
 
 
 
