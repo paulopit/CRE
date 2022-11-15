@@ -12,7 +12,7 @@
 
 
                 <div class="modal-body">
-                    <x-adminlte-input name="reference" label="Referencia" placeholder="Referencia" value="" fgroup-class="col-md-12">
+                    <x-adminlte-input name="reference" id="reference" label="Referencia" placeholder="Referencia" value="" fgroup-class="col-md-12">
                         <x-slot name="prependSlot">
                             <div class="input-group-text">
                                 <i class="fas fa-solid fa-hashtag text-lightblue"></i>
@@ -45,7 +45,7 @@
                                 <i class="fas fa-toolbox text-lightblue"></i>
                             </div>
                         </x-slot>
-                        <option value="" disabled selected>--- Selecione um tipo de equipamento ---</option>
+                        <option value="0" disabled selected>--- Selecione um tipo de equipamento ---</option>
                         @foreach($equipment_types as $equipment_type)
                             <option value="{{$equipment_type->id}}">{{$equipment_type->type}}</option>
                         @endforeach
@@ -58,7 +58,7 @@
                             <i class="far fa-registered text-lightblue"></i>
                         </div>
                     </x-slot>
-                    <option value="" disabled selected>--- Selecione um marca ---</option>
+                    <option value="0" disabled selected>--- Selecione um marca ---</option>
                     @foreach($brands as $brand)
                         <option value="{{$brand->id}}">{{$brand->name}}</option>
                     @endforeach
@@ -71,7 +71,7 @@
 
                             </div>
                         </x-slot>
-                            <option value="" disabled selected>--- Selecione um modelo ---</option>
+                            <option value="0" disabled selected>--- Selecione um modelo ---</option>
                 </x-adminlte-select>
 
                 <x-adminlte-input-file name="equip_image" label="Imagem" igroup-size="sm" fgroup-class="col-md-12" placeholder="Seleccione uma imagem...">
@@ -103,11 +103,19 @@
     </div>
 </div>
 
+
+
+<style>
+    select[readonly] {
+        background: #eee;
+        pointer-events: none;
+        touch-action: none;
+    }
+</style>
+
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <script>
     $("#brand_model").change(function(){
-        var brand = $(this).val();
-        console.log(brand);
         $.ajax({
             url: "{{ route('get_models_info') }}?brand_id=" + $(this).val(),
             method: 'GET',
@@ -117,7 +125,58 @@
                     s += '<option value="' + data[i].id + '">' + data[i].name + '</option>';
                 }
                 $("#models_select").html(s);
+            }
+        });
+    });
 
+
+    function LoadModels(){
+        $.ajax({
+            url: "{{ route('get_models_info') }}?brand_id=" + $("#brand_model").val(),
+            method: 'GET',
+            success: function(data) {
+                var s = '';
+                for (var i = 0; i < data.length; i++) {
+                    s += '<option value="' + data[i].id + '">' + data[i].name + '</option>';
+                }
+                $("#models_select").html(s);
+            }
+        });
+    }
+
+
+    $("#reference").focusout(function() {
+        $("#description").removeAttr("readonly");
+        $("#description").val('');
+
+        $("#equipment_type").removeAttr("readonly");
+        $("#equipment_type").val(0);
+
+        $("#brand_model").removeAttr("readonly");
+        $("#brand_model").val(0);
+
+        $("#models_select").removeAttr("readonly");
+        $("#models_select").empty();
+        $.ajax({
+            url: "{{ route('get_equip_data') }}?reference=" + $(this).val(),
+            method: 'GET',
+            success: function(data) {
+
+                if(data.id != null){ //apenas preenche se devolver resultados.
+                    $("#description").val(data.description);
+                    $("#description").attr("readonly", "readonly");
+
+                    $("#equipment_type").val(data.equipment_type_id);
+                    $("#equipment_type").attr("readonly", "readonly");
+
+                    $("#brand_model").val(data.equipment_model.brand_id);
+                    $("#brand_model").attr("readonly", "readonly");
+                    LoadModels();
+
+                    $("#models_select").val(data.equipment_model_id);
+                    $("#models_select").attr("readonly", "readonly");
+
+                }
             }
         });
     });

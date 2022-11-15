@@ -158,6 +158,17 @@ class EquipmentController extends Controller
         }
     }
 
+
+
+    public function getEquipData(Request $request)
+    {
+        $record = Equipment::with('equipment_model')->where('reference',$request->reference)->first();
+        //dd($record);
+        return response()->json($record);
+    }
+
+
+
     public function index()
     {
         $equipments = Equipment::all();
@@ -196,6 +207,18 @@ class EquipmentController extends Controller
             return redirect('equip-management/equipments')
                 ->with('errorForm', $validator->errors()->getMessages())
                 ->withInput();
+        }
+
+        //vamos validar se já existem registos desta ref.
+        $validate_ref = Equipment::where('reference',$request->reference)->first();
+        if($validate_ref != null){ //quer dizer que existe pelo menos 1 registo com esta ref.
+            //vamos validar se os campos estão iguais
+            if($validate_ref->description != $request->description)
+                return redirect('equip-management/equipments')->with('error','Refência já existente, com descrição diferente!')->withInput();
+            if($validate_ref->equipment_type_id != $request->equipment_type)
+                return redirect('equip-management/equipments')->with('error','Refência já existente, com o tipo de equipamento diferente!')->withInput();
+            if($validate_ref->equipment_model_id != $request->models_select)
+                return redirect('equip-management/equipments')->with('error','Refência já existente, com o modelo de equipamento diferente!')->withInput();
         }
 
         $equipment = new Equipment();
@@ -292,6 +315,11 @@ class EquipmentController extends Controller
         //validar serials repetidos ou referencias
         $equipment = Equipment::find($equipment->id);
 
+        //vamos validar que a referencia nao foi alterada.
+        if($request->equip_reference != $equipment->reference)
+            return redirect('equip-management/equipments')->with('error','Desculpe, mas não pode editar a referência');
+
+
         if ($request->file('equip_image')) {
 
             Storage::delete('public/'.$equipment->image_url);
@@ -306,15 +334,29 @@ class EquipmentController extends Controller
         }
 
         $equipment->description = $request->equip_description;
-        if(!$this->ValidateSerialNumber($request->equip_serialnumber, $equipment->id))
-            return redirect('equip-management/equipments')->with('error','Número de Série já existe');
-        $equipment->serial_number = $request->equip_serialnumber;
+        if($request->equip_serialnumber != ""){
+            if(!$this->ValidateSerialNumber($request->equip_serialnumber, $equipment->id)){
+                return redirect('equip-management/equipments')->with('error','Número de Série já existe');
+            }else{
+                $equipment->serial_number = $request->equip_serialnumber;
+            }
+        }
+
         $equipment->status_ok = boolval($request['equip_status_ok_'.$equipment->id]);
         $equipment->equipment_type_id = $request->equip_type;
         $equipment->equipment_model_id = $request->equip_model;
         $equipment->reference = $request->equip_reference;
         $equipment->obs = $request->equip_obs;
         $equipment->save();
+
+        //Atualizar os restantes equipamentos da mesma ref com os dados atualizados.
+        $Ref_equips = Equipment::where('reference', $equipment->reference)->get();
+        foreach ($Ref_equips as $equip) {
+            $equip->description = $equipment->description;
+            $equip->equipment_type_id = $equipment->equipment_type_id;
+            $equip->equipment_model_id = $equipment->equipment_model_id;
+            $equip->save();
+        }
 
         return redirect('equip-management/equipments')->with('success','Equipamento editado com sucesso!');
     }

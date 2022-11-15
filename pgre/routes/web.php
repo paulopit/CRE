@@ -57,6 +57,8 @@ Route::group(['middleware' => 'management'], function () {
     Route::get('/equip-management/models/import-template', 'EquipmentModelController@download_template');
     Route::post('/equip-management/models/excel-import', 'EquipmentModelController@excel_import');
 
+    Route::get('/equip-management/get-equipment-data', 'EquipmentController@getEquipData')->name('get_equip_data');
+
 
     // ##type management
     Route::get('/equip-management/types', 'EquipmentTypeController@index');

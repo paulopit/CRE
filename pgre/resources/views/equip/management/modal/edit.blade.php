@@ -31,7 +31,7 @@
 
 
 
-                    <x-adminlte-input name="equip_reference" label="Referência" placeholder="Marca" value="{{$equipment->reference}}" fgroup-class="col-md-12">
+                    <x-adminlte-input name="equip_reference" label="Referência" placeholder="Referência" value="{{$equipment->reference}}" readonly="readonly" fgroup-class="col-md-12">
                         <x-slot name="prependSlot">
                             <div class="input-group-text">
                                 <i class="fas fa-solid fa-hashtag text-lightblue"></i>
@@ -39,7 +39,7 @@
                         </x-slot>
                     </x-adminlte-input>
 
-                    <x-adminlte-input name="equip_description" label="Descrição" placeholder="Marca" value="{{$equipment->description}}" fgroup-class="col-md-12">
+                    <x-adminlte-input name="equip_description" label="Descrição" placeholder="Descrição" value="{{$equipment->description}}" fgroup-class="col-md-12">
                         <x-slot name="prependSlot">
                             <div class="input-group-text">
                                 <i class="fas fa-solid fa-pen text-lightblue"></i>
@@ -47,7 +47,7 @@
                         </x-slot>
                     </x-adminlte-input>
 
-                    <x-adminlte-input name="equip_serialnumber" label="Serial Number" placeholder="Marca" value="{{$equipment->serial_number}}" fgroup-class="col-md-12">
+                    <x-adminlte-input name="equip_serialnumber" label="Serial Number" placeholder="Serial Number" value="{{$equipment->serial_number}}" fgroup-class="col-md-12">
                         <x-slot name="prependSlot">
                             <div class="input-group-text">
                                 <i class="fas fa-solid fa-fingerprint text-lightblue"></i>
@@ -92,7 +92,7 @@
                         @endforeach
                     </x-adminlte-select>
 
-                    <x-adminlte-textarea name="obs" id="obs" rows="5"  label="Observações" placeholder="Observações" fgroup-class="col-md-12">
+                    <x-adminlte-textarea name="equip_obs" id="obs" rows="5"  label="Observações" placeholder="Observações" fgroup-class="col-md-12">
                         <x-slot name="prependSlot">
                             <div class="input-group-text">
                                 <i class="fas fa-info text-lightblue"></i>
