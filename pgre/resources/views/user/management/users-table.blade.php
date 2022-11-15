@@ -30,14 +30,12 @@
                         ];
 
                         // Config Botões
-                        $config['dom'] = '<"row" <"col-sm-7" B> <"col-sm-5 d-flex justify-content-end" i> >
-                                          <"row" <"col-12" tr> >
-                                          <"row" <"col-sm-12 d-flex justify-content-start" f> >';
-                        $config['paging'] = false;
+                        $config['paging'] = true;
                         $config["lengthMenu"] = [ 10, 50, 100, 500];
+                        $config['language']  = [ 'url' => 'https://cdn.datatables.net/plug-ins/1.13.1/i18n/pt-PT.json' ];
                     @endphp
 
-                    <x-adminlte-datatable id="user_table" :heads="$header" theme="light" head-theme="dark" striped hoverable with-buttons>
+                    <x-adminlte-datatable id="user_table" :heads="$header" theme="light" :config="$config"  head-theme="dark" striped hoverable with-buttons>
                         @foreach($users as $user)
                             <tr>
                                 <td>{{$user->id}}</td>
