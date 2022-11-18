@@ -97,7 +97,6 @@ class User extends Authenticatable
         return $user;
     }
 
-
     protected $dates = ['deleted_at'];
 
 }

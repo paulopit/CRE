@@ -347,6 +347,7 @@ class EquipmentController extends Controller
         $equipment->equipment_model_id = $request->equip_model;
         $equipment->reference = $request->equip_reference;
         $equipment->obs = $request->equip_obs;
+        $equipment->is_active = boolval($request['equip_is_active'.$equipment->id]);
         $equipment->save();
 
         //Atualizar os restantes equipamentos da mesma ref com os dados atualizados.

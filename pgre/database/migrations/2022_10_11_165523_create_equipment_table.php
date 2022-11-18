@@ -22,6 +22,7 @@ class CreateEquipmentTable extends Migration
             $table->foreignId('equipment_model_id')->constrained();
             $table->boolean('in_stock')->default(1);
             $table->string('reference');
+            $table->boolean('is_active')->default(1);
             //$table->foreignId('reference')->unique()->constrained('equipment_images')->onDelete('cascade');
             $table->string('obs')->nullable();
             $table->string('image_url')->nullable();
