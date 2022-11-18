@@ -36,6 +36,7 @@
                             ['label' => 'Tipo Equipamento','width' => 15],
                             ['label' => 'Estado','width' => 10],
                             ['label' => 'Ações', 'no-export' => false, 'width' => 5],
+                            ['label' => '','width' => 10],
                         ];
 
                         // Config Botões
@@ -70,6 +71,11 @@
                                         @component('equip.management.modal.view', ['equipment' => $equipment, 'equipment_models' => $equipment_models])
                                         @endcomponent
                                         <a href="" class="btn btn-xs btn-default text-teal mx-1 shadow table-btn" title="View" data-toggle="modal" data-target='#view_equip_info_{{$equipment->id}}' data-id=""> <i class="fa fa-lg fa-fw fa-eye"></i> </a>
+                                        @if($equipment->is_active == 0)
+                                                <td style="color: red"> Desativado </td>
+                                        @else
+                                                <td></td>
+                                        @endif
                                     </nobr>
                                 </td>
                             </tr>
