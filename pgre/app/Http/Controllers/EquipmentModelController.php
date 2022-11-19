@@ -127,14 +127,17 @@ class EquipmentModelController extends Controller
                 ->with('errorForm', $validator->errors()->getMessages())
                 ->withInput();
         }
+        $check = Equipment_model::where('brand_id',$request->brand)->where('name',$request->model_name)->count();
+        if($check == 0){
+            $equipment_models = new Equipment_model();
+            $equipment_models->name         = $request->model_name;
+            $equipment_models->brand_id     = $request->brand;
+            $equipment_models->save();
 
-
-        $equipment_models = new Equipment_model();
-        $equipment_models->name         = $request->model_name;
-        $equipment_models->brand_id     = $request->brand;
-        $equipment_models->save();
-
-        return redirect('equip-management/models')->with('success','Modelo criado com sucesso!');
+            return redirect('equip-management/models')->with('success','Modelo criado com sucesso!');
+        }else{
+            return redirect('equip-management/models')->with('error','Modelo já existe!');
+        }
     }
 
     /**
@@ -173,13 +176,18 @@ class EquipmentModelController extends Controller
 
         ]);
 //        dd($model);
-        $equipment_model = Equipment_model::find($equipment_model->id);
-        $equipment_model->name          = $request->model_name;
-        $equipment_model->brand_id      = $request->brand;
-
-        $equipment_model->save();
+        $check = Equipment_model::where('brand_id',$request->brand)->where('name',$request->model_name)->count();
+        if($check == 0){
+            $equipment_model = Equipment_model::find($equipment_model->id);
+            $equipment_model->name          = $request->model_name;
+            $equipment_model->brand_id      = $request->brand;
+            $equipment_model->save();
 //        dd($equipment_model);
-        return redirect('equip-management/models')->with('success','Modelo editado com sucesso!');
+            return redirect('equip-management/models')->with('success','Modelo editado com sucesso!');
+        }else{
+            return redirect('equip-management/models')->with('error','Modelo já existe!');
+        }
+
     }
 
     /**
