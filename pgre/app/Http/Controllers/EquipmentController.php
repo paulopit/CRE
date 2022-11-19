@@ -47,14 +47,16 @@ class EquipmentController extends Controller
         $equip_data['data'] = [];
             $reference_list =Equipment::where("equipment_type_id",$type_id)
             ->where('equipment.in_stock', 1)
+            ->where('equipment.is_active', 1)
             ->groupBy('reference')
             ->pluck('reference');
             foreach ($reference_list as $ref){
                 $record = Equipment::where('reference', $ref)
                     ->where('equipment.in_stock', 1)
+                    ->where('equipment.is_active', 1)
                     ->get(['id','reference','description'])
                     ->first();
-                $record['total'] = Equipment::where('reference', $ref)->where('equipment.in_stock', 1)->count();
+                $record['total'] = Equipment::where('reference', $ref)->where('equipment.in_stock', 1)->where('equipment.is_active', 1)->count();
                 array_push($equip_data['data'],$record);
             }
         return response()->json($equip_data);
