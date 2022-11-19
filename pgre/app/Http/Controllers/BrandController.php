@@ -49,12 +49,19 @@ class BrandController extends Controller
                 ->withInput();
         }
 
+        $check = Brand::where('name',$request->brand_name)->count();
+        if($check == 0){
+            $brand = new Brand();
+            $brand->name = $request->brand_name;
+            $brand->save();
 
-        $brand = new Brand();
-        $brand->name = $request->brand_name;
-        $brand->save();
+            return redirect('equip-management/brands')->with('success','Marca criada com sucesso!');
+        }else{
+            return redirect('equip-management/brands')->with('error','Marca já existe!');
+        }
 
-        return redirect('equip-management/brands')->with('success','Marca criada com sucesso!');
+
+
     }
 
     /**
@@ -91,11 +98,19 @@ class BrandController extends Controller
         $this->validate($request, [
             'brand_name' => 'required'
         ]);
+        $check = Brand::where('name',$request->brand_name)->where('id',$request->id)->count();
+        if($check > 0){
+            $brand = Brand::find($brand->id);
+            $brand->name = $request->brand_name;
+            $brand->save();
+            return redirect('equip-management/brands')->with('success','Marca editada com sucesso!');
+        }else{
+            return redirect('equip-management/brands')->with('error','Marca já existe!');
+        }
 
-        $brand = Brand::find($brand->id);
-        $brand->name = $request->brand_name;
-        $brand->save();
-        return redirect('equip-management/brands')->with('success','Marca editada com sucesso!');
+
+
+
     }
 
     /**
