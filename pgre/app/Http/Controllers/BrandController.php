@@ -54,7 +54,6 @@ class BrandController extends Controller
             $brand = new Brand();
             $brand->name = $request->brand_name;
             $brand->save();
-
             return redirect('equip-management/brands')->with('success','Marca criada com sucesso!');
         }else{
             return redirect('equip-management/brands')->with('error','Marca já existe!');
