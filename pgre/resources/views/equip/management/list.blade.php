@@ -12,8 +12,6 @@
 @component('equip.management.modal.import')
 @endcomponent
 
-
-
 @section('content')
     @include('sweetalert::alert')
     <div class="">
@@ -35,8 +33,8 @@
                             ['label' => 'Modelo','width' => 10],
                             ['label' => 'Tipo Equipamento','width' => 15],
                             ['label' => 'Estado','width' => 10],
+                            ['label' => 'Disponibilidade','width' => 10],
                             ['label' => 'Ações', 'no-export' => false, 'width' => 5],
-                            ['label' => '','width' => 10],
                         ];
 
                         // Config Botões
@@ -58,11 +56,26 @@
                                         <td>{{$equipment_type->type}}</td>
                                     @endif
                                 @endforeach
-                                @if($equipment->status_ok == 1)
-                                    <td style="color: green">OK</td>
+                                @if(!$equipment->is_active)
+                                    <td><span class="badge bg-danger p-2">Inativo</span></td>
                                 @else
-                                    <td style="color: orange"> NOK </td>
+                                    @if($equipment->status_ok)
+                                        <td style="color: green">OK</td>
+                                    @else
+                                        <td style="color: orange"> NOK </td>
+                                    @endif
                                 @endif
+                                <td>
+                                    @if($equipment->in_stock)
+                                            <span class="badge bg-success p-2 ml-3">Disponível</span>
+                                    @else
+                                        @if($equipment->active_requisition_tag() != null)
+                                            <a href="/requisition-management/details/{{$equipment->active_requisition_id()}}"}}>
+                                                <span class="badge bg-info p-2 ml-3">{{$equipment->active_requisition_tag()}}</span>
+                                            </a>
+                                        @endif
+                                    @endif
+                                </td>
                                 <td>
                                     <nobr>
                                         @component('equip.management.modal.edit', ['equipment' => $equipment, 'brands' => $brands, 'equipment_models' => $equipment_models, 'equipment_types' => $equipment_types])
@@ -71,11 +84,6 @@
                                         @component('equip.management.modal.view', ['equipment' => $equipment, 'equipment_models' => $equipment_models])
                                         @endcomponent
                                         <a href="" class="btn btn-xs btn-default text-teal mx-1 shadow table-btn" title="View" data-toggle="modal" data-target='#view_equip_info_{{$equipment->id}}' data-id=""> <i class="fa fa-lg fa-fw fa-eye"></i> </a>
-                                        @if($equipment->is_active == 0)
-                                                <td style="color: red"> Desativado </td>
-                                        @else
-                                                <td></td>
-                                        @endif
                                     </nobr>
                                 </td>
                             </tr>

@@ -91,7 +91,7 @@
             dataType: 'json',
             success: function(response){
                 var len = 0;
-                if(response['data'] != null){
+                if(response['data'][0].id != null){
                     len = response['data'].length;
                 }
                 if(len > 0){

@@ -27,3 +27,13 @@
     transform: rotate(-5deg);
     z-index: 9999;
 }
+
+.rubber_equip_view {
+    top: -7%;
+    left: 40%;
+}
+
+.rubber_equip_edit {
+    top: -5%;
+    left: 40%;
+}

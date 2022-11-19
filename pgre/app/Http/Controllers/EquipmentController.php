@@ -66,9 +66,10 @@ class EquipmentController extends Controller
         $equip_data['data'] = [];
             $record = Equipment::where('reference', $ref)
                 ->where('equipment.in_stock', 1)
+                ->where('equipment.is_active', 1)
                 ->get(['id','reference','description'])
                 ->first();
-            $record['total'] = Equipment::where('reference', $ref)->where('equipment.in_stock', 1)->count();
+            $record['total'] = Equipment::where('reference', $ref)->where('equipment.in_stock', 1)->where('equipment.is_active', 1)->count();
             array_push($equip_data['data'],$record);
         return response()->json($equip_data);
     }
@@ -317,6 +318,18 @@ class EquipmentController extends Controller
         //validar serials repetidos ou referencias
         $equipment = Equipment::find($equipment->id);
 
+
+
+        if($equipment->in_stock == 0){ //está a ser utilizado
+            return redirect('equip-management/equipments')->with('error','Desculpe, não pode editar um equipamento que se encontra associado a uma requisição!');
+        }
+        /*$inativado = boolval($request['equip_is_active_'.$equipment->id]);
+        if($inativado == false){
+
+        }*/
+
+
+
         //vamos validar que a referencia nao foi alterada.
         if($request->equip_reference != $equipment->reference)
             return redirect('equip-management/equipments')->with('error','Desculpe, mas não pode editar a referência');
@@ -349,7 +362,7 @@ class EquipmentController extends Controller
         $equipment->equipment_model_id = $request->equip_model;
         $equipment->reference = $request->equip_reference;
         $equipment->obs = $request->equip_obs;
-        $equipment->is_active = boolval($request['equip_is_active'.$equipment->id]);
+        $equipment->is_active = boolval($request['equip_is_active_'.$equipment->id]);
         $equipment->save();
 
         //Atualizar os restantes equipamentos da mesma ref com os dados atualizados.

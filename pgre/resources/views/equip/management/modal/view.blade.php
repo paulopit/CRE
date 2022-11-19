@@ -3,12 +3,15 @@
         <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title">{{$equipment->description}}</h5>
+
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
                 <div class="modal-body">
 
+
+                    @if (!$equipment->is_active)   <p class="rubber rubber_equip_view"> Inativo </p> @endif
                     <div class="row">
                         <div class="text-center col-md-12">
                             @if(isset($equipment->image_url))

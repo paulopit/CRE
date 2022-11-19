@@ -5,13 +5,13 @@
                 @csrf
                 @method('PUT')
                 <div class="modal-header">
-                    <h5 class="modal-title">Editar Equipamento {{$equipment->description}} </h5>
+                    <h5 class="modal-title">{{$equipment->description}} </h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
                 <div class="modal-body">
-
+                    @if (!$equipment->is_active)   <p class="rubber rubber_equip_edit"> Inativo </p> @endif
                     <div class="row">
                         <div class="text-center col-md-12">
                             @if(isset($equipment->image_url))
@@ -109,9 +109,9 @@
 
 
                     @if($equipment->is_active)
-                        <x-adminlte-input-switch label="Ativo" data-on-text="Ativo" data-off-text="Desativado" name="equip_is_active{{$equipment->id}}" data-on-color="lightblue" data-off-color="secondary" checked />
+                        <x-adminlte-input-switch label="Ativo" data-on-text="Sim" data-off-text="Não" name="equip_is_active_{{$equipment->id}}" data-on-color="lightblue" data-off-color="secondary" checked />
                     @else
-                        <x-adminlte-input-switch label="Ativo" data-on-text="Ativo" data-off-text="Desativado" name="equip_is_active{{$equipment->id}}" data-on-color="lightblue" data-off-color="secondary"/>
+                        <x-adminlte-input-switch label="Ativo" data-on-text="Sim" data-off-text="Não" name="equip_is_active_{{$equipment->id}}" data-on-color="lightblue" data-off-color="secondary"/>
                     @endif
 
                 </div>
