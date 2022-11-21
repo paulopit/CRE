@@ -48,11 +48,16 @@ class UserTypeController extends Controller
                 ->withInput();
         }
 
+        $check = User_type::where('type_name',$request->type_name)->count();
+        if($check == 0) {
+            $user_type = new User_type();
+            $user_type->type_name = $request->type_name;
+            $user_type->save();
+            return redirect('user-management/types')->with('success', 'Tipo de utilizador criado com sucesso!');
+        }else{
+            return redirect('user-management/types')->with('error', 'Tipo de utilizador já existe!');
 
-        $user_type = new User_type();
-        $user_type->type_name = $request->type_name;
-        $user_type->save();
-        return redirect('user-management/types')->with('success','Tipo de utilizador criado com sucesso!');
+        }
     }
 
     /**
@@ -89,10 +94,16 @@ class UserTypeController extends Controller
         $this->validate($request, [
             'type_name' => 'required'
         ]);
-        $user_type = User_type::find($user_type->id);
-        $user_type->type_name = $request->type_name;
-        $user_type->save();
-        return redirect('user-management/types')->with('success','Tipo de utilizador editado com sucesso!');
+        $check = User_type::where('type_name',$request->type_name)->count();
+        if($check == 0) {
+            $user_type = User_type::find($user_type->id);
+            $user_type->type_name = $request->type_name;
+            $user_type->save();
+            return redirect('user-management/types')->with('success', 'Tipo de utilizador editado com sucesso!');
+        }else{
+            return redirect('user-management/types')->with('error', 'Tipo de utilizador já existe!');
+        }
+
     }
 
     /**
