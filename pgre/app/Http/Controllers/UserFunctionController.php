@@ -40,10 +40,16 @@ class UserFunctionController extends Controller
         $this->validate($request, [
             'function_name' => 'required'
         ]);
-        $user_function = new User_function();
-        $user_function->function_name = $request->function_name;
-        $user_function->save();
-        return redirect('user-management/functions')->with('success','Função criada com sucesso!');
+        $check = User_function::where('function_name',$request->function_name)->count();
+        if($check == 0) {
+            $user_function = new User_function();
+            $user_function->function_name = $request->function_name;
+            $user_function->save();
+            return redirect('user-management/functions')->with('success', 'Função criada com sucesso!');
+        }else{
+            return redirect('user-management/functions')->with('error', 'Já existe função com o mesmo nome!');
+
+        }
     }
 
     /**
@@ -80,10 +86,15 @@ class UserFunctionController extends Controller
         $this->validate($request, [
             'function_name' => 'required'
         ]);
-        $user_function = User_function::find($user_function->id);
-        $user_function->function_name = $request->function_name;
-        $user_function->save();
-        return redirect('user-management/functions')->with('success','Função editada com sucesso!');
+        $check = User_function::where('function_name',$request->function_name)->count();
+        if($check == 0) {
+            $user_function = User_function::find($user_function->id);
+            $user_function->function_name = $request->function_name;
+            $user_function->save();
+            return redirect('user-management/functions')->with('success','Função editada com sucesso!');
+        }else{
+            return redirect('user-management/functions')->with('error', 'Já existe função com o mesmo nome!');
+        }
     }
 
     /**
