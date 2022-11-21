@@ -94,7 +94,9 @@ class UserTypeController extends Controller
         $this->validate($request, [
             'type_name' => 'required'
         ]);
-        $check = User_type::where('type_name',$request->type_name)->count();
+        $check = User_type::where('type_name',$request->type_name)
+            ->where('id','!=',$user_type->id)
+            ->count();
         if($check == 0) {
             $user_type = User_type::find($user_type->id);
             $user_type->type_name = $request->type_name;

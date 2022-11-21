@@ -86,7 +86,9 @@ class UserFunctionController extends Controller
         $this->validate($request, [
             'function_name' => 'required'
         ]);
-        $check = User_function::where('function_name',$request->function_name)->count();
+        $check = User_function::where('function_name',$request->function_name)
+            ->where('id','!=',$user_function->id)
+            ->count();
         if($check == 0) {
             $user_function = User_function::find($user_function->id);
             $user_function->function_name = $request->function_name;
