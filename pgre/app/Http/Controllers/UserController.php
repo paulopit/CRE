@@ -28,6 +28,7 @@ class UserController extends Controller
             'user_name' => 'required'
         ]);
 
+
         $user_info = User::find($user->id);
         $user_info->name = $request->user_name;
         $user_info->birth_date = $request->user_birth_date;
