@@ -57,7 +57,7 @@
                                     @endif
                                 @endforeach
                                 @if(!$equipment->is_active)
-                                    <td><span class="badge bg-danger p-2">Inativo</span></td>
+                                    <td></td>
                                 @else
                                     @if($equipment->status_ok)
                                         <td style="color: green">OK</td>
@@ -66,15 +66,20 @@
                                     @endif
                                 @endif
                                 <td>
-                                    @if($equipment->in_stock)
-                                            <span class="badge bg-success p-2 ml-3">Disponível</span>
+
+                                @if(!$equipment->is_active)
+                                        <span class="badge bg-danger p-2 ml-3">Inativo</span>
                                     @else
-                                        @if($equipment->active_requisition_tag() != null)
-                                            <a href="/requisition-management/details/{{$equipment->active_requisition_id()}}"}}>
-                                                <span class="badge bg-info p-2 ml-3">{{$equipment->active_requisition_tag()}}</span>
-                                            </a>
+                                        @if($equipment->in_stock)
+                                            <span class="badge bg-success p-2 ml-3">Disponível</span>
+                                        @else
+                                            @if($equipment->active_requisition_tag() != null)
+                                                <a href="/requisition-management/details/{{$equipment->active_requisition_id()}}"}}>
+                                                    <span class="badge bg-info p-2 ml-3">{{$equipment->active_requisition_tag()}}</span>
+                                                </a>
+                                            @endif
                                         @endif
-                                    @endif
+                                @endif
                                 </td>
                                 <td>
                                     <nobr>
