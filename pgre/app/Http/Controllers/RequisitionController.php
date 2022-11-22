@@ -198,7 +198,7 @@ class RequisitionController extends Controller
     {
         $user = Auth::user();
         $pending_req = Requisition::where('request_user_id', $user->id)
-                                    ->where('level_id', 2)
+                                    ->whereIn('level_id', [2,3])
                                     ->get()
                                     ->sortBy('requested_at');
         return view('requisition.list.pending',['pending_req' => $pending_req]);
@@ -241,7 +241,7 @@ class RequisitionController extends Controller
     {
         $user = Auth::user();
         $active_req = Requisition::where('request_user_id', $user->id)
-            ->where('level_id', 3) //Aguarda levantamento
+            ->where('level_id', 4) //Requisição Activa
             ->get()
             ->sortBy('requested_at');
         return view('requisition.list.active',['active_req' => $active_req]);

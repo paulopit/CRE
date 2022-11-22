@@ -4,7 +4,6 @@
 
 @section('content_header')
     <div class="mb-3">
-
     </div>
 @stop
 

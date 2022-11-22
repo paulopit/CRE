@@ -4,24 +4,27 @@
 
 @section('content_header')
     <div class="mt-3">
-                @component('components.alerts')
-                @endcomponent
+{{--                @component('components.alerts')--}}
+{{--                @endcomponent--}}
     </div>
 
 
 @stop
-
 @section('content')
     @include('sweetalert::alert')
     <div class="row">
     @if (Auth::user()->can('front-permission'))
             <div class="col-lg-3">
                 <x-adminlte-small-box title="{{count(Auth::user()->requisitions)}}" text="Total" icon="fas fa-ticket-alt text-white"
-                                      theme="info" url="#" url-text="Ver requisições"/>
+                                      theme="info" url="#" url-text=""/>
             </div>
             <div class="col-lg-3">
-                <x-adminlte-small-box title="{{count(Auth::user()->requisitions->where('level_id',2))}}" text="Pendentes" icon="fas fa-pause-circle text-white"
+                <x-adminlte-small-box title="{{count(Auth::user()->requisitions->where('level_id',2))}}" text="Por Aprovar" icon="fas fa-question-circle text-white"
                                       theme="warning" url="/requisitions/pending" url-text="Ver requisições"/>
+            </div>
+            <div class="col-lg-3">
+                <x-adminlte-small-box title="{{count(Auth::user()->requisitions->where('level_id',3))}}" text="Por entregar" icon="fas fa-pause-circle text-white"
+                                      theme="orange" url="/requisitions/pending" url-text="Ver requisições"/>
             </div>
             <div class="col-lg-3">
                 <x-adminlte-small-box title="{{count(Auth::user()->requisitions->where('level_id',4))}}" text="Ativas" icon="fas fa-play-circle text-white"
@@ -31,6 +34,16 @@
                 <x-adminlte-small-box title="{{count(Auth::user()->requisitions->whereIn('level_id', array(6,7, 8)))}}" text="Fechadas" icon="fas fa-stop-circle text-white"
                                       theme="danger" url="/requisitions/closed" url-text="View details"/>
             </div>
+
+
+            @foreach($expire_requisition as $req)
+                <div class="col-lg-3">
+                    <x-adminlte-small-box title="{{$req->tag}}"
+                                          text="A terminar" icon="fas fa-exclamation-triangle text-white"
+                                          theme="danger" url="/requisition-management/details/" url-text="View details"/>
+                </div>
+            @endforeach
+
         @endif
 
 
@@ -57,6 +70,12 @@
             </div>
             @endif
     </div>
+
+
+
+
+
+
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 @stop
 

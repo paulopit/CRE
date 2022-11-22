@@ -1,5 +1,7 @@
 @extends('adminlte::page')
+
 @section('title', 'GRE - Nova Requisição')
+
 @section('content_header')
     <div class="mb-3">
 {{--        @component('components.alerts')--}}
