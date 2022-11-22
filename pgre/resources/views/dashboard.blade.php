@@ -40,7 +40,7 @@
                 <div class="col-lg-3">
                     <x-adminlte-small-box title="{{$req->tag}}"
                                           text="A terminar" icon="fas fa-exclamation-triangle text-white"
-                                          theme="danger" url="/requisition-management/details/" url-text="View details"/>
+                                          theme="danger" url="/requisitions/details/{{$req->id}}" url-text="View details"/>
                 </div>
             @endforeach
 
