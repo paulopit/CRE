@@ -74,8 +74,16 @@
             url:"{{ route('add_req_equipment') }}",
             data:{req_id:{{$requisition_details->id}},equip_id:equip_id, _token: '{{csrf_token()}}'},
             success:function(data){
-                location.reload();
-                //location.href = "/requisitions/new"
+                Swal.fire({
+                    title: 'Sucesso!',
+                    text: 'Equipamento adicionado à requisição com sucesso!',
+                    icon: 'success',
+                    confirmButtonText: 'Ok'
+                }).then(function (result) {
+                    location.reload();
+                })
+
+
             }
         });
     }

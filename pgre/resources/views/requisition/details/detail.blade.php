@@ -97,11 +97,24 @@
                             </x-adminlte-textarea>
                         </div>
                         <div class="mt-3">
-                            <a href="{{ url()->previous() }}">
-                                <x-adminlte-button class="btn-flat" type="" label="Voltar" theme="secondary" icon="fas fa-lg fa-arrow-left"/>
-                            </a>
-                        </div>
 
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-10">
+                                <a href="{{ url()->previous() }}">
+                                    <x-adminlte-button class="btn-flat" type="" label="Voltar" theme="secondary" icon="fas fa-lg fa-arrow-left"/>
+                                </a>
+                            </div>
+                            <div class="col-lg-2" style="display: flex; justify-content: flex-end">
+                                @component('requisition.list.components.modal.delete', ['requisition' => $req_details])
+                                @endcomponent
+                                @if($req_details->level_id == 2)
+                                    <a href="" title="Cancelar" data-toggle="modal" style="margin-right: 10px" data-target='#cancel_requisition_{{$req_details->id}}' data-id="">
+                                        <x-adminlte-button class="btn-flat" type="" label="Cancelar" theme="danger" icon="far fa-times-circle"/>
+                                    </a>
+                                @endif
+                            </div>
+                        </div>
                         <hr>
                         <h5 class="pb-3"> Equipamentos </h5>
                         @php

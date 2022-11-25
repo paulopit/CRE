@@ -167,6 +167,7 @@
     </div>
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script>
 
         function Submit_requisition(){
@@ -176,9 +177,14 @@
                 url:"{{ route('submit_req') }}",
                 data:{req_id:req_id, _token: '{{csrf_token()}}'},
                 success:function(data){
-                    $('#submit_req').attr("disabled", true);
-                    $("#success-alert").show();
-                    setTimeout(function() { window.location = '/requisitions/new'; }, 1000);
+                    Swal.fire({
+                        title: 'Sucesso!',
+                        text: 'Requisição criada com sucesso!',
+                        icon: 'success',
+                        confirmButtonText: 'Ok'
+                    }).then(function (result) {
+                        location.reload();
+                    })
                 }
             });
         }
