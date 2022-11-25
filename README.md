@@ -51,11 +51,18 @@
 - [ ] Criar Documentação
 - [x] Botão extender requisição [Opcional]
 - [ ] Validar traduções
-- [ ] Possibilidade de Tecnico editar requisicoes por aprovar.
 - [x] Adicionar forma de controlar estados de entrega e devolução dos equiapamentos (Equip_lines)
-- [ ] Ao editar/criar equipamento com uma referencia, atualizar as descrições dos equip com mesma ref.
-- [ ] Nos users listar requisicoes de cada utilizador
+- [x] Ao editar/criar equipamento com uma referencia, atualizar as descrições dos equip com mesma ref.
 
+@Paulo
+- [ ] Nos users, listar requisicoes de cada utilizador (em Aberto / Fechadas, paginacao 5)
+
+@Sergio
+- [ ] Nos equipamentos ter possibilidade de listar historico (por onde o equipamento andou).
+
+@Deivid
+- [ ] Possibilidade de Tecnico editar requisicoes por aprovar. 
+- [ ] Adicionar separador para Tecnico/Admin a mostrar todas as requisicoes (não mostrar level_id 5 expiradas).
 
 ## :white_check_mark: Done:
 - [x] Middlewares @Paulo

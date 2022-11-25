@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Equipment_model;
 use App\Brand;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\QueryException;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use Maatwebsite\Excel\Facades\Excel;
@@ -79,7 +80,13 @@ class EquipmentModelController extends Controller
                     return redirect('equip-management/models')
                         ->with('error', $line[1] . ' inválido para cabeçalho da segunda coluna');
             }else{
-                $this->create_model($line[0], $line[1]);
+                try{
+                    $this->create_model($line[0], $line[1]);
+                }catch (QueryException $ex){
+                    return redirect('equip-management/models')
+                        ->with('error', $line[1] . 'Linha ' .$key . ' - Erro ao criar marcas e modelo');
+                }
+
             }
         }
         return redirect('equip-management/models')->with('success','Ficheiro excel importado com  sucesso!');

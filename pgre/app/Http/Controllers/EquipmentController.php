@@ -12,6 +12,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
 use Maatwebsite\Excel\Facades\Excel;
+use mysql_xdevapi\Exception;
 
 class EquipmentController extends Controller
 {
@@ -140,16 +141,22 @@ class EquipmentController extends Controller
                 $new_equip->equipment_type_id = $equip_type_id;
                 $new_equip->obs = $line[7];
 
-                if($line[6] != ""){
-                    $context = stream_context_create(array(
-                        'http' => array('ignore_errors' => true),
-                    ));
-                    $contents = @file_get_contents($line[6], false,$context);
-                    $name = substr($line[6], strrpos($line[6], '/') + 1);
-                    $location = 'images/equipment/' .$name;
-                    Storage::put('public/'.$location, $contents);
-                    $new_equip->image_url = $location;
+                try{
+                    if($line[6] != ""){
+                        $context = stream_context_create(array(
+                            'http' => array('ignore_errors' => true),
+                        ));
+                        $contents = @file_get_contents($line[6], false,$context);
+                        $name = substr($line[6], strrpos($line[6], '/') + 1);
+                        $location = 'images/equipment/' .$name;
+
+                        Storage::put('public/'.$location, $contents);
+                        $new_equip->image_url = $location;
+                    }
+                }catch (\ErrorException $ex){
+                    array_push($error_log,'Linha ' . $key . ' - url imagem inválido. - imagem ignorada!');
                 }
+
                 $new_equip->save();
             }
         }
@@ -162,6 +169,10 @@ class EquipmentController extends Controller
     }
 
 
+    function get_http_response_code($url) {
+        $headers = get_headers($url);
+        return substr($headers[0], 9, 3);
+    }
 
     public function getEquipData(Request $request)
     {
