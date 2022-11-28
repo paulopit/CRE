@@ -98,6 +98,8 @@ Route::group(['middleware' => 'admin'], function () {
     // ##User Management
     Route::get('/user-management/users', 'UserAccountController@index');
     Route::put('/user-management/user/{user}', 'UserAccountController@update');
+    Route::get('/user-management/user/requisition/{user_req}', 'RequisitionController@user_req');
+    Route::get('/user-management/user/requisition/show/{req}', 'RequisitionController@user_req_spec');
 
     // ##User Management Types
     Route::post('/user-management/types/add', 'UserTypeController@store');
