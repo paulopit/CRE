@@ -29,11 +29,32 @@
 }
 
 .rubber_equip_view {
-    top: -7%;
+    top: 7%;
     left: 40%;
 }
 
 .rubber_equip_edit {
     top: -5%;
     left: 40%;
+}
+
+.rubber_no_history {
+    box-shadow: 0 0 0 3px #6c757d, 0 0 0 2px #6c757d inset;
+    border: 2px solid transparent;
+    border-radius: 4px;
+    display: inline-block;
+    padding: 5px 2px;
+    line-height: 22px;
+    color: #6c757d;
+    font-size: 24px;
+    font-family: 'Black Ops One', cursive;
+    text-transform: uppercase;
+    text-align: center;
+    opacity: 0.6;
+    width: 155px;
+    position: absolute;
+    top: 6%;
+    left: 15%;
+    transform: rotate(-5deg);
+    z-index: 9999;
 }

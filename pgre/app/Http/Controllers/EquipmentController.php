@@ -6,6 +6,7 @@ use App\Brand;
 use App\Equipment;
 use App\Equipment_model;
 use App\Equipment_type;
+use App\Requisition;
 use App\Requisition_line;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -299,8 +300,19 @@ class EquipmentController extends Controller
      * @param  \App\Equipment  $equipment
      * @return \Illuminate\Http\Response
      */
-    public function show(Request $request)
+    public function show(Equipment $equipment)
     {
+        //Detalhes Equipamento
+        $equipment_info = Equipment::find($equipment->id);
+
+        //Historico Equipamento
+        $equipment_history = Requisition::select('requisitions.*')
+                            ->join('requisition_lines','requisition_lines.requisition_id','=','requisitions.id')
+                            ->where('requisition_lines.equipment_id', $equipment->id)
+                            ->orderBy('requested_at', 'desc')
+                            ->get();
+
+        return view('equip.management.details', ['equipment_info' => $equipment_info, 'equipment_history' => $equipment_history]);
     }
 
     /**
