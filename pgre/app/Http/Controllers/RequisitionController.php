@@ -22,6 +22,29 @@ class RequisitionController extends Controller
      * @return \Illuminate\Http\Response
      */
 
+    public function user_req_spec(Requisition $req)
+    {
+        $req_details =  Requisition::find($req->id);
+        return view('user.management.req',['req_details' => $req_details]);
+    }
+
+
+    public function user_req(User $user_req)
+    {
+        $user_req_list_opened = Requisition::where('request_user_id', '=', $user_req->id)
+            ->where('level_id', '>=', 2)
+            ->where('level_id', '<=', 4)
+            ->get();
+
+        $user_req_list_closed = Requisition::where('request_user_id', '=', $user_req->id)
+            ->where('level_id', '>=', 5)
+            ->where('level_id', '<=', 8)
+            ->get();
+
+        return view('user.management.user_requisition',['user_req_lists_opened' => $user_req_list_opened, 'user_req_lists_closed' => $user_req_list_closed]);
+
+    }
+
     private function GenerateRequisition($length = 10)
     {
         $characters = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ';
