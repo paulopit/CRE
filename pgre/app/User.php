@@ -92,7 +92,7 @@ class User extends Authenticatable
     public function isFrontUser()
     {
         $user = false;
-        if(Auth::user() &&  Auth::user()->user_type_id == 3)
+        if(Auth::user() &&  Auth::user()->user_type_id > 2)
             $user = true;
         return $user;
     }

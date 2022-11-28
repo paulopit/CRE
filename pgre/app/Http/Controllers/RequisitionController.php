@@ -136,7 +136,7 @@ class RequisitionController extends Controller
         }
         $user_req = Auth::user();
         $user_func = User_function::all();
-        $user_list = User::where('user_type_id', 3)
+        $user_list = User::where('user_type_id','>', 2)
                             ->where('is_active', 1)
                             ->get();
         $assigned_usr = User::find($TempReq->request_user_id);

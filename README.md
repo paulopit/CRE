@@ -58,7 +58,7 @@
 - [ ] Nos users, listar requisicoes de cada utilizador (em Aberto / Fechadas, paginacao 5)
 
 @Sergio
-- [ ] Nos equipamentos ter possibilidade de listar historico (por onde o equipamento andou).
+- [x] Nos equipamentos ter possibilidade de listar historico (por onde o equipamento andou).
 
 @Deivid
 - [ ] Possibilidade de Tecnico editar requisicoes por aprovar. 

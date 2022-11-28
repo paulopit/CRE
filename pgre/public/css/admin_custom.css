@@ -54,7 +54,27 @@
     width: 155px;
     position: absolute;
     top: 6%;
-    left: 15%;
+    left: 33%;
     transform: rotate(-5deg);
     z-index: 9999;
 }
+.kc_fab_main_btn {
+    background-color: #F44336;
+    position: absolute;
+    bottom: 1%;
+    right: 4%;
+    width: 60px;
+    height: 60px;
+    border-radius: 100%;
+    background: #F44336;
+    border: none;
+    outline: none;
+    color: #FFF;
+    font-size: 36px;
+    box-shadow: 0 3px 6px rgb(0 0 0 / 16%), 0 3px 6px rgb(0 0 0 / 23%);
+    transition: .3s;
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+    z-index: 9999;
+}
+
+
