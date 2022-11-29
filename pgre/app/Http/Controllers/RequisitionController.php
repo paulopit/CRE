@@ -518,7 +518,18 @@ class RequisitionController extends Controller
     public function edit(Requisition $requisition)
     {
         $req =  Requisition::find($requisition->id);
-        return view('requisition.management.filters.edit_pending',['req' => $req]);
+
+        if($req->level_id != 2)
+            return redirect('/')->with('error','Não pode editar este registo!');
+
+        //listar apenas tipos de equipamentos que estão a ser utilizados.
+        $equip_types = Equipment_type::select('equipment_types.id', 'equipment_types.type')
+            ->join('equipment','equipment.equipment_type_id', '=', 'equipment_types.id')
+            ->where('equipment.in_stock', 1)
+            ->groupBy('equipment_types.type','equipment_types.id')
+            ->get();
+
+        return view('requisition.management.filters.edit_pending',['req' => $req, 'equip_types' => $equip_types]);
     }
 
     /**

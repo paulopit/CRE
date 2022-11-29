@@ -10,9 +10,6 @@
 
 @section('content')
     @include('sweetalert::alert')
-        <form method="POST" action="{{ url('/requisition-management/show/edit/' . $req->id) }}">
-            @csrf
-            @method('PUT')
             <div class="">
                 <div class="col-lg-12">
                     <div class="card card-secondary">
@@ -21,6 +18,12 @@
 
                         </div>
                         <div class="card-body">
+                            <div class="row" style="display: none;">
+                                <x-adminlte-input name="user_id" id="user_id" label="" placeholder="user_id" value="{{$req->request_user_id}}" fgroup-class="col-md-6">
+                                </x-adminlte-input>
+                                <x-adminlte-input name="req_id" id="req_id" label="" placeholder="req_id" value="{{$req->id}}" fgroup-class="col-md-6">
+                                </x-adminlte-input>
+                            </div>
                             <div class="row">
                                 <x-adminlte-input name="user_name" label="Nome" placeholder="username" value="{{$req->request_user->name}}" fgroup-class="col-md-6" disabled="disabled">
                                     <x-slot name="prependSlot">
@@ -94,21 +97,8 @@
                                 </x-adminlte-textarea>
                             </div>
 
-                            <div class="row mt-3">
-                                <div class="col-lg-2">
-                                    <a href="{{ url()->previous() }}">
-                                        <x-adminlte-button class="btn-flat" type="" label="Voltar" theme="secondary" icon="fas fa-lg fa-arrow-left"/>
-                                    </a>
-                                </div>
-
-                                <div class="col-lg-8">
-                                </div>
-                                <div class="col-lg-2">
-                                    <x-adminlte-button class="btn-flat" type="submit" label="Gravar" theme="secondary" icon="fas fa-lg fa-save"/>
-                                </div>
-                            </div>
-                            <hr>
-
+                            @component('requisition.new.modal.add', ['requisition_details' => $req, 'equip_types' => $equip_types])
+                            @endcomponent
                             <a href="" class="btn btn-xs mt-3 mb-3" title="Adicionar Equipamento" onclick="Update_req_fields()" data-toggle="modal" data-target='#add_req_equip_{{$req->tag}}' data-id=""> <x-adminlte-button class="btn-flat" type="button" label="Adicionar Equipamento" theme="secondary" icon="fas fa-lg fa-plus"/></a>
                             <hr>
                             <h5 class="pb-3"> Equipamentos </h5>
@@ -121,10 +111,6 @@
                                     ['label' => 'Ações', 'no-export' => false, 'width' => 5],
                                 ];
 
-                                // Config Botões
-        //                            $config['dom'] = '<"row" <"col-sm-7" B> <"col-sm-5 d-flex justify-content-end" i> >
-        //                                              <"row" <"col-12" tr> >
-        //                                              <"row" <"col-sm-12 d-flex justify-content-start" f> >';
                                 $config['language']  = [ 'url' => 'https://cdn.datatables.net/plug-ins/1.13.1/i18n/pt-PT.json' ];
                                 $config['paging'] = false;
                                 $config['lengthMenu'] = [ 10, 50, 100, 500];
@@ -142,13 +128,6 @@
                                                 @component('requisition.new.modal.delete', ['equip' => $line])
                                                 @endcomponent
                                                 <a href="" class="btn btn-xs btn-default text-danger mx-1 shadow table-btn" title="Remover" data-toggle="modal" data-target='#remove_req_equip_{{$line->id}}' data-id=""><i class="fa fa-lg fa-fw fa-trash"></i></a>
-                                                {{--                                            @component('user.management.modal.edit', ['user' => $user, 'user_functions' =>$user_functions,'user_types' => $user_types])--}}
-                                                {{--                                            @endcomponent--}}
-                                                {{--                                            <a href="" class="btn btn-xs btn-default text-primary mx-1 shadow table-btn" title="Edit" data-toggle="modal" data-target='#edit_user_{{$user->id}}' data-id=""> <i class="fa fa-lg fa-fw fa-pen"></i> </a>--}}
-
-                                                {{--                                        @component('user.types.modal.view', ['user_type' => $type])--}}
-                                                {{--                                        @endcomponent--}}
-                                                {{--                                        <a href="" class="btn btn-xs btn-default text-teal mx-1 shadow table-btn" title="View" data-toggle="modal" data-target='#view_user_type_{{$type->id}}' data-id=""> <i class="fa fa-lg fa-fw fa-eye"></i> </a>--}}
                                             </nobr>
                                         </td>
                                     </tr>
@@ -167,10 +146,47 @@
                     </div>
                 </div>
             </div>
-        </form>
     @stop
 
     @section('css')
         <link rel="stylesheet" href="/css/admin_custom.css">
 @stop
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
+<script>
+    function Update_req_fields(){
+        var req_id = {{$req->id}};
+        var user_id = $('#user_id').val();
+        //console.log('user_id: ' + user_id);
+        var req_course = $('#req_course').val();
+        var req_class = $('#req_class').val();
+        var req_ufcd = $('#req_ufcd').val();
+        var req_teacher = $('#req_teacher').val();
+        var req_obs = $('#req_obs').val();
+        var req_days = $('#req_days').val();
+        $.ajax({
+            type:'POST',
+            url:"{{ route('manage_update_req_fields') }}",
+            data:{user_id:user_id,req_id:req_id,req_course:req_course, req_class:req_class, req_ufcd:req_ufcd, req_teacher:req_teacher,req_obs:req_obs,req_days:req_days, _token: '{{csrf_token()}}'},
+            success:function(data){
+            }
+        });
+    }
+
+
+    function Submit_requisition(){
+        $("#submit_req").prop('disabled', true);
+        var user_id = $('#user_id').val();
+        Update_req_fields();
+
+        Swal.fire({
+            title: 'Sucesso!',
+            text: 'Requisição editada com sucesso!',
+            icon: 'success',
+            confirmButtonText: 'Ok'
+        }).then(function (result) {
+            location.reload();
+        });
+    }
+</script>
