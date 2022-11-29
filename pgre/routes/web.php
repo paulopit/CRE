@@ -76,6 +76,8 @@ Route::group(['middleware' => 'management'], function () {
     Route::get('/requisition-management/closed', 'RequisitionController@manage_closed');
 
     Route::get('/requisition-management/details/{requisition}', 'RequisitionController@managementDetails');
+    Route::get('/requisition-management/show/{requisition}', 'RequisitionController@edit');
+    Route::put('/requisition-management/show/edit/{requisition}', 'RequisitionController@update');
     Route::post('/requisition-management/confirm', 'RequisitionController@managementConfirm');
     Route::post('/requisition-management/deny', 'RequisitionController@managementDeny');
     Route::post('/requisition-management/register_delivery', 'RequisitionController@registerDelivery');

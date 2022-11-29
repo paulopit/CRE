@@ -35,6 +35,7 @@
             <td>
                 <nobr>
                     <a href="/requisition-management/details/{{$req->id}}" class="btn btn-xs btn-default text-teal mx-1 shadow table-btn" title="Detalhes" > <i class="fa fa-lg fa-fw fa-eye"></i> </a>
+                    <a href="/requisition-management/show/{{$req->id}}" class="btn btn-xs btn-default text-teal mx-1 shadow table-btn" title="Editar" > <i class="fa fa-lg fa-fw fa-pen"></i> </a>
 {{--                    @component('requisition.list.components.modal.delete', ['requisition' => $req])--}}
 {{--                    @endcomponent--}}
 {{--                    @if($req->level_id == 2)--}}

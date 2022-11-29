@@ -494,7 +494,8 @@ class RequisitionController extends Controller
      */
     public function edit(Requisition $requisition)
     {
-        //
+        $req =  Requisition::find($requisition->id);
+        return view('requisition.management.filters.edit_pending',['req' => $req]);
     }
 
     /**
@@ -506,7 +507,21 @@ class RequisitionController extends Controller
      */
     public function update(Request $request, Requisition $requisition)
     {
-        //
+
+        $req = Requisition::find($requisition->id);
+        //dd($req);
+
+        $req->course                                    = $request->req_course;
+        $req->class                                    = $request->req_class;
+        $req->ufcd                                      = $request->req_ufcd;
+        $req->teacher                                   = $request->req_teacher;
+        $req->obs                                       = $request->req_obs;
+
+        //dd($req);
+
+        $req->save();
+
+        return redirect('/requisition-management/pending')->with('success','Requisição Editada com sucesso!');
     }
 
     /**
@@ -517,7 +532,8 @@ class RequisitionController extends Controller
      */
     public function destroy(Requisition $requisition)
     {
-        //
+            $req_details =  Requisition::find($requisition->id);
+
     }
 
 }
