@@ -53,8 +53,10 @@
 
                                             @component('user.management.modal.requisitions', ['user' => $user])
                                         @endcomponent
-                                        <a href="" class="btn btn-xs btn-default text-teal mx-1 shadow table-btn" title="Ver Requisições" data-toggle="modal" data-target='#view_requisitions_{{$user->id}}' data-id=""> <i class="fa fa-lg fa-fw fa-ticket-alt"></i> </a>
-{{--                                        @component('user.types.modal.delete', ['user_type' => $type])--}}
+                                        <a href="{{url('/user-management/user/requisition/'.$user->id)}}" class="btn btn-xs btn-default text-teal mx-1 shadow table-btn" title="Ver Requisições" >
+                                            <i class="fa fa-lg fa-fw fa-ticket-alt"></i> </a>
+
+                                            {{--                                        @component('user.types.modal.delete', ['user_type' => $type])--}}
 {{--                                        @endcomponent--}}
 {{--                                        <a href="" class="btn btn-xs btn-default text-danger mx-1 shadow table-btn" title="delete" data-toggle="modal" data-target='#delete_user_type_{{$type->id}}' data-id="" @if($type->id < 4)  style="pointer-events:none;cursor:default;background: #dddddd;" @endif><i class="fa fa-lg fa-fw fa-trash"></i></a>--}}
 {{--                                        @component('user.types.modal.view', ['user_type' => $type])--}}
@@ -69,6 +71,7 @@
             </div>
         </div>
     </div>
+
 @stop
 
 @section('css')

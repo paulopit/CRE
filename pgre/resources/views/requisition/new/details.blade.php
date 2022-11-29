@@ -171,6 +171,7 @@
     <script>
 
         function Submit_requisition(){
+            $("#submit_req").prop('disabled', true);
             var req_id = {{$temp_req->id}};
             $.ajax({
                 type:'POST',

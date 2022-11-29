@@ -22,6 +22,29 @@ class RequisitionController extends Controller
      * @return \Illuminate\Http\Response
      */
 
+    public function user_req_spec(Requisition $req)
+    {
+        $req_details =  Requisition::find($req->id);
+        return view('user.management.req',['req_details' => $req_details]);
+    }
+
+
+    public function user_req(User $user_req)
+    {
+        $user_req_list_opened = Requisition::where('request_user_id', '=', $user_req->id)
+            ->where('level_id', '>=', 2)
+            ->where('level_id', '<=', 4)
+            ->get();
+
+        $user_req_list_closed = Requisition::where('request_user_id', '=', $user_req->id)
+            ->where('level_id', '>=', 5)
+            ->where('level_id', '<=', 8)
+            ->get();
+
+        return view('user.management.user_requisition',['user_req_lists_opened' => $user_req_list_opened, 'user_req_lists_closed' => $user_req_list_closed]);
+
+    }
+
     private function GenerateRequisition($length = 10)
     {
         $characters = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ';
@@ -136,7 +159,7 @@ class RequisitionController extends Controller
         }
         $user_req = Auth::user();
         $user_func = User_function::all();
-        $user_list = User::where('user_type_id', 3)
+        $user_list = User::where('user_type_id','>', 2)
                             ->where('is_active', 1)
                             ->get();
         $assigned_usr = User::find($TempReq->request_user_id);

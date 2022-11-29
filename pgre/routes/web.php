@@ -48,6 +48,7 @@ Route::group(['middleware' => 'management'], function () {
     Route::get('/get-models', 'EquipmentModelController@getModels')->name('get_models_info');
     Route::get('/equip-management/equipments/import-template', 'EquipmentController@download_template');
     Route::post('/equip-management/equipments/excel-import', 'EquipmentController@excel_import');
+    Route::get('/equip-management/equipments/{equipment}', 'EquipmentController@show');
 
     // ##Model management
     Route::get('/equip-management/models', 'EquipmentModelController@index');
@@ -99,6 +100,8 @@ Route::group(['middleware' => 'admin'], function () {
     // ##User Management
     Route::get('/user-management/users', 'UserAccountController@index');
     Route::put('/user-management/user/{user}', 'UserAccountController@update');
+    Route::get('/user-management/user/requisition/{user_req}', 'RequisitionController@user_req');
+    Route::get('/user-management/user/requisition/show/{req}', 'RequisitionController@user_req_spec');
 
     // ##User Management Types
     Route::post('/user-management/types/add', 'UserTypeController@store');
