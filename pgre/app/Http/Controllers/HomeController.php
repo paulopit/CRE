@@ -59,7 +59,25 @@ class HomeController extends Controller
         $requisition = Requisition::all();
 
 
-        return view('dashboard', [ 'requisitions' => $all_requisitions, 'expiring_requisition' => $expiring_requisition, 'expired_requisition' => $expired_requisition, 'requisition' => $requisition]);
+        //Requisições abertas do utilizador
+
+        $user_open_req = Requisition::join('requisition_levels', 'requisition_levels.id', '=', 'requisitions.level_id')
+                                    ->where('request_user_id', $user->id)
+                                    ->where('requisition_levels.close_type', '!=' ,'1')
+                                    ->where('requisitions.level_id','!=', 1)
+                                    ->select('requisitions.*')
+                                    ->get();
+
+        $admin_open_req = Requisition::join('requisition_levels', 'requisition_levels.id', '=', 'requisitions.level_id')
+            ->where('requisition_levels.close_type', '!=' ,'1')
+            ->where('requisitions.level_id','!=', 1)
+            ->select('requisitions.*')
+            ->get();
+
+
+
+
+        return view('dashboard', ['user_open_req' => $user_open_req, 'admin_open_req' =>$admin_open_req, 'requisitions' => $all_requisitions, 'expiring_requisition' => $expiring_requisition, 'expired_requisition' => $expired_requisition, 'requisition' => $requisition]);
     }
 
 

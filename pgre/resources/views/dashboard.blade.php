@@ -42,10 +42,6 @@
 
 
         @if (Auth::user()->can('tech-permission') || Auth::user()->can('admin-permission')  )
-            <div class="col-lg-3">
-                <x-adminlte-small-box title="{{count($requisitions)}}" text="Total" icon="fas fa-ticket-alt text-white"
-                                          theme="info" url="#" url-text="Ver requisições"/>
-            </div>
                 <div class="col-lg-3">
                     <x-adminlte-small-box title="{{count($requisitions->where('level_id',2))}}" text="Por Aprovar" icon="fas fa-question-circle text-white"
                                           theme="warning" url="/requisition-management/pending" url-text="Ver requisições"/>
@@ -64,6 +60,35 @@
             </div>
             @endif
     </div>
+
+
+    <div class="row mt-3">
+            <div class="col-lg-12">
+                <div class="card card-secondary">
+                    <div class="card-header">
+                        <h3 class="card-title">Requisições abertas</h3>
+                    </div>
+                    <div class="card-body">
+                        @if (Auth::user()->can('tech-permission') || Auth::user()->can('admin-permission')  )
+                            @component('requisition.list.components.requisition_table', ['req_data' => $admin_open_req])
+                            @endcomponent
+                        @else
+                            @component('requisition.list.components.requisition_table', ['req_data' => $user_open_req])
+                            @endcomponent
+                        @endif
+                    </div>
+                </div>
+            </div>
+
+
+
+
+
+
+    </div>
+
+
+
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
