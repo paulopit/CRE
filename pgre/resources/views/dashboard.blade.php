@@ -15,16 +15,12 @@
     <div class="row">
 
         @if(count($expiring_requisition) > 0 || count($expired_requisition) > 0)
-            @component('components.notifications', [])
+            @component('components.notifications', ['expiring_requisition' => $expiring_requisition, 'expired_requisition' => $expired_requisition])
             @endcomponent
-                <button id="notification_btn" data-toggle="modal"  data-target='#show_notifications' data-id="" class="kc_fab_main_btn"><i class="fas fa-bell"></i></button>
+                <button id="notification_btn" data-toggle="modal" title="Notificações"  data-target='#show_notifications' data-id="" class="kc_fab_main_btn notification_btn"><i class="fas fa-bell"></i></button>
         @endif
 
     @if (Auth::user()->can('front-permission'))
-{{--            <div class="col-lg-3">--}}
-{{--                <x-adminlte-small-box title="{{count(Auth::user()->requisitions)}}" text="Total" icon="fas fa-ticket-alt text-white"--}}
-{{--                                      theme="info" url="#" url-text=""/>--}}
-{{--            </div>--}}
             <div class="col-lg-3">
                 <x-adminlte-small-box title="{{count(Auth::user()->requisitions->where('level_id',2))}}" text="Por Aprovar" icon="fas fa-question-circle text-white"
                                       theme="warning" url="/requisitions/pending" url-text="Ver requisições"/>
@@ -41,23 +37,6 @@
                 <x-adminlte-small-box title="{{count(Auth::user()->requisitions->whereIn('level_id', array(6,7, 8)))}}" text="Fechadas" icon="fas fa-stop-circle text-white"
                                       theme="danger" url="/requisitions/closed" url-text="View details"/>
             </div>
-
-
-{{--            @foreach($expiring_requisition as $req)--}}
-{{--                <div class="col-lg-3">--}}
-{{--                    <x-adminlte-small-box title="{{$req->tag}}"--}}
-{{--                                          text="A terminar" icon="fas fa-exclamation-triangle text-white"--}}
-{{--                                          theme="danger" url="/requisitions/details/{{$req->id}}" url-text="View details"/>--}}
-{{--                </div>--}}
-{{--            @endforeach--}}
-
-{{--            @foreach($expired_requisition as $req)--}}
-{{--                <div class="col-lg-3">--}}
-{{--                    <x-adminlte-small-box title="{{$req->tag}}"--}}
-{{--                                          text="Expirada!" icon="fas fa-exclamation-triangle text-white"--}}
-{{--                                          theme="danger" url="/requisitions/details/{{$req->id}}" url-text="View details"/>--}}
-{{--                </div>--}}
-{{--            @endforeach--}}
 
         @endif
 
@@ -85,10 +64,6 @@
             </div>
             @endif
     </div>
-
-
-
-
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>

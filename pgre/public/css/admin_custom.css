@@ -77,4 +77,13 @@
     z-index: 9999;
 }
 
+.notification_btn{
+    animation-name: notification_move;
+    animation-duration: 2s;
+}
 
+
+@keyframes notification_move {
+    0%   {bottom: 50%;}
+    100% {bottom: 1%;}
+}

@@ -40,6 +40,7 @@ class HomeController extends Controller
             ->where('end_date', '>', Carbon::now())
             ->where('request_user_id', $user->id)
             ->where('requisition_levels.close_type', '!=' ,'1')
+            ->select('requisitions.*')
             ->get();
 
 
@@ -48,7 +49,9 @@ class HomeController extends Controller
                             ->where('end_date',  '<', Carbon::now())
                             ->where('request_user_id', $user->id)
                             ->where('requisition_levels.close_type', '!=' ,'1')
+                            ->select('requisitions.*')
                             ->get();
+
 
 
         $all_requisitions = Requisition::all();
@@ -56,27 +59,7 @@ class HomeController extends Controller
         $requisition = Requisition::all();
 
 
-
-        $notification_text = "";
-
-
-        if(count($expiring_requisition) > 0){
-            $notification_text .= "<h5> Requisições a expirar!</h5>";
-            foreach ($expiring_requisition as $expiring){
-                $notification_text .= "<p> ". $expiring->tag . "</p>";
-            }
-        }
-
-        if(count($expired_requisition) > 0){
-            $notification_text .= "<h5> Requisições expiradas!</h5>";
-            foreach ($expired_requisition as $expired){
-                $notification_text .= "<p>". $expired->tag . "</p>";
-            }
-        }
-
-
-
-        return view('dashboard', ['notification_text' => $notification_text, 'requisitions' => $all_requisitions, 'expiring_requisition' => $expiring_requisition, 'expired_requisition' => $expired_requisition, 'requisition' => $requisition]);
+        return view('dashboard', [ 'requisitions' => $all_requisitions, 'expiring_requisition' => $expiring_requisition, 'expired_requisition' => $expired_requisition, 'requisition' => $requisition]);
     }
 
 
