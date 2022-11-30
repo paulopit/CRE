@@ -566,7 +566,7 @@ class RequisitionController extends Controller
      */
     public function destroy(Requisition $requisition)
     {
-            $req_details =  Requisition::find($requisition->id);
+
 
     }
 
