@@ -70,21 +70,79 @@
                     </div>
                     <div class="card-body">
                         @if (Auth::user()->can('tech-permission') || Auth::user()->can('admin-permission')  )
-                            @component('requisition.list.components.requisition_table', ['req_data' => $admin_open_req])
-                            @endcomponent
+                                @php
+                                    $header = [
+                                        ['label' => 'Data Pedido','width' => 10],
+                                        ['label' => 'Tag','width' => 10],
+                                        ['label' => 'Estado','width' => 20],
+                                        ['label' => 'Utilizador','width' => 20],
+                                        ['label' => 'Curso','width' => 10],
+                                        ['label' => 'Turma','width' => 10],
+                                        ['label' => 'Ufcd','width' => 10],
+                                        ['label' => 'Formador','width' => 10],
+                                        ['label' => 'Ações', 'no-export' => false, 'width' => 1],
+                                    ];
+                                     //Config Botões
+
+                                    $config['paging'] = false;
+                                    $config["lengthMenu"] = [ 10, 50, 100, 500];
+                                    $config['language']  = [ 'url' => 'https://cdn.datatables.net/plug-ins/1.13.1/i18n/pt-PT.json' ];
+                                @endphp
+
+                                <x-adminlte-datatable id="req_table_type_" :heads="$header" theme="light"   :config="$config" head-theme="dark" striped hoverable with-buttons>
+                                    @foreach($admin_open_req as $req)
+                                        <tr>
+                                            <td>{{$req->requested_at}}</td>
+                                            <td>{{$req->tag}}</td>
+                                            <td>{{$req->requisition_level->name}}</td>
+                                            <td>{{$req->request_user->name}}</td>
+                                            <td>{{$req->course}}</td>
+                                            <td>{{$req->class}}</td>
+                                            <td>{{$req->ufcd}}</td>
+                                            <td>{{$req->teacher}}</td>
+                                            <td>
+                                                <nobr>
+                                                    <a href="/requisitions/details/{{$req->id}}" class="btn btn-xs btn-default text-teal mx-1 shadow table-btn" title="Detalhes" > <i class="fa fa-lg fa-fw fa-eye"></i> </a>
+                                                </nobr>
+                                            </td>
+                                        </tr>
+                                    @endforeach
+                                </x-adminlte-datatable>
                         @else
-                            @component('requisition.list.components.requisition_table', ['req_data' => $user_open_req])
-                            @endcomponent
+                                @php
+                                    $header = [
+                                        ['label' => 'Tag','width' => 10],
+                                        ['label' => 'Estado','width' => 10],
+                                        ['label' => 'Data pedido','width' => 10],
+                                        ['label' => 'Data final','width' => 10],
+                                        ['label' => 'Ações', 'no-export' => false, 'width' => 1],
+                                    ];
+                                     //Config Botões
+
+                                    $config['paging'] = false;
+                                    $config["lengthMenu"] = [ 10, 50, 100, 500];
+                                    $config['language']  = [ 'url' => 'https://cdn.datatables.net/plug-ins/1.13.1/i18n/pt-PT.json' ];
+                                @endphp
+
+                                <x-adminlte-datatable id="req_table_type_" :heads="$header" theme="light"   :config="$config" head-theme="dark" striped hoverable with-buttons>
+                                    @foreach($user_open_req as $req)
+                                        <tr>
+                                            <td>{{$req->tag}}</td>
+                                            <td>{{$req->requisition_level->name}}</td>
+                                            <td>{{$req->created_at}}</td>
+                                            <td>{{$req->end_date}}</td>
+                                            <td>
+                                                <nobr>
+                                                    <a href="/requisitions/details/{{$req->id}}" class="btn btn-xs btn-default text-teal mx-1 shadow table-btn" title="Detalhes" > <i class="fa fa-lg fa-fw fa-eye"></i> </a>
+                                                </nobr>
+                                            </td>
+                                        </tr>
+                                    @endforeach
+                                </x-adminlte-datatable>
                         @endif
                     </div>
                 </div>
             </div>
-
-
-
-
-
-
     </div>
 
 
