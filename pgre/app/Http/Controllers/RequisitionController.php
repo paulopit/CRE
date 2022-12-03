@@ -437,7 +437,7 @@ class RequisitionController extends Controller
         //validar se a data pedida é superior a data existente
         if($old_date->gt($new_date))
             return redirect('/requisition-management/details/'. $request->req_id)->with('error','A nova data não pode ser inferior a data atual!');
-        $req_record->end_date = $request->end_date;
+        $req_record->end_date = $new_date;
         $req_record->save();
 
         //enviar um email.
