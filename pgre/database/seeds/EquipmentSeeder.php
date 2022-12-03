@@ -58,7 +58,7 @@ class EquipmentSeeder extends Seeder
             ],
             [
                 'description' => 'Cabo Usb ',
-                'serial_number' => ' ',
+                'serial_number' => null,
                 'status_ok' => '1',
                 'equipment_type_id' => '2',
                 'equipment_model_id' => '1',
