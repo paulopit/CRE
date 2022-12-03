@@ -88,15 +88,13 @@
                                     </div>
                                 </x-slot>
                             </x-adminlte-input>
-                            <x-adminlte-input name="req_days" id="req_days"  label="Nº Dias" type="number" min="1" max="999" placeholder="Nº Dias" value="1" fgroup-class="col-md-3">
+                            <x-adminlte-input name="req_days" id="req_days"  label="Nº Dias" type="number" min="1" max="999" placeholder="Nº Dias" value="{{$temp_req->request_days ?? 1}}" fgroup-class="col-md-3">
                                 <x-slot name="prependSlot">
                                     <div class="input-group-text">
                                         <i class="fas fa-hashtag text-lightblue"></i>
                                     </div>
                                 </x-slot>
                             </x-adminlte-input>
-
-
                         </div>
                         <div class="row">
                             <x-adminlte-textarea name="req_obs" id="req_obs" rows="5"  label="Observações" placeholder="Observações" fgroup-class="col-md-12">
