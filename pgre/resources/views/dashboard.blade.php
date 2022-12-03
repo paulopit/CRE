@@ -72,10 +72,10 @@
                         @if (Auth::user()->can('tech-permission') || Auth::user()->can('admin-permission')  )
                                 @php
                                     $header = [
-                                        ['label' => 'Data Pedido','width' => 10],
                                         ['label' => 'Tag','width' => 10],
                                         ['label' => 'Estado','width' => 20],
                                         ['label' => 'Utilizador','width' => 20],
+                                        ['label' => 'Data Pedido','width' => 20],
                                         ['label' => 'Curso','width' => 10],
                                         ['label' => 'Turma','width' => 10],
                                         ['label' => 'Ufcd','width' => 10],
@@ -93,10 +93,10 @@
                                 <x-adminlte-datatable id="req_table_type_" :heads="$header" theme="light"   :config="$config" head-theme="dark" striped hoverable with-buttons>
                                     @foreach($admin_open_req as $req)
                                         <tr>
-                                            <td>{{$req->requested_at}}</td>
                                             <td>{{$req->tag}}</td>
                                             <td>{{$req->requisition_level->name}}</td>
                                             <td>{{$req->request_user->name}}</td>
+                                            <td>{{$req->requested_at}}</td>
                                             <td>{{$req->course}}</td>
                                             <td>{{$req->class}}</td>
                                             <td>{{$req->ufcd}}</td>
