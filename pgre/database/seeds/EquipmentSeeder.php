@@ -58,7 +58,7 @@ class EquipmentSeeder extends Seeder
             ],
             [
                 'description' => 'Cabo Usb ',
-                'serial_number' => '',
+                'serial_number' => 'NULL',
                 'status_ok' => '1',
                 'equipment_type_id' => '2',
                 'equipment_model_id' => '1',
@@ -69,7 +69,7 @@ class EquipmentSeeder extends Seeder
             ],
             [
                 'description' => 'Cabo Usb ',
-                'serial_number' => '',
+                'serial_number' => 'NULL',
                 'status_ok' => '1',
                 'equipment_type_id' => '2',
                 'equipment_model_id' => '2',
@@ -192,7 +192,7 @@ class EquipmentSeeder extends Seeder
             ],
             [
                 'description' => 'Cartão de Memória',
-                'serial_number' => '',
+                'serial_number' => 'NULL',
                 'status_ok' => '1',
                 'equipment_type_id' => '4',
                 'equipment_model_id' => '4',
@@ -214,7 +214,7 @@ class EquipmentSeeder extends Seeder
             ],
             [
                 'description' => 'Fita ',
-                'serial_number' => '',
+                'serial_number' => 'NULL',
                 'status_ok' => '1',
                 'equipment_type_id' => '4',
                 'equipment_model_id' => '4',
@@ -225,7 +225,7 @@ class EquipmentSeeder extends Seeder
             ],
             [
                 'description' => 'Fita ',
-                'serial_number' => '',
+                'serial_number' => 'NULL',
                 'status_ok' => '1',
                 'equipment_type_id' => '4',
                 'equipment_model_id' => '4',
@@ -236,7 +236,7 @@ class EquipmentSeeder extends Seeder
             ],
             [
                 'description' => 'Fita ',
-                'serial_number' => '',
+                'serial_number' => 'NULL',
                 'status_ok' => '1',
                 'equipment_type_id' => '4',
                 'equipment_model_id' => '4',
@@ -247,7 +247,7 @@ class EquipmentSeeder extends Seeder
             ],
             [
                 'description' => 'Fita ',
-                'serial_number' => '',
+                'serial_number' => 'NULL',
                 'status_ok' => '1',
                 'equipment_type_id' => '4',
                 'equipment_model_id' => '4',
@@ -258,7 +258,7 @@ class EquipmentSeeder extends Seeder
             ],
             [
                 'description' => 'Fita ',
-                'serial_number' => '',
+                'serial_number' => 'NULL',
                 'status_ok' => '1',
                 'equipment_type_id' => '4',
                 'equipment_model_id' => '4',
@@ -313,7 +313,7 @@ class EquipmentSeeder extends Seeder
             ],
             [
                 'description' => 'Micro Ambiente',
-                'serial_number' => '',
+                'serial_number' => 'NULL',
                 'status_ok' => '1',
                 'equipment_type_id' => '4',
                 'equipment_model_id' => '4',
@@ -324,7 +324,7 @@ class EquipmentSeeder extends Seeder
             ],
             [
                 'description' => 'Mochila de Costas',
-                'serial_number' => '',
+                'serial_number' => 'NULL',
                 'status_ok' => '1',
                 'equipment_type_id' => '4',
                 'equipment_model_id' => '4',
@@ -335,7 +335,7 @@ class EquipmentSeeder extends Seeder
             ],
             [
                 'description' => 'Mochila de Mão',
-                'serial_number' => '',
+                'serial_number' => 'NULL',
                 'status_ok' => '1',
                 'equipment_type_id' => '4',
                 'equipment_model_id' => '4',
@@ -412,7 +412,7 @@ class EquipmentSeeder extends Seeder
             ],
             [
                 'description' => 'Saco de Mão',
-                'serial_number' => '',
+                'serial_number' => 'NULL',
                 'status_ok' => '1',
                 'equipment_type_id' => '4',
                 'equipment_model_id' => '4',
