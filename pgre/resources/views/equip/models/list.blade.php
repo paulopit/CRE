@@ -26,7 +26,7 @@
                 <div class="card-body">
                     @php
                         $header = [
-                            'ID',
+
                             ['label' => 'Modelo','width' => 50],
                             ['label' => 'Marca','width' => 50],
                             ['label' => 'Ações', 'no-export' => false, 'width' => 5],
@@ -42,7 +42,7 @@
                     <x-adminlte-datatable id="equip_model" :heads="$header" theme="light" :config="$config" head-theme="dark" striped hoverable with-buttons>
                         @foreach($equipment_models as $equipment_model)
                             <tr>
-                                <td>{{$equipment_model->id}}</td>
+
                                 <td>{{$equipment_model->name}}</td>
                                 <td>{{$equipment_model->brand->name}}</td>
                                 <td>
