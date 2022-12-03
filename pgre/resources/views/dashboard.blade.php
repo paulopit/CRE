@@ -4,8 +4,8 @@
 
 @section('content_header')
     <div class="mt-3">
-{{--                @component('components.alerts')--}}
-{{--                @endcomponent--}}
+                @component('components.alerts')
+                @endcomponent
     </div>
 
 
