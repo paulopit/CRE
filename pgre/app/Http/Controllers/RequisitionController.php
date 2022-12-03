@@ -457,7 +457,18 @@ class RequisitionController extends Controller
 
     public function index()
     {
-        //
+
+        $req_details = Requisition::find($requisition->id);
+        //dd($req_details);
+
+
+        $req_details->course           = $request->req_course;
+        $req_details->class            =$request->req_class;
+        $req_details->ufcd             =$request->req_ufcd;
+        $req_details->teacher          =$request->req_teacher;
+
+        $req_details->save();
+        return redirect('/requisition-management')->with('success','Requisição editada com sucesso!');
     }
 
     /**
@@ -494,7 +505,7 @@ class RequisitionController extends Controller
      */
     public function store(Request $request)
     {
-        //
+
     }
 
     /**

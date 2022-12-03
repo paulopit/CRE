@@ -31,11 +31,11 @@
             </div>
             <div class="col-lg-3">
                 <x-adminlte-small-box title="{{count(Auth::user()->requisitions->where('level_id',4))}}" text="Ativas" icon="fas fa-play-circle text-white"
-                                      theme="success" url="/requisitions/active" url-text="View details"/>
+                                      theme="success" url="/requisitions/active" url-text="Ver requisições"/>
             </div>
             <div class="col-lg-3">
                 <x-adminlte-small-box title="{{count(Auth::user()->requisitions->whereIn('level_id', array(6,7, 8)))}}" text="Fechadas" icon="fas fa-stop-circle text-white"
-                                      theme="danger" url="/requisitions/closed" url-text="View details"/>
+                                      theme="danger" url="/requisitions/closed" url-text="Ver requisições"/>
             </div>
 
         @endif

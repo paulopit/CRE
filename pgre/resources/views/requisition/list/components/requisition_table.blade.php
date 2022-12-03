@@ -1,13 +1,12 @@
 @php
     $header = [
-        ['label' => 'Data Pedido','width' => 10],
         ['label' => 'Tag','width' => 10],
         ['label' => 'Estado','width' => 10],
+        ['label' => 'Data Pedido','width' => 20],
         ['label' => 'Curso','width' => 10],
         ['label' => 'Turma','width' => 10],
         ['label' => 'Ufcd','width' => 10],
         ['label' => 'Formador','width' => 10],
-        ['label' => 'Obs','width' => 20],
         ['label' => 'Ações', 'no-export' => false, 'width' => 5],
     ];
      //Config Botões
@@ -20,14 +19,13 @@
 <x-adminlte-datatable id="req_table_type_" :heads="$header" theme="light"   :config="$config" head-theme="dark" striped hoverable with-buttons>
     @foreach($req_data as $req)
         <tr>
-            <td>{{$req->requested_at}}</td>
             <td>{{$req->tag}}</td>
             <td>{{$req->requisition_level->name}}</td>
+            <td>{{$req->requested_at}}</td>
             <td>{{$req->course}}</td>
             <td>{{$req->class}}</td>
             <td>{{$req->ufcd}}</td>
             <td>{{$req->teacher}}</td>
-            <td>{{$req->obs}}</td>
             <td>
                 <nobr>
                     <a href="/requisitions/details/{{$req->id}}" class="btn btn-xs btn-default text-teal mx-1 shadow table-btn" title="Detalhes" > <i class="fa fa-lg fa-fw fa-eye"></i> </a>

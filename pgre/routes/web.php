@@ -132,6 +132,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/requisitions/closed', 'RequisitionController@closed');
 
     Route::get('/requisitions/details/{requisition}', 'RequisitionController@show');
+    Route::get('/requisition-management/edit_pending/{requisition}', 'RequisitionController@update');
     Route::post('/requisitions/cancel/{requisition}', 'RequisitionController@cancel');
 
     Route::get('/getEquipmentsByType/{id}', 'EquipmentController@getEquipmentsByType');
