@@ -54,7 +54,7 @@
                                         </div>
                                     </x-slot>
                                 </x-adminlte-input>
-                                <x-adminlte-input name="req_course" id="req_course" label="Curso" placeholder="Curso" value="{{$req->course}}" fgroup-class="col-md-6">
+                                <x-adminlte-input name="req_course" id="req_course" label="Curso" placeholder="Curso" value="{{$req->course}}" fgroup-class="col-md-3">
                                     <x-slot name="prependSlot">
                                         <div class="input-group-text">
                                             <i class="fas fa-book text-lightblue"></i>
@@ -62,7 +62,7 @@
                                     </x-slot>
                                 </x-adminlte-input>
 
-                                <x-adminlte-input name="req_class" id="req_class"  label="Turma" placeholder="Turma" value="{{$req->class}}" fgroup-class="col-md-6" >
+                                <x-adminlte-input name="req_class" id="req_class"  label="Turma" placeholder="Turma" value="{{$req->class}}" fgroup-class="col-md-3" >
                                     <x-slot name="prependSlot">
                                         <div class="input-group-text">
                                             <i class="fas fa-graduation-cap text-lightblue"></i>
@@ -70,7 +70,7 @@
                                     </x-slot>
                                 </x-adminlte-input>
 
-                                <x-adminlte-input name="req_ufcd" id="req_ufcd"  label="Nome UFCD" placeholder="UFCD" value="{{$req->ufcd}}" fgroup-class="col-md-6">
+                                <x-adminlte-input name="req_ufcd" id="req_ufcd"  label="Nome UFCD" placeholder="UFCD" value="{{$req->ufcd}}" fgroup-class="col-md-3">
                                     <x-slot name="prependSlot">
                                         <div class="input-group-text">
                                             <i class="fas fa-university text-lightblue"></i>
@@ -78,10 +78,17 @@
                                     </x-slot>
                                 </x-adminlte-input>
 
-                                <x-adminlte-input name="req_teacher" id="req_teacher"  label="Nome Formador" placeholder="Nome Formador" value="{{$req->teacher}}" fgroup-class="col-md-6" >
+                                <x-adminlte-input name="req_teacher" id="req_teacher"  label="Nome Formador" placeholder="Nome Formador" value="{{$req->teacher}}" fgroup-class="col-md-3" >
                                     <x-slot name="prependSlot">
                                         <div class="input-group-text">
                                             <i class="fas fa-user-tie text-lightblue"></i>
+                                        </div>
+                                    </x-slot>
+                                </x-adminlte-input>
+                                <x-adminlte-input name=req_days id="req_days"  label="Nº Dias" placeholder="Nº Dias" value="{{$req->request_days}}" fgroup-class="col-md-3">
+                                    <x-slot name="prependSlot">
+                                        <div class="input-group-text">
+                                            <i class="fas fa-hashtag text-lightblue"></i>
                                         </div>
                                     </x-slot>
                                 </x-adminlte-input>

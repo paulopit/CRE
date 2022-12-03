@@ -99,6 +99,7 @@
                                 </div>
                             </x-slot>
                         </x-adminlte-input>
+
                     </div>
                     <div class="row">
                         <x-adminlte-textarea name="req_obs" id="req_obs" rows="5"  label="Observações" placeholder="Observações" fgroup-class="col-md-12" disabled="disabled">

@@ -97,8 +97,11 @@ class BrandController extends Controller
         $this->validate($request, [
             'brand_name' => 'required'
         ]);
-        $check = Brand::where('name',$request->brand_name)->where('id',$request->id)->count();
-        if($check > 0){
+
+        $check = Brand::where('name',$request->brand_name)->where('id','!=', $request->id)->count();
+
+
+        if($check == 0){
             $brand = Brand::find($brand->id);
             $brand->name = $request->brand_name;
             $brand->save();
