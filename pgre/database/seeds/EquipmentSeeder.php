@@ -58,7 +58,7 @@ class EquipmentSeeder extends Seeder
             ],
             [
                 'description' => 'Cabo Usb ',
-                'serial_number' => 'NULL',
+                'serial_number' => ' ',
                 'status_ok' => '1',
                 'equipment_type_id' => '2',
                 'equipment_model_id' => '1',
@@ -69,7 +69,7 @@ class EquipmentSeeder extends Seeder
             ],
             [
                 'description' => 'Cabo Usb ',
-                'serial_number' => 'NULL',
+                'serial_number' => null,
                 'status_ok' => '1',
                 'equipment_type_id' => '2',
                 'equipment_model_id' => '2',
@@ -192,7 +192,7 @@ class EquipmentSeeder extends Seeder
             ],
             [
                 'description' => 'Cartão de Memória',
-                'serial_number' => 'NULL',
+                'serial_number' => null,
                 'status_ok' => '1',
                 'equipment_type_id' => '4',
                 'equipment_model_id' => '4',
@@ -214,7 +214,7 @@ class EquipmentSeeder extends Seeder
             ],
             [
                 'description' => 'Fita ',
-                'serial_number' => 'NULL',
+                'serial_number' => null,
                 'status_ok' => '1',
                 'equipment_type_id' => '4',
                 'equipment_model_id' => '4',
@@ -225,7 +225,7 @@ class EquipmentSeeder extends Seeder
             ],
             [
                 'description' => 'Fita ',
-                'serial_number' => 'NULL',
+                'serial_number' => null,
                 'status_ok' => '1',
                 'equipment_type_id' => '4',
                 'equipment_model_id' => '4',
@@ -236,7 +236,7 @@ class EquipmentSeeder extends Seeder
             ],
             [
                 'description' => 'Fita ',
-                'serial_number' => 'NULL',
+                'serial_number' => null,
                 'status_ok' => '1',
                 'equipment_type_id' => '4',
                 'equipment_model_id' => '4',
@@ -247,7 +247,7 @@ class EquipmentSeeder extends Seeder
             ],
             [
                 'description' => 'Fita ',
-                'serial_number' => 'NULL',
+                'serial_number' => null,
                 'status_ok' => '1',
                 'equipment_type_id' => '4',
                 'equipment_model_id' => '4',
@@ -258,7 +258,7 @@ class EquipmentSeeder extends Seeder
             ],
             [
                 'description' => 'Fita ',
-                'serial_number' => 'NULL',
+                'serial_number' => null,
                 'status_ok' => '1',
                 'equipment_type_id' => '4',
                 'equipment_model_id' => '4',
@@ -270,17 +270,6 @@ class EquipmentSeeder extends Seeder
             [
                 'description' => 'Foco Projetor',
                 'serial_number' => '6D132626',
-                'status_ok' => '1',
-                'equipment_type_id' => '4',
-                'equipment_model_id' => '4',
-                'reference' => 'FOCOPROJETORAPUTURE',
-                'obs' => 'HP',
-                'created_at' => now(),
-                'updated_at' => now()
-            ],
-            [
-                'description' => 'Foco Projetor',
-                'serial_number' => '6D133069',
                 'status_ok' => '1',
                 'equipment_type_id' => '4',
                 'equipment_model_id' => '4',
@@ -313,7 +302,7 @@ class EquipmentSeeder extends Seeder
             ],
             [
                 'description' => 'Micro Ambiente',
-                'serial_number' => 'NULL',
+                'serial_number' => null,
                 'status_ok' => '1',
                 'equipment_type_id' => '4',
                 'equipment_model_id' => '4',
@@ -324,7 +313,7 @@ class EquipmentSeeder extends Seeder
             ],
             [
                 'description' => 'Mochila de Costas',
-                'serial_number' => 'NULL',
+                'serial_number' => null,
                 'status_ok' => '1',
                 'equipment_type_id' => '4',
                 'equipment_model_id' => '4',
@@ -335,7 +324,7 @@ class EquipmentSeeder extends Seeder
             ],
             [
                 'description' => 'Mochila de Mão',
-                'serial_number' => 'NULL',
+                'serial_number' => null,
                 'status_ok' => '1',
                 'equipment_type_id' => '4',
                 'equipment_model_id' => '4',
@@ -379,7 +368,7 @@ class EquipmentSeeder extends Seeder
             ],
             [
                 'description' => 'Objetiva',
-                'serial_number' => 'EF-S 17-55mm1:2.8',
+                'serial_number' => null,
                 'status_ok' => '1',
                 'equipment_type_id' => '4',
                 'equipment_model_id' => '4',
@@ -412,7 +401,7 @@ class EquipmentSeeder extends Seeder
             ],
             [
                 'description' => 'Saco de Mão',
-                'serial_number' => 'NULL',
+                'serial_number' => null,
                 'status_ok' => '1',
                 'equipment_type_id' => '4',
                 'equipment_model_id' => '4',
@@ -520,7 +509,6 @@ class EquipmentSeeder extends Seeder
                 'created_at' => now(),
                 'updated_at' => now()
             ],
-
         ]);
     }
 }
