@@ -21,7 +21,6 @@
                             ['label' => 'Tag','width' => 20],
                             ['label' => 'Estado','width' => 20],
                             ['label' => 'Data Requisição','width' => 20],
-                            ['label' => 'Observações','width' => 20],
                             ['label' => 'Curso','width' => 20],
                             ['label' => 'Turma','width' => 20],
                             ['label' => 'UFCD','width' => 20],
@@ -41,7 +40,6 @@
                                 <td>{{$user_req_list_op->tag}}</td>
                                 <td>{{$user_req_list_op->requisition_level->name}}</td>
                                 <td>{{$user_req_list_op->requested_at}}</td>
-                                <td>{{$user_req_list_op->obs}}</td>
                                 <td>{{$user_req_list_op->course}}</td>
                                 <td>{{$user_req_list_op->class}}</td>
                                 <td>{{$user_req_list_op->ufcd}}</td>
@@ -71,7 +69,6 @@
                             ['label' => 'Estado','width' => 20],
                             ['label' => 'Data Requisição','width' => 20],
                             ['label' => 'Data conclusão','width' => 20],
-                            ['label' => 'Observações','width' => 20],
                             ['label' => 'Curso','width' => 20],
                             ['label' => 'Turma','width' => 20],
                             ['label' => 'UFCD','width' => 20],
@@ -93,7 +90,6 @@
                                 <td>{{$user_req_list_cl->requisition_level->name}}</td>
                                 <td>{{$user_req_list_cl->requested_at}}</td>
                                 <td>{{$user_req_list_cl->closed_at}}</td>
-                                <td>{{$user_req_list_cl->obs}}</td>
                                 <td>{{$user_req_list_cl->course}}</td>
                                 <td>{{$user_req_list_cl->class}}</td>
                                 <td>{{$user_req_list_cl->ufcd}}</td>
