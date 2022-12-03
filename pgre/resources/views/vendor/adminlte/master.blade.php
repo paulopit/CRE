@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
-
+<link rel="shortcut icon" sizes="114x114" href="{{ asset('css/favicon.png') }}">
 <head>
 
     {{-- Base Meta Tags --}}
