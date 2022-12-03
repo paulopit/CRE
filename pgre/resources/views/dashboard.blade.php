@@ -86,6 +86,7 @@
 
                                     $config['paging'] = false;
                                     $config["lengthMenu"] = [ 10, 50, 100, 500];
+                                    $config['order'] = [[0, 'asc']];
                                     $config['language']  = [ 'url' => 'https://cdn.datatables.net/plug-ins/1.13.1/i18n/pt-PT.json' ];
                                 @endphp
 
