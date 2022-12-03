@@ -47,34 +47,34 @@ class UserSeeder extends Seeder
                 'updated_at' => now()
             ],
             [
-                'name' => 'user1',
+                'name' => 'Deivid Vieira',
                 'phone' => null,
                 'birth_date' => carbon::createFromDate(1900, 1, 1),
                 'user_function_id' => 4,
                 'user_type_id' => 3,
-                'email' => 'user1@admin.com',
+                'email' => 'deivid@admin.com',
                 'password' => Hash::make('user'),
                 'created_at' => now(),
                 'updated_at' => now()
             ],
             [
-                'name' => 'user2',
+                'name' => 'Paulo Pinto',
                 'phone' => null,
                 'birth_date' => carbon::createFromDate(1900, 1, 1),
                 'user_function_id' => 4,
                 'user_type_id' => 3,
-                'email' => 'user2@admin.com',
+                'email' => 'paulo@admin.com',
                 'password' => Hash::make('user'),
                 'created_at' => now(),
                 'updated_at' => now()
             ],
             [
-            'name' => 'user3',
+            'name' => 'Sérgio Fernandes',
             'phone' => null,
             'birth_date' => carbon::createFromDate(1900, 1, 1),
             'user_function_id' => 4,
             'user_type_id' => 3,
-            'email' => 'user3@admin.com',
+            'email' => 'sergio@admin.com',
             'password' => Hash::make('user'),
             'created_at' => now(),
             'updated_at' => now()

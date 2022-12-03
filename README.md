@@ -33,67 +33,54 @@
 
 ## :rotating_light: To Do:
 
-- []
 
 
-
-
-
+## :white_check_mark: Done:
+- [x] Middlewares 
+- [x] Migrations completas
+- [x] Página Login
+- [x] Página Registo
+- [x] Criar projeto. 
+- [x] Integrar AdminLTE. 
+- [x] Permissões Gate 
+- [x] Menus AdminLTE 
+- [x] Datatables AdminLTE
+- [x] Modo Tabs AdminLTE
+- [x] Sistema de traduções
+- [x] Configuração de timezone para Portugal
+- [x] Função de leitura de parametros AppConfig 
+- [x] Integração de Envio Email. 
+- [x] Criado middleware 'management' 
+- [x] Página gestão de conta para utilizadores 
+- [x] Página gestão contas para Administrador 
+- [x] Página gestão de tipos de utilizador 
+- [x] Página gestão de funções de utilizador 
+- [x] Página gestão de parametros da APP 
+- [x] CRUD UserFunction 
+- [x] CRUD UserType 
+- [x] CRUD AppConfig
+- [x] CRUD UserAccount
+- [x] AppConfigSeeder
+- [x] Página pedidos de requisições (FrontEnd User) 
+- [x] Página gestão de requisições (BackEnd User) 
 - [x] Seeds
 - [X] CRUD @Deivid
 - [x] Página gestão de Marcas e Modelos
 - [x] Página gestão de Equipamentos
 - [x] Triggers envio de Emails.
 - [x] Importação de equipamentos via ficheiro Excel
-- [-] Webservice [Opcional]
-- [-] Ajuste CSS
-- [ ] Testes Funcionais
-- [ ] Criar Documentação
+- [x] Webservice [Opcional]
+- [x] Ajuste CSS
+- [x] Testes Funcionais
+- [x] Criar Documentação
 - [x] Botão extender requisição [Opcional]
-- [ ] Validar traduções
+- [x] Validar traduções
 - [x] Adicionar forma de controlar estados de entrega e devolução dos equiapamentos (Equip_lines)
 - [x] Ao editar/criar equipamento com uma referencia, atualizar as descrições dos equip com mesma ref.
-
-@Paulo
-- [ ] Nos users, listar requisicoes de cada utilizador (em Aberto / Fechadas, paginacao 5)
-
-@Sergio
+- [x] Nos users, listar requisicoes de cada utilizador (em Aberto / Fechadas, paginacao 5)
 - [x] Nos equipamentos ter possibilidade de listar historico (por onde o equipamento andou).
-
-@Deivid
-- [ ] Possibilidade de Tecnico editar requisicoes por aprovar. 
-- [ ] Adicionar separador para Tecnico/Admin a mostrar todas as requisicoes (não mostrar level_id 5 expiradas).
-
-## :white_check_mark: Done:
-- [x] Middlewares @Paulo
-- [x] Migrations completas @Paulo
-###### 
-- [x] Página Login @Deivid
-- [x] Página Registo @Deivid
-###### 
-- [x] Criar projeto. @Sergio
-- [x] Integrar AdminLTE. @Sergio
-- [x] Permissões Gate @Sergio
-- [x] Menus AdminLTE @Sergio
-- [x] Datatables AdminLTE @Sergio
-- [x] Modo Tabs AdminLTE @Sergio
-- [x] Sistema de traduções @Sergio
-- [x] Configuração de timezone para Portugal @Sergio
-- [x] Função de leitura de parametros AppConfig @Sergio
-- [x] Integração de Envio Email. @Sergio
-- [x] Criado middleware 'management' @Sergio
-- [x] Página gestão de conta para utilizadores @Sergio
-- [x] Página gestão contas para Administrador @Sergio
-- [x] Página gestão de tipos de utilizador @Sergio
-- [x] Página gestão de funções de utilizador @Sergio
-- [x] Página gestão de parametros da APP @Sergio
-- [x] CRUD UserFunction @Sergio
-- [x] CRUD UserType @Sergio
-- [x] CRUD AppConfig @Sergio
-- [x] CRUD UserAccount @Sergio
-- [x] AppConfigSeeder @Sergio
-- [x] Página pedidos de requisições (FrontEnd User) @Sergio
-- [x] Página gestão de requisições (BackEnd User) @Sergio
+- [x] Possibilidade de Tecnico editar requisicoes por aprovar.
+- [x] Adicionar separador para Tecnico/Admin a mostrar todas as requisicoes (não mostrar level_id 5 expiradas).
 
 
 
