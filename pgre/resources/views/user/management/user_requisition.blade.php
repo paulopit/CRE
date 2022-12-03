@@ -1,6 +1,6 @@
 @extends('adminlte::page')
 
-@section('title', 'GRE - Gestão Utilizadores')
+@section('title', 'SER - Gestão Utilizadores')
 
 @section('content_header')
     <div class="mb-3">

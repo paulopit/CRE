@@ -194,7 +194,7 @@
                             <tr  >
                                 <td class="center-text"  align="center" style="font-family:'Poppins',Arial,Helvetica,sans-serif;font-size:14px;padding-top:20px;line-height:24px;font-weight:400;font-style:normal;color:#fff;text-decoration:none;letter-spacing:0px;">
                                     <div  >
-                                        GRE - Gestão de Requisições de Equipamentos
+                                        SER - System Equipment Requisition
                                     </div>
                                 </td>
                             </tr>

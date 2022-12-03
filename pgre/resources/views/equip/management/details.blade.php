@@ -1,6 +1,6 @@
 @extends('adminlte::page')
 
-@section('title', 'GRE - Equipamentos')
+@section('title', 'SER - Equipamentos')
 
 @section('content_header')
     <div class="mb-3">

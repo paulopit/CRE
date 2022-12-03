@@ -1,6 +1,6 @@
 @extends('adminlte::page')
 
-@section('title', 'GRE - Tipos Utilizadores')
+@section('title', 'SER - Tipos Utilizadores')
 
 @section('content_header')
     <div class="mb-3">

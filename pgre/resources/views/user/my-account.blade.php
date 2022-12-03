@@ -1,6 +1,6 @@
 @extends('adminlte::page')
 
-@section('title', 'GRE - Dados Pessoais')
+@section('title', 'SER - Dados Pessoais')
 
 @section('content_header')
     <div class="mb-3">

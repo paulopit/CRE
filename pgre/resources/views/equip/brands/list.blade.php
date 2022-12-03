@@ -1,6 +1,6 @@
 @extends('adminlte::page')
 
-@section('title', 'GRE - Marcas')
+@section('title', 'SER - Marcas')
 
 @section('content_header')
     <div class="mb-3">

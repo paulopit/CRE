@@ -14,7 +14,7 @@ return [
     |
     */
 
-    'title' => 'GRE',
+    'title' => 'SER - System Equipment Requisition',
     'title_prefix' => '',
     'title_postfix' => '',
 

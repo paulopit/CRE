@@ -1,6 +1,6 @@
 @extends('adminlte::page')
 
-@section('title', 'GRE - Detalhe requisição ')
+@section('title', 'SER - Detalhe requisição ')
 
 @section('content_header')
     <link rel="preconnect" href="https://fonts.googleapis.com">
