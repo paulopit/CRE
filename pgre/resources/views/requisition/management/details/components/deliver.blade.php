@@ -14,7 +14,7 @@
                         <x-adminlte-input name="req_id" label="" placeholder="" value="{{$req_details->id}}" fgroup-class="col-md-12">
                         </x-adminlte-input>
                     </div>
-                    <x-adminlte-input name="req_days" label="Nº Dias" placeholder="Nº Dias" value="{{$req_details->request_days}}" fgroup-class="col-md-12">
+                    <x-adminlte-input name="req_days" label="Nº Dias" type="number" placeholder="Nº Dias" value="{{$req_details->request_days}}" fgroup-class="col-md-12">
                         <x-slot name="prependSlot">
                             <div class="input-group-text">
                                 <i class="fas fa-hashtag text-lightblue"></i>
