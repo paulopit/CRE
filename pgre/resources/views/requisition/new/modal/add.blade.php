@@ -99,7 +99,7 @@
             dataType: 'json',
             success: function(response){
                 var len = 0;
-                if(response['data'][0].id != null){
+                if(response['data'] != null){
                     len = response['data'].length;
                 }
                 if(len > 0){
