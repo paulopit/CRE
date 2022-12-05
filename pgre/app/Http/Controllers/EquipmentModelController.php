@@ -183,7 +183,10 @@ class EquipmentModelController extends Controller
 
         ]);
 //        dd($model);
-        $check = Equipment_model::where('brand_id',$request->brand)->where('name',$request->model_name)->count();
+        $check = Equipment_model::where('brand_id',$request->brand)
+                                ->where('name',$request->model_name)
+                                ->where('id','!=', $equipment_model->id)
+                                ->count();
         if($check == 0){
             $equipment_model = Equipment_model::find($equipment_model->id);
             $equipment_model->name          = $request->model_name;
