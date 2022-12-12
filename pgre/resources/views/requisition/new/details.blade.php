@@ -171,6 +171,7 @@
         function Submit_requisition(){
             $("#submit_req").prop('disabled', true);
             var req_id = {{$temp_req->id}};
+            Update_req_fields();
             $.ajax({
                 type:'POST',
                 url:"{{ route('submit_req') }}",
