@@ -67,10 +67,10 @@ class EquipmentController extends Controller
     public function getEquipmentsByRef($ref=""){
         $equip_data['data'] = [];
         $reference_list = Equipment::where('reference','LIKE','%' . $ref . '%')
-                ->where('equipment.in_stock', 1)
-                ->where('equipment.is_active', 1)
-                ->get(['id','reference','description'])
-                ->pluck('reference');
+            ->where('equipment.in_stock', 1)
+            ->where('equipment.is_active', 1)
+            ->groupBy('reference')
+            ->pluck('reference');
         foreach ($reference_list as $ref){
             $record = Equipment::where('reference', $ref)
                 ->where('equipment.in_stock', 1)
