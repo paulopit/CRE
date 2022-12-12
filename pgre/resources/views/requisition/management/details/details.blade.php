@@ -202,7 +202,7 @@
                         <x-adminlte-datatable id="req_lines" :heads="$header" theme="light" head-theme="dark"  :config="$config" striped hoverable>
                             @foreach($req_details->lines as $line)
                                 <tr>
-                                    <td>{{$line->equipment->reference}}</td>
+                                    <td> <a href="/equip-management/equipments/{{$line->equipment->id}}" class="product-title">{{$line->equipment->reference}}</a></td>
                                     <td>{{$line->equipment->description}}</td>
                                     <td>{{$line->equipment->serial}}</td>
                                     <td>@if($line->equipment->status_ok) <label style="color: green">OK</label> @else <label style="color: orange"> NOK </label> @endif</td>
