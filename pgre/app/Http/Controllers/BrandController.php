@@ -98,7 +98,8 @@ class BrandController extends Controller
             'brand_name' => 'required'
         ]);
 
-        $check = Brand::where('name',$request->brand_name)->where('id','!=', $request->id)->count();
+
+        $check = Brand::where('name',$request->brand_name)->where('id','!=', $brand->id)->count();
 
 
         if($check == 0){

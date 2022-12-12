@@ -1,5 +1,5 @@
 <div class="modal fade" id="edit_equip_brand_{{$brand->id}}">
-    <div class="modal-dialog modal-dialog-centered">\\
+    <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
             <form method="POST" action="{{url('/equip-management/brands/'. $brand->id)}}" enctype="multipart/form-data">
                 @csrf
