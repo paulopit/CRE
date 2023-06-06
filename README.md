@@ -1,6 +1,6 @@
 # Projeto-Final---EFA-Cesae
 
-## Projeto GRE - Gestão de Requisições de Equipamentos
+## Aplicativo Web - Gestão de Requisições de Equipamentos
 
 ## Equipa S
  - Sérgio Fernandes
