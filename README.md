@@ -3,9 +3,7 @@
 ## Aplicativo Web - Gestão de Requisições de Equipamentos
 
 ## Equipa S
- - Sérgio Fernandes
  - Paulo Pinto
- - Deivid Vieira
 
 ## Requisitos: 
 
