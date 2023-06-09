@@ -62,7 +62,7 @@
 - [x] Página pedidos de requisições (FrontEnd User) 
 - [x] Página gestão de requisições (BackEnd User) 
 - [x] Seeds
-- [X] CRUD @Deivid
+- [X] CRUD
 - [x] Página gestão de Marcas e Modelos
 - [x] Página gestão de Equipamentos
 - [x] Triggers envio de Emails.
